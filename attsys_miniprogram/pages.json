@@ -1,0 +1,75 @@
+{
+    "pages": [ //pages数组中第一项表示应用启动页,
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+            "path": "pages/pwd/pwd",
+            "style": {
+                "navigationBarTitleText": "忘记密码"
+            }
+        }, {
+            "path": "pages/reg/reg",
+            "style": {
+                "navigationBarTitleText": "注册"
+            }
+        }, {
+            "path" : "pages/home/home",
+            "style" : {
+				"navigationBarTitleText": "首页"
+			}
+        }
+        ,{
+            "path" : "pages/shiftarrangement/shiftarrangement",
+            "style" : {
+				"navigationBarTitleText": "班次安排"
+			}
+        }
+        ,{
+            "path" : "pages/leave/leave",
+            "style" : {
+				"navigationBarTitleText": "请假"
+			}
+        }
+        ,{
+            "path" : "pages/icu/icu",
+            "style" : {
+				"navigationBarTitleText": "加班"
+			}
+        }
+        ,{
+            "path" : "pages/info/info",
+            "style" : {
+				"navigationBarTitleText": "个人信息"
+			}
+        }
+    ],
+    // "tabBar": {
+    //     "color": "#7a7e83",
+    //     "selectedColor": "#0faeff",
+    //     "backgroundColor": "#ffffff",
+    //     "list": [{
+    //         "pagePath": "pages/user/user",
+    //         "text": "我的",
+    //         "iconPath": "static/img/user.png",
+    //         "selectedIconPath": "static/img/userHL.png"
+    //     }]
+    // },
+    "globalStyle": {
+        "navigationBarTextStyle": "white",
+        "navigationBarBackgroundColor": "#0faeff",
+        "backgroundColor": "#fbf9fe"
+    },
+	"condition":{
+		"current":0,
+		"list":[{
+			"name":"登录",
+			"path":"pages/login/login",
+			"query":""
+		}
+		]
+		}
+}
