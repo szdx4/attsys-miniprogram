@@ -1,15 +1,20 @@
 <template>
     <view class="content">
-        <view class="input-group">
-            <view class="input-row border">
-                <text class="title">账号：</text>
-                <m-input class="m-input" type="text" clearable focus v-model="account" placeholder="请输入账号"></m-input>
-            </view>
-            <view class="input-row">
-                <text class="title">密码：</text>
-                <m-input type="password" displayable v-model="password" placeholder="请输入密码"></m-input>
-            </view>
-        </view>
+		<view class="title">
+			员工考勤系统
+		</view>
+		<view class="_content">
+			<view class="input-group">
+				<view class="input-row border">
+					<text class="title">账号：</text>
+					<m-input class="m-input" type="text" clearable focus v-model="account" placeholder="请输入账号"></m-input>
+				</view>
+				<view class="input-row">
+					<text class="title">密码：</text>
+					<m-input type="password" displayable v-model="password" placeholder="请输入密码"></m-input>
+				</view>
+			</view>
+		</view>
         <view class="btn-row">
             <button type="primary" class="primary" @tap="bindLogin">登录</button>
         </view>
@@ -124,9 +129,33 @@
 					let token = this.token;
 					// 提取token中的相关信息
 					let key_info_base64 = token.split(".")[1];
-					// console.log("key_info_base64="+key_info_base64);
-					let key_info_str = atob(key_info_base64);  //base64编码解码
+					console.log("key_info_base64="+key_info_base64);
+					// base64解码的js实现（atob函数用不了，只能强行转）
+					var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
+					var key_info_str = "";  
+					var chr1, chr2, chr3;  
+					var enc1, enc2, enc3, enc4;  
+					var i = 0;  
+					key_info_base64 = key_info_base64.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
+					while (i < key_info_base64.length) {  
+						enc1 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+						enc2 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+						enc3 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+						enc4 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+						chr1 = (enc1 << 2) | (enc2 >> 4);  
+						chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
+						chr3 = ((enc3 & 3) << 6) | enc4;  
+						key_info_str = key_info_str + String.fromCharCode(chr1);  
+						if (enc3 != 64) {  
+							key_info_str = key_info_str + String.fromCharCode(chr2);  
+						}  
+						if (enc4 != 64) {  
+							key_info_str = key_info_str + String.fromCharCode(chr3);  
+						}  
+					}
+					// 上面的方法转自https://blog.csdn.net/u012369749/article/details/73784897
 					let key_info_obj = JSON.parse(key_info_str);
+					console.log(key_info_obj);
 					let user_id = key_info_obj.id;
 					let expired_at_init = key_info_obj.expired_at;
 					// 将expired_at格式化
@@ -147,7 +176,6 @@
 						}
 					}
 					let expired_ms = Date.UTC(year,month,day,hours,minutes,seconds);
-					console.log(key_info_obj);
 					// 存储用户登陆信息到本地
 					try{
 						uni.setStorageSync('userName',userName);
@@ -183,29 +211,13 @@
         color: #007aff;
         padding: 0 20upx;
     }
-
-    .oauth-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .oauth-image {
-        width: 100upx;
-        height: 100upx;
-        border: 1upx solid #dddddd;
-        border-radius: 100upx;
-        margin: 0 40upx;
-        background-color: #ffffff;
-    }
-
-    .oauth-image image {
-        width: 60upx;
-        height: 60upx;
-        margin: 20upx;
-    }
+	
+	._content {
+		margin-top: 300upx;
+	}
+	
+	.title {
+	    color: #8f8f94;
+		text-align:center;//水平居中
+	}
 </style>
