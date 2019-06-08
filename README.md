@@ -1,4 +1,5 @@
-attsys-miniprogram
+（第一个文件夹“attsys-miniprogram”已作废）
+（以下页面之后找时间更新）
 
 login页面
     
@@ -13,3 +14,16 @@ home页面
     
     页面加载时，根据服务器返回的信息，将用户签到状态显示
     
+icu页面
+
+
+info页面
+
+
+leave页面
+
+
+message页面
+
+
+shiftarrangement页面
