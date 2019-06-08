@@ -1,15 +1,15 @@
 <!-- 有和没有正在进行中的请假用两种view -->
 <template>
 	<view v-if="haveWorkOff">
-		<view class="uni-title uni-common-pl">选取请假记录</view>
+		<!-- <view class="uni-title uni-common-pl">选取请假记录</view> -->
 		<view class="uni-list">
 			<view class="uni-list-cell">
-				<view class="uni-list-cell-left">
+				<view class="uni-list-cell-left current-picker">
 					当前选择
 				</view>
-				<view class="uni-list-cell-db">
+				<view class="uni-list-cell-db current-picker">
 					<picker @change="bindPickerChange" :value="index" :range="data" range-key="start_at">
-						<view class="uni-input">{{data[index].id}}. {{data[index].start_at}}至{{data[index].end_at}}</view>
+						<view class="uni-input">{{data[index].id}}.&nbsp;&nbsp;{{data[index].start_at}}<p>至&nbsp;{{data[index].end_at}}</p></view>
 					</picker>
 				</view>
 			</view>
@@ -28,7 +28,6 @@
 		</view>
 	</view>
 	<view v-else>
-		<view class="title">您好 {{userName}}，您已成功登录。</view>
 		<view class="no-content">
 			<text>没有正在进行中的请假申请</text>
 		</view>
@@ -229,5 +228,9 @@
 	}
 	.remark {
 		color: #FF3333;
+	}
+	.current-picker {
+		line-height: 85upx;
+		height: 130upx;
 	}
 </style>
