@@ -145,6 +145,10 @@
 				}
 				else {
 					console.log("还未上传图片")
+					uni.showToast({
+						duration:2000,
+						title:'您还未选择照片'
+					})
 				}
 			}
 		}
