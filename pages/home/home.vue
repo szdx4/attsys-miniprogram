@@ -1,8 +1,10 @@
 <template>
     <view class="content">
-		<view>
-			<view class="title" @click="goMessage">
-				您好 {{userName}}
+		<view class="_caption">
+			<view class="title">
+				{{userName}},您好
+			</view>
+			<view style="display: inline;"><image :src="messageSrc" :mode='scaleToFill'  @click="goMessage"></image>
 			</view>
 		</view>
 		<view class="check">
@@ -12,7 +14,7 @@
 			<view>
 				班次开始: {{start_at}}
 			</view>
-			<view>
+			<view style="padding-bottom: 10upx;">
 				班次结束: {{end_at}}
 			</view>
 		</view>
@@ -38,6 +40,71 @@
 </template>
 
 <script>
+	// 设置计时器查询是否有unread的消息,第二个参数单位是ms
+	function startQueryMessage(){
+		console.log('已开启计时器')
+		var messageintervalID;
+		messageintervalID = setInterval(function(){
+			// 向服务器查询unread消息
+			// uni.request({
+			// 	url: 'https://???path???/message?to_user_id=' + this.user_id + '&status=unread&page=' + 0,
+			// 	header:{
+			// 		'Authorization': 'Bearer '+ this.token,
+			// 	},
+			// 	method: 'GET',
+			// 	success: (res) => {
+			// 		console.log(res);
+			// 		if (res.status==200) {
+			// 			if (res.total != 0) {
+			// 				// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
+			// 				uni.showModal({
+			// 					title: '提示',
+			// 					content: '您有新消息了，请前往查看',
+			// 					showCancel:false,
+			// 					success: function (res) {
+			// 						if (res.confirm) {
+			// 							console.log('用户点击确定');
+			// 						}
+			// 					}
+			// 				});
+			// 			} else{
+			// 				console.log("无未读信息")
+			// 			}
+			// 		} else {
+			// 			console.log("系统通知信息获取失败")
+			// 		}
+			// 	}
+			// });
+		// 用作测试，记得删除
+		uni.showModal({
+			title: '提示',
+			content: '您有新消息了，请前往查看',
+			showCancel:false,
+			success: function (res) {
+				if (res.confirm) {
+					console.log('用户点击确定');
+				}
+			}
+		});
+		if(messageintervalID != -1) {
+			clearInterval(messageintervalID);
+			messageintervalID = -1;
+			console.log('已关闭计时器');
+			try{
+				uni.setStorageSync('start_interval',false);
+			}catch(e){
+				console.log("存储出现问题");
+			}
+		}
+		},5000);
+		// 存储是否开起定时器的控制变量
+		try{
+			uni.setStorageSync('start_interval',true);
+		}catch(e){
+			console.log("存储出现问题");
+		}
+		return messageintervalID;
+	}
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	
     export default {
@@ -57,6 +124,8 @@
 				isShowPopup:false,
 				canICU:false,
 				canCheckOff:false,
+				messageSrc:'../../static/img/message.png',
+				messageintervalID:-1,
 			}
 		},
         onLoad: function(){
@@ -64,6 +133,7 @@
 			this.token = uni.getStorageSync('token');
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
+			this.messageSrc = '../../static/img/message.png';
 			// 检查用户签到状态
 			// var checkStatus = 204;
 			// uni.request({
@@ -96,39 +166,65 @@
 			var department = 0;
 			var role = 'default role';
 			var hours = 0;
-			uni.request({
-				url: 'https://???path???/user/' + this.user_id,
-				header: {
-					'Authorization': 'Bearer '+ this.token,
-				},
-				method:'GET',
-				success: res=> {
-					console.log(res);
-					if (res.status==200) {
-						console.log("获取用户信息成功");
-						name = res.data.name;
-						department = res.data.department;
-						role = res.data.role;
-						hours = res.data.hours;
-						// 存储用户信息到本地
-						try{
-							uni.setStorageSync('name',name);
-							uni.setStorageSync('department',department);
-							uni.setStorageSync('role',role);
-							uni.setStorageSync('hours',hours);
-						}catch(e){
-							console.log("存储出现问题");
-						}
-					} else{
-						console.log("获取用户信息失败");
-						// 刷新info页面
-						uni.redirectTo({
-							url: '../info/info'
-						});
-					}
-				}
-			});
+			// uni.request({
+			// 	url: 'https://???path???/user/' + this.user_id,
+			// 	header: {
+			// 		'Authorization': 'Bearer '+ this.token,
+			// 	},
+			// 	method:'GET',
+			// 	success: res=> {
+			// 		console.log(res);
+			// 		if (res.status==200) {
+			// 			console.log("获取用户信息成功");
+			// 			name = res.data.name;
+			// 			department = res.data.department;
+			// 			role = res.data.role;
+			// 			hours = res.data.hours;
+			// 			// 存储用户信息到本地
+			// 			try{
+			// 				uni.setStorageSync('name',name);
+			// 				uni.setStorageSync('department',department);
+			// 				uni.setStorageSync('role',role);
+			// 				uni.setStorageSync('hours',hours);
+			// 			}catch(e){
+			// 				console.log("存储出现问题");
+			// 			}
+			// 		} else{
+			// 			console.log("获取用户信息失败");
+			// 			// 刷新info页面
+			// 			uni.redirectTo({
+			// 				url: '../info/info'
+			// 			});
+			// 		}
+			// 	}
+			// });
+			// 第一次加载时设置定时器的控制变量为true
+			try{
+				uni.setStorageSync('start_interval',true);
+			}catch(e){
+				console.log("存储出现问题");
+			}
         },
+		// 当退出小程序的时候，若定时器还没关闭，则关闭计时器
+		onUnload:function(){
+			if(this.messageintervalID != -1) {
+				clearInterval(this.messageintervalID);
+				this.messageintervalID = -1;
+				console.log('已关闭计时器');
+			}  
+		},
+		// 在页面每次显示时，若储存的定时器的控制变量为true，则开启定时器
+		onShow:function(){
+			// 先关闭上一次的定时器
+			if(this.messageintervalID != -1) {
+				clearInterval(this.messageintervalID);
+				this.messageintervalID = -1;
+				console.log('已关闭计时器');
+			}  
+			if (uni.getStorageSync('start_interval')) {
+				this.messageintervalID = startQueryMessage();
+			}
+		},
 		methods:{
 			goShiftArrangement(e) {
 				console.log(e)
@@ -182,15 +278,31 @@
 										}catch(e){
 											console.log("sign_id存储出现问题");
 										}
+										uni.showToast({
+											duration:2000,
+											title:'签到成功'
+										})
 									} else{
 										console.log("签到失败");
+										uni.showToast({
+											duration:2000,
+											title:'签到失败'
+										})
 									}
 								}catch(e){
 									console.log("签到失败:",e);
+									uni.showToast({
+										duration:2000,
+										title:'签到失败'
+									})
 								}
 							},
 							fail() {
 								console.log("接口调用失败");
+								uni.showToast({
+									duration:2000,
+									title:'签到失败'
+								})
 							}
 						})
 					},
@@ -223,13 +335,25 @@
 						console.log(res);
 						if(res.status==200){
 							this.canICU = res.overtime;
+							uni.showToast({
+								duration:2000,
+								title:'签退成功'
+							})
 						}
 						else{
 							console.log("签退失败");
+							uni.showToast({
+								duration:2000,
+								title:'签退失败'
+							})
 						}
 					},
 					fail() {
 						console.log("签退失败");
+						uni.showToast({
+							duration:2000,
+							title:'签退失败'
+						})
 					}
 				});
 			}
@@ -240,6 +364,7 @@
 <style>
     .check {
     	margin-top: 5upx;
+		border-bottom: 3.5upx solid #000000;
     }
 	.check view {
 		font-size: 40upx;
@@ -247,7 +372,7 @@
     .title {
 		font-size: 40upx;
         color: #8f8f94;
-		text-decoration: underline;
+		display: inline;
     }
 	.message {
 		background-color: #D9D9D9;
@@ -257,14 +382,12 @@
 		border-left: 4upx solid #555555;
 		border-right: 4upx solid #555555;
 	}
-	.clear {
-		height: 55upx;
-		width: 500upx;
-		text-align: center;
-		background-color: #B2B2B2; 
-		border-bottom: 4upx solid #555555;
-		border-left: 4upx solid #555555;
-		border-right: 4upx solid #555555;
-		text-decoration: underline;
+	image {
+		margin-left: 12upx;
+		width: 50upx;
+		height: 50upx;
+	}
+	._caption {
+		border-bottom: 3.5upx solid #000000;
 	}
 </style>
