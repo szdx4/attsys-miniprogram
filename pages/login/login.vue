@@ -78,27 +78,21 @@
                 this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
             },
             bindLogin(e) {
-                /**
-                 * 客户端对账号信息进行一些必要的校验。
-                 * 实际开发中，根据业务需要进行处理，这里仅做示例。
-                 */
-                // if (this.account.length < 5) {
-                //     uni.showToast({
-                //         icon: 'none',
-                //         title: '账号最短为 5 个字符'
-                //     });
-                //     return;
-                // }
-                // if (this.password.length < 6) {
-                //     uni.showToast({
-                //         icon: 'none',
-                //         title: '密码最短为 6 个字符'
-                //     });
-                //     return;
-                // }
-                /**
-                 * 检测用户账号密码是否在已注册的用户列表中
-                 */
+                if (this.account.length < 2) {
+                    uni.showToast({
+                        icon: 'none',
+                        title: '账号最短为 2 个字符'
+                    });
+                    return;
+                }
+                if (this.password.length < 4) {
+                    uni.showToast({
+                        icon: 'none',
+                        title: '密码最短为 4 个字符'
+                    });
+                    return;
+                }
+                // 检测用户账号密码是否在已注册的用户列表中
 				var status = 200;
 				// 这里token为了测试，将过期时间设置在2019-06-30
 				var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVkX2F0IjoiVGh1IEp1biAzMCAwMjoyMTo0NiBVVEMgMjAxOSIsImlkIjoxLCJyb2xlIjoibWFzdGVyIn0=.NwUOTTY5ZbPVRQdQRFQwZ3Na-hNfemMrFSTGv63aJjs';
