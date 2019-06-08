@@ -1,0 +1,207 @@
+<template>
+	<view>
+		<view class="table">
+			<caption class='_caption'>个人信息</caption>
+			<view id="panel" class="flex-column">
+				<view class="flex-row flex-cell row">
+					<text class="flex-cell flex-row">姓名：</text>
+					<text class="flex-cell flex-row">{{name}}</text>
+				</view>
+				<view class="flex-row flex-cell row">
+					<text class="flex-cell flex-row">部门：</text>
+					<text class="flex-cell flex-row">{{department}}</text>
+				</view>
+				<view class="flex-row flex-cell row">
+					<text class="flex-cell flex-row">工时：</text>
+					<text class="flex-cell flex-row">{{hours}}</text>
+				</view>
+				<view class="flex-row flex-cell">
+					<text class="flex-cell flex-row">图片：</text>
+					<view><image ref="i" class='_img flex-cell flex-row-l' :src="imgSrc" :mode='scaleToFill'></image></view>
+				</view>
+				<view class="flex-row flex-cell">
+					<text class="flex-cell flex-row"></text>
+					<view class="flex-cell flex-row img_button">
+						<button size="mini" @tap="chooseImg">选择图片</button>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="sub_button">
+			<button class="primary" type="primary" @tap="submit">确认上传</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				userName: '',
+				token:'',
+				user_id:0,
+				name:'Tony',
+				department:1,
+				role:'user',
+				hours:12,
+				imgSrc:'',
+				imgSrcOld:'',
+				isChanged: false,
+			}
+		},
+		onLoad: function() {
+			this.token = uni.getStorageSync('token');
+			this.user_id = uni.getStorageSync('user_id');
+			this.userName = uni.getStorageSync('userName');
+			this.imgSrc = '../../static/img/qq.png';  // 服务器给的是base64码，可以在image标签中直接解析
+			// this.name = uni.getStorageSync('name');
+			// this.department = uni.getStorageSync('department');
+			// this.role = uni.getStorageSync('role');
+			// this.hours = uni.getStorageSync('hours');
+			// 向服务器请求获取用户人脸信息
+			// uni.request({
+			// 	url: 'https://???path???/face/user/' + this.user_id,
+			// 	header: {
+			// 		'Authorization': 'Bearer '+ this.token,
+			// 	},
+			// 	method: 'GET',
+			// 	success: res => {
+			// 		if (res.status==200) {
+			// 			console.log("获取用户图片成功");
+			// 			if (res.data.status=="available") {
+			// 				this.imgSrc = res.data.info;
+			// 				this.imgSrcOld = this.imgSrc;
+			// 			}
+			// 			else {
+			// 				console.log("用户图片暂时不可用")
+			// 			}
+			// 		} else{
+			// 			console.log("获取用户图片失败");
+			// 		}
+			// 	},
+			// });
+		},
+		methods: {
+			// 选择照片，可从相册或相机，一次只允许选一张
+			chooseImg(e) {
+				uni.chooseImage({
+					count: 1,
+					success: (chooseImageRes) => {
+						this.isChanged = true;
+						// 将图片存到本地
+						uni.saveFile({
+							tempFilePath: chooseImageRes.tempFilePaths[0],
+							success: (saveRes) => {
+								this.imgSrc = saveRes.savedFilePath;
+								// console.log(this.imgSrc);
+							}
+						});
+					}
+				});
+				
+			},
+			// 提交用户的图片修改
+			submit(e) {
+				var img_base64 = '';
+				if (this.isChanged){
+					// 先将图片base64编码
+					uni.getFileSystemManager().readFile({
+						filePath: this.imgSrc,
+						encoding: 'base64',
+						success: (encodeRes) => {
+							this.imgSrc = 'data:image/png;base64,' + encodeRes.data;
+							// console.log(this.imgSrc);
+							// 再将图片的base64上传到服务器
+							// uni.request({
+							// 	url: 'https://???path???/user/' + this.user_id,
+							// 	header: {
+							// 		'Authorization': 'Bearer '+ this.token,
+							// 	},
+							// 	data: {
+							// 		info: this.imgSrc
+							// 	},
+							// 	method: 'GET',
+							// 	success: (uploadRes) => {
+							// 		if (uploadRes.data.status==201) {
+							// 			console.log("上传成功");
+							// 			this.imgSrcOld = this.imgSrc;
+							// 		} else{
+							// 			console.log("上传失败");
+							// 			this.imgSrc = this.imgSrcOld;
+							// 		}
+							// 	}
+							// })
+						},
+					})
+					
+				}
+				else {
+					console.log("还未上传图片")
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+.title {
+        color: #8f8f94;
+        margin-top: 50upx;
+    }
+.table {
+	width: 600upx;
+	top: 9%;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0); 
+}
+._caption {
+	text-align: center;
+	margin-bottom: 40upx;
+}
+._img {
+	width: 300upx;
+	height: 300upx;
+	margin-top: 12upx;
+	margin-bottom: 7upx;
+	margin-right: 12upx;
+	background-color: #8F8F94;
+}
+
+#panel{
+	background:#EEEEEE;
+	border: 5upx solid #8F8F94;
+}
+
+.row{
+	line-height: 5vh;
+	border-bottom: 5upx solid #8F8F94;
+}
+
+.flex-row{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.flex-column{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.flex-cell{
+	flex: 1;
+}
+.img_button{
+	margin-bottom: 12upx;
+}
+.sub_button{
+	margin-top: 30upx;
+	position: absolute;
+	bottom: 20%;
+	left: 70%;
+	transform: translate(-50%, 0); 
+}
+</style>
