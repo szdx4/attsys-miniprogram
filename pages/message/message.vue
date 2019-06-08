@@ -226,44 +226,51 @@
 				this.isShowPopup = false;
 			},
 			clearAll() {
-				uni.showModal({
-					title: '提示',
-					content: '是否确定清除',
-					success: (res) => {
-						if (res.confirm) {
-							console.log('用户点击确定');
-							this.message_list = [];
-							// 将所有消息通过api接口标记为read
-							// for (var i in this.message_list) {
-							// 	uni.request({
-							// 		url: 'https://???path???/message/' + this.message_list[i].messageId,
-							// 		method: 'GET',
-							// 		header: {
-							// 			'Authorization': 'Bearer '+ this.token,
-							// 		},
-							// 		success: (res) => {
-							// 			console.log('标记消息成功：' + this.message_list[i].messageId)
-							// 		},
-							// 		fail() {
-							// 			console.log('查询失败');
-							// 		}
-							// 	})
-							// }
-							// 将定时器的控制变量设置为true
-							try{
-								uni.setStorageSync('start_interval',true);
-							}catch(e){
-								console.log("存储出现问题");
+				if (this.message_list.length != 0) {
+					uni.showModal({
+						title: '提示',
+						content: '是否确定清除',
+						success: (res) => {
+							if (res.confirm) {
+								console.log('用户点击确定');
+								this.message_list = [];
+								// 将所有消息通过api接口标记为read
+								// for (var i in this.message_list) {
+								// 	uni.request({
+								// 		url: 'https://???path???/message/' + this.message_list[i].messageId,
+								// 		method: 'GET',
+								// 		header: {
+								// 			'Authorization': 'Bearer '+ this.token,
+								// 		},
+								// 		success: (res) => {
+								// 			console.log('标记消息成功：' + this.message_list[i].messageId)
+								// 		},
+								// 		fail() {
+								// 			console.log('查询失败');
+								// 		}
+								// 	})
+								// }
+								// 将定时器的控制变量设置为true
+								try{
+									uni.setStorageSync('start_interval',true);
+								}catch(e){
+									console.log("存储出现问题");
+								}
+								uni.showToast({
+									duration:2000,
+									title:'清除成功'
+								})
+							} else {
+								console.log('用户点击取消');
 							}
-							uni.showToast({
-								duration:2000,
-								title:'清除成功'
-							})
-						} else {
-							console.log('用户点击取消');
 						}
-					}
-				});
+					});
+				} else{
+					uni.showToast({
+						duration:2000,
+						title:'消息已为空'
+					})
+				}
 			},
 			goMessageRead() {
 				uni.navigateTo({
