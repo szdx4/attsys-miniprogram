@@ -204,4 +204,7 @@
 .result{
 	margin-top: 20upx;
 }
+textarea {
+	margin-top: 20upx;
+}
 </style>
