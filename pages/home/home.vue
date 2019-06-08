@@ -2,7 +2,7 @@
     <view class="content">
 		<view class="_caption">
 			<view class="title">
-				{{userName}},您好
+				{{userName}},&nbsp;您好
 			</view>
 			<view style="display: inline;"><image :src="messageSrc" :mode='scaleToFill'  @click="goMessage"></image>
 			</view>
@@ -34,7 +34,7 @@
 			<button type="primary" class="primary" @tap="goICU">申请加班</button>
 		</view>
 		<view class="btn-row">
-			<button type="primary" class="primary" @tap="goInfo">查看/修改信息</button>
+			<button type="primary" class="primary" @tap="goInfo">查看个人信息</button>
 		</view>
     </view>
 </template>
@@ -191,10 +191,6 @@
 			// 			}
 			// 		} else{
 			// 			console.log("获取用户信息失败");
-			// 			// 刷新info页面
-			// 			uni.redirectTo({
-			// 				url: '../info/info'
-			// 			});
 			// 		}
 			// 	}
 			// });
