@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<view class="title">您好 {{userName}}，您已成功登录。</view>
 		<view class="uni-padding-wrap">
 			<form @submit="formSubmit" @reset="formReset">
 				<view>
