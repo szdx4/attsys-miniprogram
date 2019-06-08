@@ -1,5 +1,7 @@
-（第一个文件夹“attsys-miniprogram”已作废）
-（以下页面之后找时间更新）
+说明：
+    第一个文件夹“attsys-miniprogram”为旧工程文件，作废；
+    文件夹“unpackage”为微信开发工具缓存文件，作废；
+    以下页面之后找时间更新
 
 login页面
     
