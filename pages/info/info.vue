@@ -17,7 +17,7 @@
 				</view>
 				<view class="flex-row flex-cell">
 					<text class="flex-cell flex-row">图片：</text>
-					<view><image ref="i" class='_img flex-cell flex-row-l' :src="imgSrc" :mode='scaleToFill'></image></view>
+					<view><image class='_img flex-cell flex-row-l' :src="imgSrc" :mode='scaleToFill'></image></view>
 				</view>
 				<view class="flex-row flex-cell">
 					<text class="flex-cell flex-row"></text>
@@ -125,9 +125,17 @@
 							// 		if (uploadRes.data.status==201) {
 							// 			console.log("上传成功");
 							// 			this.imgSrcOld = this.imgSrc;
+							//			uni.showToast({
+							// 				duration:2000,
+							// 				title:'上传成功'
+							// 			})
 							// 		} else{
 							// 			console.log("上传失败");
 							// 			this.imgSrc = this.imgSrcOld;
+							// 			uni.showToast({
+							// 				duration:2000,
+							// 				title:'上传失败'
+							// 			})
 							// 		}
 							// 	}
 							// })
