@@ -46,26 +46,35 @@
 			this.token = uni.getStorageSync('token');
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
-			
-			uni.request({
-				url: 'https://webSiteUrl/leave/user/' + this.user_id + '?page=' + 0,
-				// data: {
-				// 	text: 'uni.request'
-				// },
-				header: {
-					'Authorization': 'Bearer' + this.token //'Authorization'加引号？
-				},
-				method: 'GET',
-				success: (res) => {
-					if (res.data.status == 200) {
-						this.haveWorkOff = true;
-						console.log('request success');
-						console.log(res.data);
-						this.data = res.data.data;
-						
+			// 向服务器查询请假项目。用total除以per_page，向下取整，得出需要查询的总页数
+			var pages = 0;
+			for (var i = 0; i <= pages; i++) {
+				uni.request({
+					url: 'https://webSiteUrl/leave/user/' + this.user_id + '?page=' + 0,
+					header: {
+						'Authorization': 'Bearer' + this.token
+					},
+					method: 'GET',
+					success: (res) => {
+						if (res.data.status == 200) {
+							console.log('request success');
+							console.log(res.data);
+							if (res.total != 0) {
+								this.haveWorkOff = true;
+								pages = Math.floor(res.total / res.per_page);
+								// 将得到的数组加入data中
+								this.data.push().apply(this.data,res.data);
+							} else{
+								uni.showToast({
+									title:'无未读信息',
+									duration:3000
+								})
+								console.log("无未读信息")
+							}
+						}
 					}
-				}
-			});
+				});
+			}
 			//为让一开始就能显示
 			var show = {target:{value:0}};
 			this.bindPickerChange(show);
@@ -78,30 +87,36 @@
 				user_id: '',
 				haveWorkOff: true, //控制显示
 				data: [
-					{
-						"id": 1,
-						"user_id": 1,
-						"start_at": "2019-06-01 11:11:11",
-						"end_at": "2019-06-06 11:11:11",
-						"remark": "身体原因",
-						"status": "pass"
-					},
-					{
-						"id": 2,
-						"user_id": 1,
-						"start_at": "2019-06-20 11:11:11",
-						"end_at": "2019-06-22 11:11:11",
-						"remark": "心理原因",
-						"status": "wait"
-					},
-					{
-						"id": 3,
-						"user_id": 1,
-						"start_at": "2019-06-10 11:11:11",
-						"end_at": "2019-06-12 11:11:11",
-						"remark": "没有原因",
-						"status": "reject"
-					}, //for test
+					// {
+					// 	"id": 1,
+					// 	"user": {
+					// 		"id": 1,
+					// 		"name":"testname"
+					// 	},
+					// 	"start_at": "2019-06-01 11:11:11",
+					// 	"end_at": "2019-06-06 11:11:11",
+					// 	"remark": "身体原因",
+					// 	"status": "pass"
+					// },
+					// {
+					// 	"id": 2,
+					// 	"user": {
+					// 		"id": 2,
+					// 		"name":"testname"
+					// 	},
+					// 	"start_at": "2019-06-20 11:11:11",
+					// 	"end_at": "2019-06-22 11:11:11",
+					// 	"remark": "心理原因",
+					// 	"status": "wait"
+					// },
+					// {
+					// 	"id": 3,
+					// 	"user_id": 1,
+					// 	"start_at": "2019-06-10 11:11:11",
+					// 	"end_at": "2019-06-12 11:11:11",
+					// 	"remark": "没有原因",
+					// 	"status": "reject"
+					// }, //for test
 				],
 				remark: '',//显示理由
 				index: 0,//选择器
