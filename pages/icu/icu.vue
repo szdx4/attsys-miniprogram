@@ -19,6 +19,7 @@
 	</view>
 </template>
 <script>
+	import webSiteUrl from '../../common/webSiteUrl.js';
 	//来自 graceUI 的表单验证， 使用说明见手册 http://grace.hcoder.net/doc/info/73-3.html
 	var  graceChecker = require("../../common/graceChecker.js");
 	export default {
@@ -49,7 +50,7 @@
 					var now = new Date()
 					now = now.toJSON().replace('T',' ').slice(0,-5)
 					uni.request({
-						url: 'https://www.example.com/overtime/user/' + this.user_id,
+						url: 'https://webSiteUrl/overtime/user/' + this.user_id,
 						method: 'POST',
 						data: {
 							remark: formData
