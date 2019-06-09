@@ -254,7 +254,7 @@
 					} else{
 						uni.showToast({
 							duration:2000,
-							title:'两次密码不一致'
+							title:'两次输入的新密码不一致'
 						})
 					}
 				}
