@@ -27,6 +27,7 @@
 
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import webSiteUrl from '../../../common/webSiteUrl.js'
 	
     export default {
 		components: {
@@ -69,112 +70,69 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			// 向服务器查询read消息。用total除以per_page，向下取整，得出需要查询的总页数
-			// var pages = 0;
-			// for (var i = 0; i <= pages; i++) {
-			// 	uni.request({
-			// 		url: 'https://???path???/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
-			// 		header:{
-			// 			'Authorization': 'Bearer '+ this.token,
-			// 		},
-			// 		method: 'GET',
-			// 		success: (res) => {
-			// 			console.log(res);
-			// 			if (res.status==200) {
-			// 				if (res.total != 0) {
-			// 					pages = Math.floor(res.total / res.per_page);
-			// 					// 将得到的数组加入message_list中
-			// 					this.message_list.push().apply(this.message_list,res.data);
-			// 				} else{
-			// 					uni.showToast({
-			// 						title:'无未读信息',
-			// 						duration:3000
-			// 					})
-			// 					console.log("无未读信息")
-			// 				}
-			// 			} else {
-			// 				console.log("系统通知信息获取失败")
-			// 			}
-			// 		}
-			// 	});
-			// }
-			var data_m = [
-				{
-					"id": 1,
-					"from_user_id": 1,
-					"from_user_name": "Rose",
-					"to_user_id": 2,
-					"to_user_name": "test",
-					"title": "test title3",
-					"status": "read"
-				},
-				{
-					"id": 2,
-					"from_user_id": 1,
-					"from_user_name": "Tony",
-					"to_user_id": 2,
-					"to_user_name": "test",
-					"title": "test title4",
-					"status": "read"
-				}
-			]
-			this.message_list.push.apply(this.message_list,data_m);
+			var pages = 0;
+			for (var i = 0; i <= pages; i++) {
+				uni.request({
+					url: 'https://webSiteUrl/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
+					header:{
+						'Authorization': 'Bearer '+ this.token,
+					},
+					method: 'GET',
+					success: (res) => {
+						console.log(res);
+						if (res.status==200) {
+							if (res.total != 0) {
+								pages = Math.floor(res.total / res.per_page);
+								// 将得到的数组加入message_list中
+								this.message_list.push().apply(this.message_list,res.data);
+							} else{
+								uni.showToast({
+									title:'无未读信息',
+									duration:3000
+								})
+								console.log("无未读信息")
+							}
+						} else {
+							console.log("系统通知信息获取失败")
+						}
+					}
+				});
+			}
 		},
 		onPullDownRefresh() {
 			console.log('refresh');
 			// 向服务器查询read消息。用total除以per_page，向下取整，得出需要查询的总页数
-			// var pages = 0;
-			// for (var i = 0; i <= pages; i++) {
-			// 	uni.request({
-			// 		url: 'https://???path???/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
-			// 		header:{
-			// 			'Authorization': 'Bearer '+ this.token,
-			// 		},
-			// 		method: 'GET',
-			// 		success: (res) => {
-			// 			console.log(res);
-			// 			if (res.status==200) {
-			// 				if (res.total != 0) {
-			// 					pages = Math.floor(res.total / res.per_page);
-			// 					// 将得到的数组加入message_list中
-			// 					this.message_list.push().apply(this.message_list,res.data);
-			// 				} else{
-			// 					uni.showToast({
-			// 						title:'无未读信息',
-			// 						duration:3000
-			// 					})
-			// 					console.log("无未读信息")
-			// 				}
-			// 			} else {
-			// 				console.log("系统通知信息获取失败")
-			// 			}
-			// 		},
-			// 		complete() {
-			// 			uni.stopPullDownRefresh();
-			// 		}
-			// 	});
-			// }
-			// 测试用，记得删除
-			var data_m = [
-				{
-					"id": 1,
-					"from_user_id": 1,
-					"from_user_name": "Rose",
-					"to_user_id": 2,
-					"to_user_name": "test",
-					"title": "test title3",
-					"status": "read"
-				},
-				{
-					"id": 2,
-					"from_user_id": 1,
-					"from_user_name": "Tony",
-					"to_user_id": 2,
-					"to_user_name": "test",
-					"title": "test title4",
-					"status": "read"
-				}
-			];
-			this.message_list.push.apply(this.message_list,data_m);
+			var pages = 0;
+			for (var i = 0; i <= pages; i++) {
+				uni.request({
+					url: 'https://webSiteUrl/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
+					header:{
+						'Authorization': 'Bearer '+ this.token,
+					},
+					method: 'GET',
+					success: (res) => {
+						console.log(res);
+						if (res.status==200) {
+							if (res.total != 0) {
+								pages = Math.floor(res.total / res.per_page);
+								// 将得到的数组加入message_list中
+								this.message_list.push().apply(this.message_list,res.data);
+							} else{
+								uni.showToast({
+									title:'无未读信息',
+									duration:3000
+								})
+								console.log("无未读信息")
+							}
+						} else {
+							console.log("系统通知信息获取失败")
+						}
+					},
+					complete() {
+						uni.stopPullDownRefresh();
+					}
+				});
+			}
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
@@ -187,21 +145,21 @@
 				this.message_title = 'test title';
 				this.message_from = 'tom';
 				this.message_content = messageId + 'test contenttest contenttest contenttest contenttest contenttest content';
-				// uni.request({
-				// 	url: 'https://???path???/message/' + messageId,
-				// 	method: 'GET',
-				// 	header: {
-				// 		'Authorization': 'Bearer '+ this.token,
-				// 	},
-				// 	success: (res) => {
-				// 		this.message_title = res.data.title;
-				// 		this.message_from = res.data.from_user_name;
-				// 		this.message_content = res.data.content;
-				// 	},
-				// 	fail() {
-				// 		console.log(查询失败);
-				// 	}
-				// })
+				uni.request({
+					url: 'https://webSiteUrl/message/' + messageId,
+					method: 'GET',
+					header: {
+						'Authorization': 'Bearer '+ this.token,
+					},
+					success: (res) => {
+						this.message_title = res.data.title;
+						this.message_from = res.data.from_user_name;
+						this.message_content = res.data.content;
+					},
+					fail() {
+						console.log(查询失败);
+					}
+				})
 				this.isShowPopup = true;
 			},
 			closeMessage() {
