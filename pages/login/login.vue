@@ -26,6 +26,7 @@
 
 <script>
     import mInput from '../../components/m-input.vue'
+	import webSiteUrl from '../../common/webSiteUrl.js'
 
     export default {
         components: {
@@ -78,115 +79,108 @@
                 this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
             },
             bindLogin(e) {
-                if (this.account.length < 2) {
+                if (this.account.length < 3) {
                     uni.showToast({
-                        icon: 'none',
-                        title: '账号最短为 2 个字符'
+                        duration:2000,
+                        title: '账号最短为 3 个字符'
                     });
                     return;
                 }
                 if (this.password.length < 4) {
                     uni.showToast({
-                        icon: 'none',
+                        duration:2000,
                         title: '密码最短为 4 个字符'
                     });
                     return;
                 }
                 // 检测用户账号密码是否在已注册的用户列表中
-				var status = 200;
 				// 这里token为了测试，将过期时间设置在2019-06-30
 				var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVkX2F0IjoiVGh1IEp1biAzMCAwMjoyMTo0NiBVVEMgMjAxOSIsImlkIjoxLCJyb2xlIjoibWFzdGVyIn0=.NwUOTTY5ZbPVRQdQRFQwZ3Na-hNfemMrFSTGv63aJjs';
-				// uni.request({
-				// 	/**
-				// 	* 路径待修改！！！
-				// 	*/
-				// 	url: 'https://???path???/user/auth',
-				// 	method: 'POST',
-				// 	data: {
-				// 		name:this.account,
-				// 		password:this.password
-				// 	},
-				// 	success: res => {
-				// 		console.log(res);
-				// 		status = res.data.status;
-				// 		token = res.data.token;
-				// 	},
-				// 	fail: () => {
-				// 		console.log("登陆认证失败");
-				// 	}
-				// });
-				
-                if (status==200) {
-					let userName = this.account;
-					// 提取token中的相关信息
-					let key_info_base64 = token.split(".")[1];
-					console.log("key_info_base64="+key_info_base64);
-					// base64解码的js实现（atob函数用不了，只能强行转）
-					var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
-					var key_info_str = "";  
-					var chr1, chr2, chr3;  
-					var enc1, enc2, enc3, enc4;  
-					var i = 0;  
-					key_info_base64 = key_info_base64.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
-					while (i < key_info_base64.length) {  
-						enc1 = _keyStr.indexOf(key_info_base64.charAt(i++));  
-						enc2 = _keyStr.indexOf(key_info_base64.charAt(i++));  
-						enc3 = _keyStr.indexOf(key_info_base64.charAt(i++));  
-						enc4 = _keyStr.indexOf(key_info_base64.charAt(i++));  
-						chr1 = (enc1 << 2) | (enc2 >> 4);  
-						chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
-						chr3 = ((enc3 & 3) << 6) | enc4;  
-						key_info_str = key_info_str + String.fromCharCode(chr1);  
-						if (enc3 != 64) {  
-							key_info_str = key_info_str + String.fromCharCode(chr2);  
-						}  
-						if (enc4 != 64) {  
-							key_info_str = key_info_str + String.fromCharCode(chr3);  
-						}  
-					}
-					// 上面的方法转自https://blog.csdn.net/u012369749/article/details/73784897
-					let key_info_obj = JSON.parse(key_info_str);
-					console.log(key_info_obj);
-					let user_id = key_info_obj.id;
-					let expired_at_init = key_info_obj.expired_at;
-					// 将expired_at格式化
-					let expired_at_splited = expired_at_init.split(" ");
-					let month_init = expired_at_splited[1];
-					let day = parseInt(expired_at_splited[2]);
-					let time = expired_at_splited[3].split(":");
-					let hours = parseInt(time[0])-1;
-					let minutes = parseInt(time[1])-1;
-					let seconds = parseInt(time[2])-1;
-					let year = parseInt(expired_at_splited[5]);
-					let month_array = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-					var month;
-					for (var i = 0; i < 12; i++) {
-						if(month_init==month_array[i]){
-							month = i;
-							break;
+				uni.request({
+					url: 'https://webSiteUrl/user/auth',
+					method: 'POST',
+					data: {
+						name:this.account,
+						password:this.password
+					},
+					success: (res) => {
+						console.log(res);
+						token = res.data.token;
+						if (res.status==200) {
+							let userName = this.account;
+							// 提取token中的相关信息
+							let key_info_base64 = token.split(".")[1];
+							console.log("key_info_base64="+key_info_base64);
+							// base64解码的js实现（atob函数用不了，只能强行转）
+							var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
+							var key_info_str = "";  
+							var chr1, chr2, chr3;  
+							var enc1, enc2, enc3, enc4;  
+							var i = 0;  
+							key_info_base64 = key_info_base64.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
+							while (i < key_info_base64.length) {  
+								enc1 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+								enc2 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+								enc3 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+								enc4 = _keyStr.indexOf(key_info_base64.charAt(i++));  
+								chr1 = (enc1 << 2) | (enc2 >> 4);  
+								chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
+								chr3 = ((enc3 & 3) << 6) | enc4;  
+								key_info_str = key_info_str + String.fromCharCode(chr1);  
+								if (enc3 != 64) {  
+									key_info_str = key_info_str + String.fromCharCode(chr2);  
+								}  
+								if (enc4 != 64) {  
+									key_info_str = key_info_str + String.fromCharCode(chr3);  
+								}  
+							}
+							// 上面的方法转自https://blog.csdn.net/u012369749/article/details/73784897
+							let key_info_obj = JSON.parse(key_info_str);
+							console.log(key_info_obj);
+							let user_id = key_info_obj.id;
+							let expired_at_init = key_info_obj.expired_at;
+							// 将expired_at格式化
+							let expired_at_splited = expired_at_init.split(" ");
+							let month_init = expired_at_splited[1];
+							let day = parseInt(expired_at_splited[2]);
+							let time = expired_at_splited[3].split(":");
+							let hours = parseInt(time[0])-1;
+							let minutes = parseInt(time[1])-1;
+							let seconds = parseInt(time[2])-1;
+							let year = parseInt(expired_at_splited[5]);
+							let month_array = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+							var month;
+							for (var i = 0; i < 12; i++) {
+								if(month_init==month_array[i]){
+									month = i;
+									break;
+								}
+							}
+							let expired_ms = Date.UTC(year,month,day,hours,minutes,seconds);
+							// 存储用户登陆信息到本地
+							try{
+								uni.setStorageSync('userName',userName);
+								uni.setStorageSync('token',token);
+								uni.setStorageSync('expired_ms',expired_ms);
+								uni.setStorageSync('user_id',user_id);
+							}catch(e){
+								console.log("存储出现问题");
+							}
+						    uni.redirectTo({
+						    	url: '../home/home'
+						    });
+						} else {
+						    uni.showToast({
+						        icon: 'none',
+						        title: '用户账号或密码不正确',
+						    });
 						}
+					},
+					fail: () => {
+						console.log("登陆认证失败");
 					}
-					let expired_ms = Date.UTC(year,month,day,hours,minutes,seconds);
-					// 存储用户登陆信息到本地
-					try{
-						uni.setStorageSync('userName',userName);
-						uni.setStorageSync('token',token);
-						uni.setStorageSync('expired_ms',expired_ms);
-						uni.setStorageSync('user_id',user_id);
-					}catch(e){
-						console.log("存储出现问题");
-					}
-                    uni.redirectTo({
-                    	url: '../home/home'
-                    });
-                } else {
-                    uni.showToast({
-                        icon: 'none',
-                        title: '用户账号或密码不正确',
-                    });
-                }
+				});
             },
-			
 		}
     }
 </script>
