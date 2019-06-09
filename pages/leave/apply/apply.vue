@@ -34,7 +34,8 @@
 	</view>
 </template>
 <script>
-	import wPicker from "@/components/w-picker/w-picker.vue";
+	import wPicker from "@/components/w-picker/w-picker.vue"
+	import webSiteUrl from '../../../common/webSiteUrl.js'
 
 	function getDate(type) {
 		const date = new Date();
@@ -133,6 +134,7 @@
 				// end = end.replace(/-/g,"\/");
 				var begin = new Date(this.date);
 				var end = new Date(this.dateend);
+				var today = new Date()
 				//将下列代码加入到对应的检查位置
 				//定义表单规则
 				var rule = [
@@ -146,6 +148,10 @@
 				{
 					uni.showToast({title:"错误:结束日期应大于开始日期!", icon:"none"});
 				}
+				else if(begin<today)
+				{
+					uni.showToast({title:"错误:开始日期不应在今天之前!", icon:"none"});
+				}
 				//表单检查
 				else if(!checkRes)
 				{
@@ -155,7 +161,7 @@
 				else
 				{
 					uni.request({
-						url: 'https://www.example.com/leave/user/' + this.user_id,
+						url: 'https://webSiteUrl/leave/user/' + this.user_id,
 						data: {
 							start_at: this.date,
 							end_at: this.dateend,
@@ -191,20 +197,20 @@
 </script>
 
 <style>
-.content {
-	text-align: left;
-	height: 400upx;
-}
-.tab{
-	padding:40upx 0;
-	font-size: 32upx;
-}
-.tab.active{
-}
-.result{
-	margin-top: 20upx;
-}
-textarea {
-	margin-top: 20upx;
-}
+	.content {
+		text-align: left;
+		height: 400upx;
+	}
+	.tab{
+		padding:40upx 0;
+		font-size: 32upx;
+	}
+	.tab.active{
+	}
+	.result{
+		margin-top: 20upx;
+	}
+	textarea {
+		margin-top: 20upx;
+	}
 </style>
