@@ -27,14 +27,47 @@
 				</view>
 			</view>
 		</view>
-		<view class="sub_button">
-			<button class="primary" type="primary" @tap="submit">确认上传</button>
+		<view class="upload_button">
+			<button class="primary" type="primary" @tap="submit">上传图片</button>
+		</view>
+		<view class="pwd_button">
+			<button class="primary" type="warn" @tap="showPanel">修改密码</button>
+		</view>
+		<view>
+			<uni-popup :show="isShowPopup" position="middle" mode="insert" buttonMode="right" @hidePopup="closePanel">
+				<view class="pwd_panel">
+					<view class="input-row border">
+						<text class="_title">原密码：</text>
+						<m-input type="password" displayable v-model="oldpwd" placeholder="请输入密码"></m-input>
+					</view>
+					<view class="input-row border">
+						<text class="_title">新密码：</text>
+						<m-input type="password" displayable v-model="newpwd_1" placeholder="请输入密码"></m-input>
+					</view>
+					<view class="input-row border">
+						<text class="_title">新密码确认：</text>
+						<m-input type="password" displayable v-model="newpwd_2" placeholder="请输入密码"></m-input>
+					</view>
+					<view class="bottom-btn">
+						<button class="btn_left" size="mini" @tap="clear">重置</button>
+						<button class="btn_right" size="mini" @click="changePwd">提交</button>
+					</view>
+				</view>
+			</uni-popup>
 		</view>
 	</view>
 </template>
 
 <script>
+	import webSiteUrl from '../../common/webSiteUrl.js'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import mInput from '../../components/m-input.vue'
+	
 	export default {
+		components: {
+			uniPopup,
+			mInput
+		},
 		data() {
 			return {
 				userName: '',
@@ -47,6 +80,10 @@
 				imgSrc:'',
 				imgSrcOld:'',
 				isChanged: false,
+				isShowPopup:false,
+				oldpwd:'',
+				newpwd_1:'',
+				newpwd_2:'',
 			}
 		},
 		onLoad: function() {
@@ -60,12 +97,12 @@
 			// this.hours = uni.getStorageSync('hours');
 			// 向服务器请求获取用户人脸信息
 			// uni.request({
-			// 	url: 'https://???path???/face/user/' + this.user_id,
+			// 	url: 'https://webSiteUrl/face/user/' + this.user_id,
 			// 	header: {
 			// 		'Authorization': 'Bearer '+ this.token,
 			// 	},
 			// 	method: 'GET',
-			// 	success: res => {
+			// 	success: (res) => {
 			// 		if (res.status==200) {
 			// 			console.log("获取用户图片成功");
 			// 			if (res.data.status=="available") {
@@ -86,6 +123,7 @@
 			chooseImg(e) {
 				uni.chooseImage({
 					count: 1,
+					sizeType: 'compressed',  // 只能选择压缩图片
 					success: (chooseImageRes) => {
 						this.isChanged = true;
 						// 将图片存到本地
@@ -110,10 +148,10 @@
 						encoding: 'base64',
 						success: (encodeRes) => {
 							this.imgSrc = 'data:image/png;base64,' + encodeRes.data;
-							// console.log(this.imgSrc);
+							console.log(this.imgSrc);
 							// 再将图片的base64上传到服务器
 							// uni.request({
-							// 	url: 'https://???path???/user/' + this.user_id,
+							// 	url: 'https://webSiteUrl/user/' + this.user_id,
 							// 	header: {
 							// 		'Authorization': 'Bearer '+ this.token,
 							// 	},
@@ -125,7 +163,7 @@
 							// 		if (uploadRes.data.status==201) {
 							// 			console.log("上传成功");
 							// 			this.imgSrcOld = this.imgSrc;
-							//			uni.showToast({
+							// 			uni.showToast({
 							// 				duration:2000,
 							// 				title:'上传成功'
 							// 			})
@@ -150,70 +188,170 @@
 						title:'您还未选择照片'
 					})
 				}
+			},
+			showPanel(e) {
+				console.log(e);
+				this.isShowPopup = true;
+			},
+			closePanel() {
+				this.isShowPopup = false;
+			},
+			clear() {
+				this.oldpwd = '';
+				this.newpwd_1 = '';
+				this.newpwd_2 = '';
+			},
+			changePwd() {
+				console.log(this.oldpwd);
+				console.log(this.newpwd_1);
+				console.log(this.newpwd_2);
+				// 判断密码格式是否正确
+				if (this.oldpwd.length < 4 || this.newpwd_1.length < 4 || this.newpwd_2.length < 4) {
+				    uni.showToast({
+				        duration:2000,
+				        title: '密码最短为 4 个字符'
+				    });
+				    return;
+				} else {
+					// 判断两次新密码是否相同
+					if (this.newpwd_1 == this.newpwd_2) {
+						uni.request({
+							url: 'https://webSiteUrl/user/' + this.user_id + '/password',
+							header: {
+								'Authorization': 'Bearer '+ this.token,
+							},
+							data: {
+								old_password:this.oldpwd,
+								new_password:this.newpwd_1
+							},
+							method: 'PUT',
+							success: (res) => {
+								if (res.status == 200) {
+									uni.showToast({
+										duration:2000,
+										title:'修改密码成功'
+									})
+									console.log('修改密码请求提交成功');
+								} else{
+									uni.showToast({
+										duration:2000,
+										title:'修改密码失败'
+									})
+									console.log('修改密码请求提交失败');
+								}
+							},
+							fail() {
+								uni.showToast({
+									duration:2000,
+									title:'修改密码失败'
+								})
+								console.log('修改密码请求提交失败');
+							}
+						})
+					} else{
+						uni.showToast({
+							duration:2000,
+							title:'两次密码不一致'
+						})
+					}
+				}
 			}
 		}
 	}
 </script>
 
 <style>
-.title {
-        color: #8f8f94;
-        margin-top: 50upx;
-    }
-.table {
-	width: 600upx;
-	top: 9%;
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 0); 
-}
-._caption {
-	text-align: center;
-	margin-bottom: 40upx;
-}
-._img {
-	width: 300upx;
-	height: 300upx;
-	margin-top: 12upx;
-	margin-bottom: 7upx;
-	margin-right: 12upx;
-	background-color: #8F8F94;
-}
+	.title {
+			color: #8f8f94;
+			margin-top: 50upx;
+		}
+	.table {
+		width: 600upx;
+		top: 9%;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, 0); 
+	}
+	._caption {
+		text-align: center;
+		margin-bottom: 40upx;
+	}
+	._img {
+		width: 300upx;
+		height: 300upx;
+		margin-top: 12upx;
+		margin-bottom: 7upx;
+		margin-right: 12upx;
+		background-color: #8F8F94;
+	}
 
-#panel{
-	background:#EEEEEE;
-	border: 5upx solid #8F8F94;
-}
+	#panel{
+		background:#EEEEEE;
+		border: 5upx solid #8F8F94;
+	}
 
-.row{
-	line-height: 5vh;
-	border-bottom: 5upx solid #8F8F94;
-}
+	.row{
+		line-height: 5vh;
+		border-bottom: 5upx solid #8F8F94;
+	}
 
-.flex-row{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-.flex-column{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: stretch;
-}
+	.flex-row{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.flex-column{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: stretch;
+	}
 
-.flex-cell{
-	flex: 1;
-}
-.img_button{
-	margin-bottom: 12upx;
-}
-.sub_button{
-	margin-top: 30upx;
-	position: absolute;
-	bottom: 20%;
-	left: 70%;
-	transform: translate(-50%, 0); 
-}
+	.flex-cell{
+		flex: 1;
+	}
+	.img_button{
+		margin-bottom: 12upx;
+	}
+	.upload_button{
+		margin-top: 30upx;
+		position: absolute;
+		bottom: 25%;
+		left: 50%;
+		transform: translate(-50%, 0); 
+	}
+	.pwd_button{
+		margin-top: 30upx;
+		position: absolute;
+		bottom: 15%;
+		left: 50%;
+		transform: translate(-50%, 0); 
+	}
+	.pwd_panel{
+		padding-top: 8upx;
+		padding-right: 20upx;
+		height: 300upx;
+		width: 600upx;
+		background-color: #FFFFFF;
+		border: 2upx solid #000000;
+	}
+	.input-row ._title {
+		width: 45%;
+		height: 50upx;
+		min-height: 50upx;
+		padding: 10upx 0;
+		padding-left: 30upx;
+		line-height: 50upx;
+	}
+	.bottom-btn {
+		position: absolute;
+		bottom: 12%;
+	}
+	.btn_left {
+		left: 40%;
+	}
+	.btn_right {
+		left: 130%;
+	}
 </style>
