@@ -36,6 +36,8 @@
 
 <script>
 	import uniSteps from '@/components/uni-steps/uni-steps.vue'
+	import webSiteUrl from '../../common/webSiteUrl.js'
+	
 	export default {
 		components: {
 			uniSteps
@@ -46,7 +48,7 @@
 			this.user_id = uni.getStorageSync('user_id');
 			
 			uni.request({
-				url: 'https://www.example.com/leave/user/' + this.user_id + '?page=' + 0,
+				url: 'https://webSiteUrl/leave/user/' + this.user_id + '?page=' + 0,
 				// data: {
 				// 	text: 'uni.request'
 				// },
@@ -120,7 +122,7 @@
 		methods: {
 			resume() {//销假按钮
 				uni.request({
-					url: 'https://www.example.com/leave/user/leave/'+this.data[this.index].id,
+					url: 'https://webSiteUrl/leave/user/leave/'+this.data[this.index].id,
 					method: 'DELETE',
 					header:{
 						'Authorization': 'Bearer' + this.token //'Authorization'加引号？
