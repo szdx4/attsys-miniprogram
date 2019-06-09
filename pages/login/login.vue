@@ -18,9 +18,6 @@
         <view class="btn-row">
             <button type="primary" class="primary" @tap="bindLogin">登录</button>
         </view>
-        <view class="action-row">
-            <navigator url="../pwd/pwd">忘记密码</navigator>
-        </view>
     </view>
 </template>
 
