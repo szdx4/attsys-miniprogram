@@ -8,7 +8,7 @@
 		</caption>
 		<scroll-view :scroll-y="true" class="uni-center center-box">
 			<view v-for="(item, index) in message_list" :key="index" class="uni-list-item message">
-				{{ item.from_user_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				{{ item.from.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				{{ item.title }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
 				<text @tap="showMessage" :data-messageId='item.id' :data-id='index'>查看</text>
 			</view>
@@ -153,7 +153,7 @@
 					},
 					success: (res) => {
 						this.message_title = res.data.title;
-						this.message_from = res.data.from_user_name;
+						this.message_from = res.data.from.name;
 						this.message_content = res.data.content;
 					},
 					fail() {
