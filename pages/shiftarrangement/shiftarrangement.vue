@@ -19,6 +19,7 @@
 <script>
 	import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import webSiteUrl from '../../common/webSiteUrl.js'
 
 	export default {
 		components: {
@@ -140,7 +141,7 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			uni.request({
-				url: 'https://www.example.com/shift?user_id=' + this.user_id + '&page=' + 0,
+				url: 'https://webSiteUrl/shift?user_id=' + this.user_id + '&page=' + 0,
 				// data: {
 				// 	text: 'uni.request'
 				// },
