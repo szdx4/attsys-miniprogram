@@ -91,32 +91,32 @@
 			this.user_id = uni.getStorageSync('user_id');
 			this.userName = uni.getStorageSync('userName');
 			this.imgSrc = '../../static/img/qq.png';  // 服务器给的是base64码，可以在image标签中直接解析
-			// this.name = uni.getStorageSync('name');
-			// this.department = uni.getStorageSync('department');
-			// this.role = uni.getStorageSync('role');
-			// this.hours = uni.getStorageSync('hours');
+			this.name = uni.getStorageSync('name');
+			this.department = uni.getStorageSync('department');
+			this.role = uni.getStorageSync('role');
+			this.hours = uni.getStorageSync('hours');
 			// 向服务器请求获取用户人脸信息
-			// uni.request({
-			// 	url: 'https://webSiteUrl/face/user/' + this.user_id,
-			// 	header: {
-			// 		'Authorization': 'Bearer '+ this.token,
-			// 	},
-			// 	method: 'GET',
-			// 	success: (res) => {
-			// 		if (res.status==200) {
-			// 			console.log("获取用户图片成功");
-			// 			if (res.data.status=="available") {
-			// 				this.imgSrc = res.data.info;
-			// 				this.imgSrcOld = this.imgSrc;
-			// 			}
-			// 			else {
-			// 				console.log("用户图片暂时不可用")
-			// 			}
-			// 		} else{
-			// 			console.log("获取用户图片失败");
-			// 		}
-			// 	},
-			// });
+			uni.request({
+				url: 'https://webSiteUrl/face/user/' + this.user_id,
+				header: {
+					'Authorization': 'Bearer '+ this.token,
+				},
+				method: 'GET',
+				success: (res) => {
+					if (res.status==200) {
+						console.log("获取用户图片成功");
+						if (res.data.status=="available") {
+							this.imgSrc = res.data.info;
+							this.imgSrcOld = this.imgSrc;
+						}
+						else {
+							console.log("用户图片暂时不可用")
+						}
+					} else{
+						console.log("获取用户图片失败");
+					}
+				},
+			});
 		},
 		methods: {
 			// 选择照片，可从相册或相机，一次只允许选一张
@@ -150,33 +150,33 @@
 							this.imgSrc = 'data:image/png;base64,' + encodeRes.data;
 							console.log(this.imgSrc);
 							// 再将图片的base64上传到服务器
-							// uni.request({
-							// 	url: 'https://webSiteUrl/user/' + this.user_id,
-							// 	header: {
-							// 		'Authorization': 'Bearer '+ this.token,
-							// 	},
-							// 	data: {
-							// 		info: this.imgSrc
-							// 	},
-							// 	method: 'GET',
-							// 	success: (uploadRes) => {
-							// 		if (uploadRes.data.status==201) {
-							// 			console.log("上传成功");
-							// 			this.imgSrcOld = this.imgSrc;
-							// 			uni.showToast({
-							// 				duration:2000,
-							// 				title:'上传成功'
-							// 			})
-							// 		} else{
-							// 			console.log("上传失败");
-							// 			this.imgSrc = this.imgSrcOld;
-							// 			uni.showToast({
-							// 				duration:2000,
-							// 				title:'上传失败'
-							// 			})
-							// 		}
-							// 	}
-							// })
+							uni.request({
+								url: 'https://webSiteUrl/user/' + this.user_id,
+								header: {
+									'Authorization': 'Bearer '+ this.token,
+								},
+								data: {
+									info: this.imgSrc
+								},
+								method: 'GET',
+								success: (uploadRes) => {
+									if (uploadRes.data.status==201) {
+										console.log("上传成功");
+										this.imgSrcOld = this.imgSrc;
+										uni.showToast({
+											duration:2000,
+											title:'上传成功'
+										})
+									} else{
+										console.log("上传失败");
+										this.imgSrc = this.imgSrcOld;
+										uni.showToast({
+											duration:2000,
+											title:'上传失败'
+										})
+									}
+								}
+							})
 						},
 					})
 					
@@ -191,6 +191,9 @@
 			},
 			showPanel(e) {
 				console.log(e);
+				this.oldpwd = '';
+				this.newpwd_1 = '';
+				this.newpwd_2 = '';
 				this.isShowPopup = true;
 			},
 			closePanel() {
