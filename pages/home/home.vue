@@ -134,7 +134,6 @@
 			this.user_id = uni.getStorageSync('user_id');
 			this.messageSrc = '../../static/img/message.png';
 			// 检查用户签到状态
-			var checkStatus = 204;
 			uni.request({
 				url: webSiteUrl + '/sign/user/' + this.user_id,
 				header:{
@@ -142,12 +141,11 @@
 				},
 				method: 'GET',
 				success:(res) => {
-					checkStatus = res.statusCode;
-					if(checkStatus==204){
+					if(res.statusCode==204){
 						this.check_message = "未签到";
 						this.IsNotcheck = true;
 					}
-					else if(checkStatus==200){
+					else if(res.statusCode==200){
 						this.check_message = "已签到";
 						this.isNotCheck = false;
 						this.canCheckOff = true;
@@ -160,10 +158,6 @@
 				}
 			});
 			// 获取用户基本信息，并存入缓存
-			var name = 'default name';
-			var department = 0;
-			var role = 'default role';
-			var hours = 0;
 			uni.request({
 				url: webSiteUrl + '/user/' + this.user_id,
 				header: {
@@ -173,16 +167,12 @@
 				success: res=> {
 					if (res.statusCode==200) {
 						console.log("获取用户信息成功");
-						name = res.data.data.name;
-						department = res.data.data.department;
-						role = res.data.data.role;
-						hours = res.data.data.hours;
 						// 存储用户信息到本地
 						try{
-							uni.setStorageSync('name',name);
-							uni.setStorageSync('department',department);
-							uni.setStorageSync('role',role);
-							uni.setStorageSync('hours',hours);
+							uni.setStorageSync('name',res.data.data.name);
+							uni.setStorageSync('department',res.data.data.department);
+							uni.setStorageSync('role',res.data.data.role);
+							uni.setStorageSync('hours',res.data.data.hours);
 						}catch(e){
 							console.log("存储出现问题");
 						}
@@ -317,6 +307,7 @@
 					url: '../message/message'
 				});
 			},
+			// 签退
 			checkOff(e){
 				var sign_id = uni.getStorageSync('sign_id');
 				uni.request({
