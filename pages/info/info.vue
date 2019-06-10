@@ -9,7 +9,7 @@
 				</view>
 				<view class="flex-row flex-cell row">
 					<text class="flex-cell flex-row">部门：</text>
-					<text class="flex-cell flex-row">{{department}}</text>
+					<text class="flex-cell flex-row">{{department.name}}</text>
 				</view>
 				<view class="flex-row flex-cell row">
 					<text class="flex-cell flex-row">工时：</text>
@@ -18,6 +18,9 @@
 				<view class="flex-row flex-cell">
 					<text class="flex-cell flex-row">图片：</text>
 					<view><image class='_img flex-cell flex-row-l' :src="imgSrc" :mode='scaleToFill'></image></view>
+					<view style='width:0px;height:0px;overflow:hidden;'>
+						<canvas canvas-id="myCanvas"></canvas>
+					</view>
 				</view>
 				<view class="flex-row flex-cell">
 					<text class="flex-cell flex-row"></text>
@@ -90,23 +93,22 @@
 			this.token = uni.getStorageSync('token');
 			this.user_id = uni.getStorageSync('user_id');
 			this.userName = uni.getStorageSync('userName');
-			this.imgSrc = '../../static/img/qq.png';  // 服务器给的是base64码，可以在image标签中直接解析
 			this.name = uni.getStorageSync('name');
 			this.department = uni.getStorageSync('department');
 			this.role = uni.getStorageSync('role');
 			this.hours = uni.getStorageSync('hours');
 			// 向服务器请求获取用户人脸信息
 			uni.request({
-				url: 'https://webSiteUrl/face/user/' + this.user_id,
+				url: webSiteUrl + '/face/user/' + this.user_id,
 				header: {
 					'Authorization': 'Bearer '+ this.token,
 				},
 				method: 'GET',
 				success: (res) => {
-					if (res.status==200) {
+					if (res.statusCode==200) {
 						console.log("获取用户图片成功");
-						if (res.data.status=="available") {
-							this.imgSrc = res.data.info;
+						if (res.data.data.status=="available") {
+							this.imgSrc = res.data.data.info;  // 服务器给的图片base64码，可以在image标签中直接解析
 							this.imgSrcOld = this.imgSrc;
 						}
 						else {
@@ -123,9 +125,31 @@
 			chooseImg(e) {
 				uni.chooseImage({
 					count: 1,
-					sizeType: 'compressed',  // 只能选择压缩图片
+					sizeType: 'compressed',  // 只能选择压缩图片，如果这个压缩还不够给力，则使用更麻烦的方法：http://www.heibaiketang.com/blog/show/97.html
 					success: (chooseImageRes) => {
 						this.isChanged = true;
+						// 通过画布得到等比例压缩后的图片的base64码
+						// 先获得图像长宽
+						// uni.getImageInfo({
+						// 	src:chooseImageRes.tempFilePaths[0],
+						// 	success: (image) => {
+						// 		var max_height = 600;
+						// 		var max_width = 800;
+						// 		var image_width_ori = image.width;
+						// 		var image_height_ori = image.height;
+						// 		console.log(image_width_ori);
+						// 		console.log(image_height_ori);
+						// 		w_h_rate = image_width_ori/image_height_ori;
+						// 		// 等比压缩，判断宽度或高度优先
+						// 		const ctx = uni.createCanvasContext('myCanvas');
+						// 		if (w_h_rate>(max_height/max_width)) {
+						// 			ctx.drawImage(chooseImageRes.tempFilePaths[0], 0, 0, max_width, max_width/w_h_rate);
+						// 		} else{
+						// 			ctx.drawImage(chooseImageRes.tempFilePaths[0], 0, 0, max_height*w_h_rate, max_height);
+						// 		}
+						// 		ctx.draw();
+						// 	}
+						// })
 						// 将图片存到本地
 						uni.saveFile({
 							tempFilePath: chooseImageRes.tempFilePaths[0],
@@ -148,19 +172,20 @@
 						encoding: 'base64',
 						success: (encodeRes) => {
 							this.imgSrc = 'data:image/png;base64,' + encodeRes.data;
-							console.log(this.imgSrc);
+							// console.log(this.imgSrc);
 							// 再将图片的base64上传到服务器
 							uni.request({
-								url: 'https://webSiteUrl/user/' + this.user_id,
+								url: webSiteUrl + '/face/user/' + this.user_id,
 								header: {
 									'Authorization': 'Bearer '+ this.token,
 								},
 								data: {
 									info: this.imgSrc
 								},
-								method: 'GET',
+								method: 'POST',
 								success: (uploadRes) => {
-									if (uploadRes.data.status==201) {
+									console.log(uploadRes);
+									if (uploadRes.statusCode==201) {
 										console.log("上传成功");
 										this.imgSrcOld = this.imgSrc;
 										uni.showToast({
@@ -205,9 +230,6 @@
 				this.newpwd_2 = '';
 			},
 			changePwd() {
-				console.log(this.oldpwd);
-				console.log(this.newpwd_1);
-				console.log(this.newpwd_2);
 				// 判断密码格式是否正确
 				if (this.oldpwd.length < 4 || this.newpwd_1.length < 4 || this.newpwd_2.length < 4) {
 				    uni.showToast({
@@ -219,7 +241,7 @@
 					// 判断两次新密码是否相同
 					if (this.newpwd_1 == this.newpwd_2) {
 						uni.request({
-							url: 'https://webSiteUrl/user/' + this.user_id + '/password',
+							url: webSiteUrl + '/user/' + this.user_id + '/password',
 							header: {
 								'Authorization': 'Bearer '+ this.token,
 							},
@@ -229,12 +251,21 @@
 							},
 							method: 'PUT',
 							success: (res) => {
-								if (res.status == 200) {
+								if (res.statusCode == 200) {
 									uni.showToast({
 										duration:2000,
 										title:'修改密码成功'
 									})
 									console.log('修改密码请求提交成功');
+									// 修改密码成功，则清除缓存，重新登陆
+									try {
+										uni.clearStorageSync();
+									} catch (e) {
+										console.log(e);
+									}
+									uni.redirectTo({
+										url: '../login/login'
+									});
 								} else{
 									uni.showToast({
 										duration:2000,
@@ -281,7 +312,7 @@
 	}
 	._img {
 		width: 300upx;
-		height: 300upx;
+		height: 400upx;
 		margin-top: 12upx;
 		margin-bottom: 7upx;
 		margin-right: 12upx;
@@ -320,14 +351,14 @@
 	.upload_button{
 		margin-top: 30upx;
 		position: absolute;
-		bottom: 25%;
+		bottom: 20%;
 		left: 50%;
 		transform: translate(-50%, 0); 
 	}
 	.pwd_button{
 		margin-top: 30upx;
 		position: absolute;
-		bottom: 15%;
+		bottom: 12%;
 		left: 50%;
 		transform: translate(-50%, 0); 
 	}
