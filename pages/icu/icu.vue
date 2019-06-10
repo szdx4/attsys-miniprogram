@@ -50,7 +50,7 @@
 					var now = new Date()
 					now = now.toJSON().replace('T',' ').slice(0,-5)
 					uni.request({
-						url: 'https://webSiteUrl/overtime/user/' + this.user_id,
+						url: webSiteUrl + '/overtime/user/' + this.user_id,
 						method: 'POST',
 						data: {
 							remark: formData
@@ -60,13 +60,13 @@
 							'content-type': 'application/json',// 也有可能是application/x-www-form-urlencoded
 						},
 						success: (res) => {
-							if(res.status == 201){
+							if(res.statusCode == 201){
 								console.log('request success');
 								console.log(res);
 								uni.showToast({title:"提交成功!", icon:"none"});
 							}
 							else{
-								var errCode = (res.data.status == undefined)?'连接失败':res.data.status;
+								var errCode = (res.statusCode == undefined)?'连接失败':res.statusCode;
 								uni.showToast({title:"提交失败! "+errCode, icon:"none"});
 							}
 						}
