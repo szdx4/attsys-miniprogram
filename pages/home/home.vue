@@ -43,37 +43,45 @@
 <script>
 	import webSiteUrl from '../../common/webSiteUrl.js';
 	// 设置计时器查询是否有unread的消息,第二个参数单位是ms
-	function startQueryMessage(){
+	function startQueryMessage(that){
 		console.log('已开启计时器')
 		var messageintervalID;
-		messageintervalID = setInterval(function(){
+		messageintervalID = setInterval(function(that){
 			// 向服务器查询unread消息
 			uni.request({
-				url: 'https://webSiteUrl/message?to_user_id=' + this.user_id + '&status=unread&page=' + 0,
+				url: webSiteUrl + 'message?to_user_id=' + that.user_id + '&status=unread&page=' + 1,
 				header:{
-					'Authorization': 'Bearer '+ this.token,
+					'Authorization': 'Bearer '+ that.token,
 				},
 				method: 'GET',
 				success: (res) => {
-					console.log(res);
-					if (res.status==200) {
-						if (res.total != 0) {
-							// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
-							uni.showModal({
-								title: '提示',
-								content: '您有新消息了，请前往查看',
-								showCancel:false,
-								success: function (res) {
-									if (res.confirm) {
-										console.log('用户点击确定');
-									}
+					console.log('计时器：',res);
+					if (res.statusCode==200) {
+						// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
+						uni.showModal({
+							title: '提示',
+							content: '您有新消息了，请前往查看',
+							showCancel:false,
+							success: function (res) {
+								if (res.confirm) {
+									console.log('用户点击确定');
 								}
-							});
-						} else{
-							console.log("无未读信息")
+							}
+						});
+					} else if (res.statusCode==204) {
+						console.log("无未读信息")
+						try{
+							uni.setStorageSync('start_interval',true);
+						}catch(e){
+							console.log("存储出现问题");
 						}
 					} else {
 						console.log("系统通知信息获取失败")
+						try{
+							uni.setStorageSync('start_interval',true);
+						}catch(e){
+							console.log("存储出现问题");
+						}
 					}
 				}
 			});
@@ -87,7 +95,7 @@
 				console.log("存储出现问题");
 			}
 		}
-		},5000);
+		},60000,that);
 		// 存储是否开起定时器的控制变量
 		try{
 			uni.setStorageSync('start_interval',true);
@@ -128,16 +136,13 @@
 			// 检查用户签到状态
 			var checkStatus = 204;
 			uni.request({
-				url: 'https://webSiteUrl/sign/user/' + this.user_id,
+				url: webSiteUrl + '/sign/user/' + this.user_id,
 				header:{
 					'Authorization': 'Bearer '+ this.token,
 				},
 				method: 'GET',
 				success:(res) => {
-					console.log(res);
-					checkStatus = res.status;
-					this.start_at = result.start_at;
-					this.end_at = result.end_at;
+					checkStatus = res.statusCode;
 					if(checkStatus==204){
 						this.check_message = "未签到";
 						this.IsNotcheck = true;
@@ -146,6 +151,8 @@
 						this.check_message = "已签到";
 						this.isNotCheck = false;
 						this.canCheckOff = true;
+						this.start_at = res.data.start_at;
+						this.end_at = res.data.end_at;
 					}
 					else{
 						this.check_message = "服务器异常";
@@ -158,19 +165,18 @@
 			var role = 'default role';
 			var hours = 0;
 			uni.request({
-				url: 'https://webSiteUrl/user/' + this.user_id,
+				url: webSiteUrl + '/user/' + this.user_id,
 				header: {
 					'Authorization': 'Bearer '+ this.token,
 				},
 				method:'GET',
 				success: res=> {
-					console.log(res);
-					if (res.status==200) {
+					if (res.statusCode==200) {
 						console.log("获取用户信息成功");
-						name = res.data.name;
-						department = res.data.department;
-						role = res.data.role;
-						hours = res.data.hours;
+						name = res.data.data.name;
+						department = res.data.data.department;
+						role = res.data.data.role;
+						hours = res.data.data.hours;
 						// 存储用户信息到本地
 						try{
 							uni.setStorageSync('name',name);
@@ -209,7 +215,8 @@
 				console.log('已关闭计时器');
 			}  
 			if (uni.getStorageSync('start_interval')) {
-				this.messageintervalID = startQueryMessage();
+				var that = this;
+				this.messageintervalID = startQueryMessage(that);
 			}
 		},
 		methods:{
@@ -246,7 +253,7 @@
 						this.check_token = res.result.token;
 						// 通过二维码获得的token，向服务器签到
 						uni.request({
-							url:'https://webSiteUrl/sign/qrcode/' + this.user_id,
+							url: webSiteUrl + '/sign/qrcode/' + this.user_id,
 							method:'POST',
 							header:{
 								'Authorization': 'Bearer '+ this.token,
@@ -257,11 +264,11 @@
 							success: res => {
 								console.log(res);
 								try{
-									if (res.status==200) {
+									if (res.statusCode==200) {
 										console.log("签到成功");
 										// 存储sign_id到本地
 										try{
-											uni.setStorageSync('sign_id',res.sign_id);
+											uni.setStorageSync('sign_id',res.data.sign_id);
 										}catch(e){
 											console.log("sign_id存储出现问题");
 										}
@@ -313,15 +320,14 @@
 			checkOff(e){
 				var sign_id = uni.getStorageSync('sign_id');
 				uni.request({
-					url: 'https://webSiteUrl/sign/off/' + sign_id,
+					url: webSiteUrl + '/sign/off/' + sign_id,
 					method: 'POST',
 					header:{
 						'Authorization': 'Bearer ' + this.token
 					},
 					success: (res) => {
-						console.log(res);
-						if(res.status==200){
-							this.canICU = res.overtime;
+						if(res.statusCode==200){
+							this.canICU = res.data.overtime;
 							uni.showToast({
 								duration:2000,
 								title:'签退成功'
