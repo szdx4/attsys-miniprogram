@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/shiftarrangement/shiftarrangement",
+    "pages/leave/leave",
+    "pages/icu/icu",
+    "pages/info/info",
+    "pages/leave/apply/apply",
+    "pages/message/message",
+    "pages/message/message_read/message_read"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#0faeff",
+    "backgroundColor": "#fbf9fe"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}
