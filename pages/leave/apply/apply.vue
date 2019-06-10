@@ -66,9 +66,9 @@
 				token:'',
 				user_id:'',
 				//开始
-				date: new Date(),
+				date: '',
 				//结束
-				dateend: new Date(),
+				dateend: '',
 				//控制选择日期
 				defaultVal1: [1,1,1,1,2,5],
 				defaultVal2: [1,1,1,1,2,5],
@@ -102,22 +102,15 @@
 			this.token = uni.getStorageSync('token');
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
+			this.date = (new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
+			this.dateend = (new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
 		},
 		methods: {
-			bindDateChange: function(e) {
-				this.date = e.target.value;
-				console.log(this.date);
-			},
-			bindDateChange2: function(e) {
-				this.dateend = e.target.value;
-				console.log(this.dateend);
-			},
 			toggleTab(index){
 				this.tabIndex=index;
 				this.$refs.picker.show();
 			},
 			onConfirm(val){
-				console.log(val);
 				if(this.tabIndex == 0)
 				{
 					this.date=val.result;
@@ -134,6 +127,8 @@
 				// end = end.replace(/-/g,"\/");
 				var begin = new Date(this.date);
 				var end = new Date(this.dateend);
+				console.log(begin);
+				console.log(end);
 				var today = new Date()
 				//将下列代码加入到对应的检查位置
 				//定义表单规则
@@ -143,6 +138,7 @@
 				//进行表单检查
 				var formData = e.detail.value;
 				var checkRes = graceChecker.check(formData, rule);
+				formData = formData.nickname;
 				//时间检查
 				if(begin>=end)
 				{
@@ -161,10 +157,10 @@
 				else
 				{
 					uni.request({
-						url: 'https://webSiteUrl/leave/user/' + this.user_id,
+						url: webSiteUrl + '/leave/user/' + this.user_id,
 						data: {
-							start_at: this.date,
-							end_at: this.dateend,
+							start_at: begin.toJSON(),
+							end_at: end.toJSON(),
 							remark: formData
 						},
 						dataType: 'json',
@@ -174,13 +170,14 @@
 							'Authorization': 'Bearer '+ this.token
 						},
 						success: (res) => {
-							if(res.data.status == 201){
+							console.log(res);
+							if(res.statusCode == 201){
 								console.log('request success');
 								console.log(res.data);
 								uni.showToast({title:"验证通过!", icon:"none"});
 							}
 							else{
-								var errCode = (res.data.status == undefined)?'连接失败':res.data.status;
+								var errCode = (res.statusCode == undefined)?'连接失败':res.statusCode;
 								uni.showToast({title:"提交失败! "+errCode, icon:"none"});
 							}
 						}
