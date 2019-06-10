@@ -42,26 +42,7 @@
 				message_content:'',
 				message_title:'',
 				message_from:'',
-				message_list: [
-					{
-						"id": 1,
-						"from_user_id": 1,
-						"from_user_name": "Jack",
-						"to_user_id": 2,
-						"to_user_name": "test",
-						"title": "test title1",
-						"status": "read"
-					},
-					{
-						"id": 2,
-						"from_user_id": 1,
-						"from_user_name": "Tom",
-						"to_user_id": 2,
-						"to_user_name": "test",
-						"title": "test title2",
-						"status": "read"
-					}
-				],
+				message_list: [],
 			}
 		},
         onLoad: function(){
@@ -70,21 +51,21 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			// 向服务器查询read消息。用total除以per_page，向下取整，得出需要查询的总页数
-			var pages = 0;
-			for (var i = 0; i <= pages; i++) {
+			var pages = 1;
+			for (var i = 1; i <= pages; i++) {
 				uni.request({
-					url: 'https://webSiteUrl/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
+					url: webSiteUrl + '/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
 					header:{
 						'Authorization': 'Bearer '+ this.token,
 					},
 					method: 'GET',
 					success: (res) => {
 						console.log(res);
-						if (res.status==200) {
-							if (res.total != 0) {
-								pages = Math.floor(res.total / res.per_page);
+						if (res.statusCode==200) {
+							if (res.data.total != 0) {
+								pages = Math.ceil(res.data.total / res.data.per_page);
 								// 将得到的数组加入message_list中
-								this.message_list.push().apply(this.message_list,res.data);
+								this.message_list.push.apply(this.message_list,res.data.data);
 							} else{
 								uni.showToast({
 									title:'无未读信息',
@@ -102,21 +83,21 @@
 		onPullDownRefresh() {
 			console.log('refresh');
 			// 向服务器查询read消息。用total除以per_page，向下取整，得出需要查询的总页数
-			var pages = 0;
-			for (var i = 0; i <= pages; i++) {
+			var pages = 1;
+			for (var i = 1; i <= pages; i++) {
 				uni.request({
-					url: 'https://webSiteUrl/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
+					url: webSiteUrl + '/message?to_user_id=' + this.user_id + '&status=read&page=' + i,
 					header:{
 						'Authorization': 'Bearer '+ this.token,
 					},
 					method: 'GET',
 					success: (res) => {
 						console.log(res);
-						if (res.status==200) {
-							if (res.total != 0) {
-								pages = Math.floor(res.total / res.per_page);
+						if (res.statusCode==200) {
+							if (res.data.total != 0) {
+								pages = Math.ceil(res.data.total / res.data.per_page);
 								// 将得到的数组加入message_list中
-								this.message_list.push().apply(this.message_list,res.data);
+								this.message_list.push.apply(this.message_list,res.data.data);
 							} else{
 								uni.showToast({
 									title:'无未读信息',
@@ -146,15 +127,16 @@
 				this.message_from = 'tom';
 				this.message_content = messageId + 'test contenttest contenttest contenttest contenttest contenttest content';
 				uni.request({
-					url: 'https://webSiteUrl/message/' + messageId,
+					url: webSiteUrl + '/message/' + messageId,
 					method: 'GET',
 					header: {
 						'Authorization': 'Bearer '+ this.token,
 					},
 					success: (res) => {
-						this.message_title = res.data.title;
-						this.message_from = res.data.from.name;
-						this.message_content = res.data.content;
+						console.log(res);
+						this.message_title = res.data.data.title;
+						this.message_from = res.data.data.from.name;
+						this.message_content = res.data.data.content;
 					},
 					fail() {
 						console.log(查询失败);
