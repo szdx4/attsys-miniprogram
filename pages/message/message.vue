@@ -33,6 +33,41 @@
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import webSiteUrl from '../../common/webSiteUrl.js'
 	
+	// 向服务器查询unread消息。用total除以per_page，向下取整，得出需要查询的总页数
+	function queryUnreadMessage(that) {
+		var pages = 1;
+		that.message_list = [];
+		for (var i = 1; i <= pages; i++) {
+			uni.request({
+				url: webSiteUrl + '/message?to_user_id=' + that.user_id + '&status=unread&page=' + i,
+				header:{
+					'Authorization': 'Bearer '+ that.token,
+				},
+				method: 'GET',
+				success: (res) => {
+					console.log(res);
+					if (res.statusCode==200) {
+						if (res.data.total != 0) {
+							pages = Math.ceil(res.data.total / res.data.per_page);
+							// 将得到的数组加入message_list中
+							that.message_list.push.apply(that.message_list,res.data.data);
+						} else{
+							uni.showToast({
+								title:'无未读信息',
+								duration:3000
+							})
+							console.log("无未读信息")
+						}
+					} else if (res.statusCode==204) {
+						console.log("无系统通知信息")
+					} else {
+						console.log("系统通知信息获取失败")
+					}
+				}
+			});
+		}
+	}
+	
     export default {
 		components: {
 			uniPopup
@@ -54,70 +89,13 @@
 			this.token = uni.getStorageSync('token');
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
-			// 向服务器查询unread消息。用total除以per_page，向下取整，得出需要查询的总页数
-			var pages = 1;
-			for (var i = 1; i <= pages; i++) {
-				uni.request({
-					url: webSiteUrl + '/message?to_user_id=' + this.user_id + '&status=unread&page=' + i,
-					header:{
-						'Authorization': 'Bearer '+ this.token,
-					},
-					method: 'GET',
-					success: (res) => {
-						console.log(res);
-						if (res.statusCode==200) {
-							if (res.data.total != 0) {
-								pages = Math.ceil(res.data.total / res.data.per_page);
-								// 将得到的数组加入message_list中
-								this.message_list.push.apply(this.message_list,res.data.data);
-							} else{
-								uni.showToast({
-									title:'无未读信息',
-									duration:3000
-								})
-								console.log("无未读信息")
-							}
-						} else {
-							console.log("系统通知信息获取失败")
-						}
-					}
-				});
-			}
+			var that = this;
+			queryUnreadMessage(that);
 		},
 		onPullDownRefresh() {
 			console.log('refresh');
-			// 向服务器查询unread消息。用total除以per_page，向下取整，得出需要查询的总页数
-			var pages = 1;
-			for (var i = 1; i <= pages; i++) {
-				uni.request({
-					url: webSiteUrl + '/message?to_user_id=' + this.user_id + '&status=unread&page=' + i,
-					header:{
-						'Authorization': 'Bearer '+ this.token,
-					},
-					method: 'GET',
-					success: (res) => {
-						console.log(res);
-						if (res.statusCode==200) {
-							if (res.data.total != 0) {
-								pages = Math.ceil(res.data.total / res.data.per_page);
-								// 将得到的数组加入message_list中
-								this.message_list.push.apply(this.message_list,res.data.data);
-							} else{
-								uni.showToast({
-									title:'无未读信息',
-									duration:3000
-								})
-								console.log("无未读信息")
-							}
-						} else {
-							console.log("系统通知信息获取失败")
-						}
-					},
-					complete() {
-						uni.stopPullDownRefresh();
-					}
-				});
-			}
+			var that = this;
+			queryUnreadMessage(that);
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
