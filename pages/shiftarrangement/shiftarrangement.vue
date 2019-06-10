@@ -141,7 +141,7 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			uni.request({
-				url: 'https://webSiteUrl/shift?user_id=' + this.user_id + '&page=' + 0,
+				url: webSiteUrl + '/shift?user_id=' + this.user_id + '&page=' + 0,
 				// data: {
 				// 	text: 'uni.request'
 				// },
@@ -150,7 +150,8 @@
 				},
 				method: 'GET',
 				success: (res) => {
-					if (res.data.status == 200) {
+					console.log(res);
+					if (res.statusCode == 200) {
 						console.log('request success');
 						console.log(res.data);
 						this.data = res.data.data;
