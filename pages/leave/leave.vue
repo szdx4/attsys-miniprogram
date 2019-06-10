@@ -9,7 +9,7 @@
 				</view>
 				<view class="uni-list-cell-db current-picker">
 					<picker @change="bindPickerChange" :value="index" :range="data" range-key="start_at">
-						<view class="uni-input">{{data[index].id}}.&nbsp;&nbsp;{{data[index].start_at}}<p>至&nbsp;{{data[index].end_at}}</p></view>
+						<view class="uni-input">{{index}}.{{data[index].start_at}} 至 {{data[index].end_at}}</view>
 					</picker>
 				</view>
 			</view>
@@ -20,7 +20,7 @@
 				<view class="text-box">
 					<text>请假开始日期: {{datebegin}}</text><br />
 					<text>请假结束日期: {{dateend}}</text><br />
-					<text class="remark">反馈理由: {{remark}}</text>
+					<text class="remark">理由: {{remark}}</text>
 				</view>
 			</view>
 			<!-- 批准阶段才能点击按钮 -->
@@ -47,37 +47,70 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			// 向服务器查询请假项目。用total除以per_page，向下取整，得出需要查询的总页数
-			var pages = 0;
-			for (var i = 0; i <= pages; i++) {
+			var pages = 1;
+			var showInit = true;
+			for (var i = 1; i <= pages; i++) {
 				uni.request({
-					url: 'https://webSiteUrl/leave/user/' + this.user_id + '?page=' + 0,
+					url: webSiteUrl + '/leave/user/' + this.user_id + '?page=' + i,
 					header: {
-						'Authorization': 'Bearer' + this.token
+						'Authorization': 'Bearer ' + this.token
 					},
 					method: 'GET',
 					success: (res) => {
-						if (res.data.status == 200) {
+						console.log(res);
+						if (res.statusCode == 200) {
 							console.log('request success');
-							console.log(res.data);
-							if (res.total != 0) {
+							if (res.data.total != 0) {
 								this.haveWorkOff = true;
-								pages = Math.floor(res.total / res.per_page);
+								pages = Math.ceil(res.data.total / res.data.per_page);
 								// 将得到的数组加入data中
-								this.data.push().apply(this.data,res.data);
+								this.data.push.apply(this.data,res.data.data);
+								// 将data中的日期格式化
+								for (var i = 0; i < this.data.length; i++) {
+									this.data[i].start_at = (new Date(res.data.data[i].start_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
+									this.data[i].end_at = (new Date(res.data.data[i].end_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
+								}
 							} else{
 								uni.showToast({
-									title:'无未读信息',
-									duration:3000
+									title:'无请假信息',
+									duration:2000
 								})
-								console.log("无未读信息")
+								console.log("无请假信息")
+							}
+							// 显示第一个请假项目的信息
+							if (showInit) {
+								console.log(this.data.length);
+								if (this.data.length > 0) {
+									this.datebegin = this.data[this.index].start_at;
+									this.dateend = this.data[this.index].end_at
+									this.remark = this.data[this.index].remark;
+									var status = this.data[this.index].status;
+									if (status == 'wait') {
+										this.active = 0;
+										this.progress[1].title = '申请结果';
+										this.resumeAvailable = false;
+									} else if(status == 'pass'){
+										this.active = 1;
+										this.progress[1].title = '通过';
+										this.resumeAvailable = true;
+									} else if(status == 'reject'){
+										this.active = 1;
+										this.progress[1].title = '不予通过';
+										this.resumeAvailable = false;
+									}
+								}
+								showInit = false;
 							}
 						}
+					},
+					fail() {
+						console.log('请假信息获取失败')
 					}
 				});
 			}
 			//为让一开始就能显示
-			var show = {target:{value:0}};
-			this.bindPickerChange(show);
+			// var show = {target:{value:0}};
+			// this.bindPickerChange(show);
 		},
 
 		data() {
@@ -85,45 +118,14 @@
 				userName: '',
 				token: '',
 				user_id: '',
-				haveWorkOff: true, //控制显示
-				data: [
-					// {
-					// 	"id": 1,
-					// 	"user": {
-					// 		"id": 1,
-					// 		"name":"testname"
-					// 	},
-					// 	"start_at": "2019-06-01 11:11:11",
-					// 	"end_at": "2019-06-06 11:11:11",
-					// 	"remark": "身体原因",
-					// 	"status": "pass"
-					// },
-					// {
-					// 	"id": 2,
-					// 	"user": {
-					// 		"id": 2,
-					// 		"name":"testname"
-					// 	},
-					// 	"start_at": "2019-06-20 11:11:11",
-					// 	"end_at": "2019-06-22 11:11:11",
-					// 	"remark": "心理原因",
-					// 	"status": "wait"
-					// },
-					// {
-					// 	"id": 3,
-					// 	"user_id": 1,
-					// 	"start_at": "2019-06-10 11:11:11",
-					// 	"end_at": "2019-06-12 11:11:11",
-					// 	"remark": "没有原因",
-					// 	"status": "reject"
-					// }, //for test
-				],
+				haveWorkOff: false, //控制显示
+				data: [],
 				remark: '',//显示理由
 				index: 0,//选择器
 				resumeAvailable:false, //通过（pass）状态才能点击'销假'按钮
 
-				datebegin: new Date(), //用于显示起止日期
-				dateend: new Date(),
+				datebegin:'', //用于显示起止日期
+				dateend:'',
 				active: 1,
 				progress: [{
 					title: '申请中'
@@ -137,14 +139,14 @@
 		methods: {
 			resume() {//销假按钮
 				uni.request({
-					url: 'https://webSiteUrl/leave/user/leave/'+this.data[this.index].id,
+					url: webSiteUrl + '/leave/user/leave/'+this.data[this.index].id,
 					method: 'DELETE',
 					header:{
 						'Authorization': 'Bearer' + this.token //'Authorization'加引号？
 					},
 					data: {},
 					success: res => {
-						if (res.data.status == 200) {
+						if (res.statusCode == 200) {
 							//切换状态
 							if (this.active < this.progress.length - 1) {
 								this.active += 1
@@ -156,21 +158,19 @@
 							
 						}
 						else{
-							var errCode = (res.data.status == undefined)?'连接失败':res.data.status;
+							var errCode = (res.statusCode == undefined)?'连接失败':res.statusCode;
 							uni.showToast({title:"提交失败! "+errCode, icon:"none"});
 						}
 					},
 					fail: () => {},
 					complete: () => {}
 				});
-
-				
 			},
 			bindPickerChange: function(e) {
 				console.log('picker发送选择改变，携带值为（同样为index值）：' + e.target.value);
 				this.index = e.target.value;
 				this.datebegin = this.data[this.index].start_at;
-				this.dateend = this.data[this.index].end_at;
+				this.dateend = this.data[this.index].end_at
 				this.remark = this.data[this.index].remark;
 				var status = this.data[this.index].status;
 				if (status == 'wait') {
@@ -247,7 +247,7 @@
 		color: #FF3333;
 	}
 	.current-picker {
-		line-height: 85upx;
+		line-height: 90upx;
 		height: 130upx;
 	}
 </style>
