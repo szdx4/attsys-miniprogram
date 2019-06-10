@@ -49,6 +49,7 @@
 			// 向服务器查询请假项目。用total除以per_page，向下取整，得出需要查询的总页数
 			var pages = 1;
 			var showInit = true;
+			this.data = [];
 			for (var i = 1; i <= pages; i++) {
 				uni.request({
 					url: webSiteUrl + '/leave/user/' + this.user_id + '?page=' + i,
@@ -170,7 +171,7 @@
 				console.log('picker发送选择改变，携带值为（同样为index值）：' + e.target.value);
 				this.index = e.target.value;
 				this.datebegin = this.data[this.index].start_at;
-				this.dateend = this.data[this.index].end_at
+				this.dateend = this.data[this.index].end_at;
 				this.remark = this.data[this.index].remark;
 				var status = this.data[this.index].status;
 				if (status == 'wait') {
