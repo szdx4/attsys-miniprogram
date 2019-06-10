@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "申请请假",
-  "usingComponents": {
-    "w-picker": "/components/w-picker/w-picker"
-  }
-}

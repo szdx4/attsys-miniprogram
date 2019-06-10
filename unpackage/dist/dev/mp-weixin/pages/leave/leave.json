@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "进行中的请假申请",
-  "usingComponents": {
-    "uni-steps": "/components/uni-steps/uni-steps"
-  }
-}
