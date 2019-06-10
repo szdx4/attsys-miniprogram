@@ -50,7 +50,8 @@
 						} else{
 							uni.showToast({
 								title:'无未读信息',
-								duration:3000
+								icon:'none',
+								duration:2000
 							})
 							console.log("无未读信息")
 						}
