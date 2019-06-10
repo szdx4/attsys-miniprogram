@@ -1,4 +1,1 @@
-const webSiteUrl = 'http://uniapp.dcloud.io';
-export default {  
-    webSiteUrl, 
-}
+export default 'https://attsys.koder.me/';
