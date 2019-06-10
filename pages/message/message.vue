@@ -53,8 +53,9 @@
 							that.message_list.push.apply(that.message_list,res.data.data);
 						} else{
 							uni.showToast({
-								title:'无未读信息',
-								duration:3000
+								title:'无未读信息???',
+								icon:'none',
+								duration:2000
 							})
 							console.log("无未读信息")
 						}
@@ -115,26 +116,22 @@
 						this.message_title = res.data.data.title;
 						this.message_from = res.data.data.from.name;
 						this.message_content = res.data.data.content;
+						// 将该消息从消息列表中删除
+						this.message_list.splice(id,1);
+						// 当消息列表为空时，将定时器的控制变量设置为true
+						if (this.message_list.length==0) {
+							try{
+								uni.setStorageSync('start_interval',true);
+							}catch(e){
+								console.log("存储出现问题");
+							}
+						}
 					},
 					fail() {
 						console.log(查询失败);
 					}
 				})
 				this.isShowPopup = true;
-				// 将该消息从消息列表中删除
-				this.message_list.splice(id,1);
-				// 当消息列表为空时，将定时器的控制变量设置为true
-				if (this.message_list.length==0) {
-					uni.showToast({
-						title:'无未读信息',
-						duration:3000
-					})
-					try{
-						uni.setStorageSync('start_interval',true);
-					}catch(e){
-						console.log("存储出现问题");
-					}
-				}
 			},
 			closeMessage() {
 				this.isShowPopup = false;
@@ -179,7 +176,7 @@
 							}
 						}
 					});
-				} else{
+				} else {
 					uni.showToast({
 						duration:2000,
 						title:'消息已为空'
