@@ -1,16 +1,17 @@
 <template>
     <view class="_content">
 		<caption>
-			<label class="caption_label">来自&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				标题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				操作
+			<label class="caption_label">
+				<view style="left: 17%;">来自</view>
+				<view style="left: 56%;">标题</view>
+				<view style="left: 86%;">操作</view>
 			</label>
 		</caption>
 		<scroll-view :scroll-y="true" class="uni-center center-box">
 			<view v-for="(item, index) in message_list" :key="index" class="uni-list-item message">
-				{{ item.from.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				{{ item.title }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*
-				<text @tap="showMessage" :data-messageId='item.id' :data-id='index'>查看</text>
+				<view style="height: 55upx;left: 2%;text-align: left;width: 38%; border-right: 3upx solid #000000;">{{ item.from.name }}</view>
+				<view style="height: 55upx;left: 42%;text-align: left;width: 37%; border-right: 3upx solid #000000;">{{ item.title }}</view>
+				<view style="height: 55upx;left: 81%;text-align: center;width: 17%;" @tap="showMessage" :data-messageId='item.id' :data-id='index'>查看</view>
 			</view>
 		</scroll-view>
 		<view>
@@ -82,7 +83,21 @@
 				message_content:'',
 				message_title:'',
 				message_from:'',
-				message_list: [],
+				message_list: [
+					// {
+					// 	"id": 1,
+					// 	"from": {
+					// 		"id": 1,
+					// 		"name": "test",
+					// 	},
+					// 	"to": {
+					// 		"id": 2,
+					// 		"name": "test2",
+					// 	},
+					// 	"title": "test title",
+					// 	"status": "unread"
+					// }
+				],
 			}
 		},
         onLoad: function(){
@@ -201,6 +216,9 @@
 		border-left: 4upx solid #555555;
 		border-right: 4upx solid #555555;
 	}
+	.message view {
+		position: absolute;
+	}
 	.specificMessage{
 		min-height: 300upx;
 		max-height: 700upx;
@@ -220,8 +238,9 @@
 		border-bottom: 3upx solid #000000;
 		font-size: 35upx;
 	}
-	.caption_label {
-		margin-left: 13%;
+	.caption_label view{
+		line-height: 70upx;
+		position: absolute;
 	}
 	p {
 		padding-left: 8upx;
