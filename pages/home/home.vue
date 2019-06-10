@@ -43,66 +43,41 @@
 <script>
 	import webSiteUrl from '../../common/webSiteUrl.js';
 	// 设置计时器查询是否有unread的消息,第二个参数单位是ms
-	function startQueryMessage(that){
-		console.log('已开启计时器')
-		var messageintervalID;
-		messageintervalID = setInterval(function(that){
-			// 向服务器查询unread消息
-			uni.request({
-				url: webSiteUrl + 'message?to_user_id=' + that.user_id + '&status=unread&page=' + 1,
-				header:{
-					'Authorization': 'Bearer '+ that.token,
-				},
-				method: 'GET',
-				success: (res) => {
-					console.log('计时器：',res);
-					if (res.statusCode==200) {
-						// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
-						uni.showModal({
-							title: '提示',
-							content: '您有新消息了，请前往查看',
-							showCancel:false,
-							success: function (res) {
-								if (res.confirm) {
-									console.log('用户点击确定');
-								}
+	function hasUnreadMessage(that){
+		// 向服务器查询unread消息
+		uni.request({
+			url: webSiteUrl + 'message?to_user_id=' + that.user_id + '&status=unread&page=' + 1,
+			header:{
+				'Authorization': 'Bearer '+ that.token,
+			},
+			method: 'GET',
+			success: (res) => {
+				console.log('计时器：',res);
+				if (res.statusCode==200) {
+					// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
+					uni.showModal({
+						title: '提示',
+						content: '您有新消息了，请前往查看',
+						showCancel:false,
+						success: function (res) {
+							if (res.confirm) {
+								console.log('用户点击确定');
 							}
-						});
-					} else if (res.statusCode==204) {
-						console.log("无未读信息")
-						try{
-							uni.setStorageSync('start_interval',true);
-						}catch(e){
-							console.log("存储出现问题");
 						}
-					} else {
-						console.log("系统通知信息获取失败")
-						try{
-							uni.setStorageSync('start_interval',true);
-						}catch(e){
-							console.log("存储出现问题");
-						}
+					});
+					// 将localstorage中的start_query_unread_message设置未false，即停止查询
+					try{
+						uni.setStorageSync('start_query_unread_message',false);
+					}catch(e){
+						console.log("存储出现问题");
 					}
+				} else if (res.statusCode==204) {
+					console.log("无未读信息");
+				} else {
+					console.log("系统通知信息获取失败");
 				}
-			});
-		if(messageintervalID != -1) {
-			clearInterval(messageintervalID);
-			messageintervalID = -1;
-			console.log('已关闭计时器');
-			try{
-				uni.setStorageSync('start_interval',false);
-			}catch(e){
-				console.log("存储出现问题");
 			}
-		}
-		},60000,that);
-		// 存储是否开起定时器的控制变量
-		try{
-			uni.setStorageSync('start_interval',true);
-		}catch(e){
-			console.log("存储出现问题");
-		}
-		return messageintervalID;
+		});
 	}
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	
@@ -124,7 +99,7 @@
 				canICU:false,
 				canCheckOff:false,
 				messageSrc:'../../static/img/message.png',
-				messageintervalID:-1,
+				messageIntervalID:-1,
 			}
 		},
         onLoad: function(){
@@ -181,32 +156,39 @@
 					}
 				}
 			});
-			// 第一次加载时设置定时器的控制变量为true
+			// 存储是否控制是否查询的变量
 			try{
-				uni.setStorageSync('start_interval',true);
+				uni.setStorageSync('start_query_unread_message',true);
 			}catch(e){
 				console.log("存储出现问题");
 			}
+			// （页面加载时）查询一次用户是否有unread消息
+			var that = this;
+			hasUnreadMessage(that);
+			/** 
+			* 开启计时器，每隔 60s，利用localstorage中的变量start_query_unread_message判断是否进行查询。
+			*	停止查询的条件:
+			*		上一次查询查到有unread信息
+			*	重新开始查询的条件：
+			* 		在message页面将unread全部“查看”
+			* 停止计时器：页面unload时
+			* 
+			*/
+			console.log('开启计时器');
+			this.messageIntervalID = setInterval(function(that){
+				if (uni.getStorageSync('start_query_unread_message')) {
+					hasUnreadMessage(that);
+				} else {
+					console.log("上次的新信息还没处理完");
+				}
+			},60000,that);
         },
-		// 当退出小程序的时候，若定时器还没关闭，则关闭计时器
+		// 当退出小程序的时候，关闭计时器
 		onUnload:function(){
-			if(this.messageintervalID != -1) {
-				clearInterval(this.messageintervalID);
-				this.messageintervalID = -1;
-				console.log('已关闭计时器');
-			}  
-		},
-		// 在页面每次显示时，若储存的定时器的控制变量为true，则开启定时器
-		onShow:function(){
-			// 先关闭上一次的定时器
-			if(this.messageintervalID != -1) {
-				clearInterval(this.messageintervalID);
-				this.messageintervalID = -1;
-				console.log('已关闭计时器');
-			}  
-			if (uni.getStorageSync('start_interval')) {
-				var that = this;
-				this.messageintervalID = startQueryMessage(that);
+			if(this.messageIntervalID != -1) {
+				clearInterval(this.messageIntervalID);
+				this.messageIntervalID = -1;
+				console.log('关闭计时器');
 			}
 		},
 		methods:{
