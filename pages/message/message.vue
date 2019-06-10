@@ -53,7 +53,7 @@
 							that.message_list.push.apply(that.message_list,res.data.data);
 						} else{
 							uni.showToast({
-								title:'无未读信息???',
+								title:'无未读信息',
 								icon:'none',
 								duration:2000
 							})
@@ -121,7 +121,7 @@
 						// 当消息列表为空时，将定时器的控制变量设置为true
 						if (this.message_list.length==0) {
 							try{
-								uni.setStorageSync('start_interval',true);
+								uni.setStorageSync('start_query_unread_message',true);
 							}catch(e){
 								console.log("存储出现问题");
 							}
@@ -141,35 +141,30 @@
 					uni.showModal({
 						title: '提示',
 						content: '是否确定清除',
-						success: (res) => {
-							if (res.confirm) {
+						success: (choose_res) => {
+							if (choose_res.confirm) {
 								console.log('用户点击确定');
-								this.message_list = [];
 								// 将所有消息通过api接口标记为read
-								for (var i in this.message_list) {
+								for (var i = 0; i < this.message_list.length; i++) {
 									uni.request({
-										url: webSiteUrl + '/message/' + this.message_list[i].messageId,
+										url: webSiteUrl + '/message/' + this.message_list[i].id,
 										method: 'GET',
 										header: {
 											'Authorization': 'Bearer '+ this.token,
-										},
-										success: (res) => {
-											console.log('标记消息成功：' + this.message_list[i].messageId)
-										},
-										fail() {
-											console.log('查询失败');
 										}
 									})
 								}
-								// 将定时器的控制变量设置为true
+								// 将消息列表中清空
+								this.message_list = [];
+								// 将定时器的控制变量设置为 true
 								try{
-									uni.setStorageSync('start_interval',true);
+									uni.setStorageSync('start_query_unread_message',true);
 								}catch(e){
 									console.log("存储出现问题");
 								}
 								uni.showToast({
-									duration:2000,
-									title:'清除成功'
+									title: '清除成功',
+									duration:2000
 								})
 							} else {
 								console.log('用户点击取消');
