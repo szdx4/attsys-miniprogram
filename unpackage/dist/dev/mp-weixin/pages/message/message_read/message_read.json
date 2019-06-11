@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "已读消息",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "uni-popup": "/components/uni-popup/uni-popup"
-  }
-}

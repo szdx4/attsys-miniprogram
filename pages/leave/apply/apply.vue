@@ -2,28 +2,22 @@
 	<view>
 		<view class="uni-padding-wrap">
 			<form @submit="formSubmit">
-			<view class="uni-list">
-					<button class="tab uni-common-mt uni-comment-replay-btn" :class="[{'active':index==tabIndex}]" @tap="toggleTab(index)" v-for="(item,index) in tabList" :key="index">{{item.name}}</button>
+				<view class="uni-list">
+					<button class="tab uni-common-mt uni-comment-replay-btn" :class="[{'active':index==tabIndex}]" @tap="toggleTab(index)" v-for="(item,index) in tabList" :key="index">{{item.name}}: {{item.date}}</button>
 					<w-picker 
 						:mode="mode" 
 						startYear="1926" 
 						endYear="2112" 
 						step="1" 
-						:defaultVal="defaultVal" 
+						:defaultVal="defaultVal"
 						:current="true" 
 						@confirm="onConfirm" 
 						ref="picker" 
 						themeColor="#439057"
 					></w-picker>
-				<view class="uni-list-cell">
-					<view class="result">请假起始日期时间：{{date}}</view>
-				</view>
-				<view class="uni-list-cell">
-					<view class="result">请假结束日期时间：{{dateend}}</view>
-				</view>
-				<view class="uni-list-cell">
-					<textarea class="uni-textarea" name="nickname" placeholder="请填写申请加班理由..." />
-				</view>
+					<view class="uni-list-cell">
+						<textarea class="uni-textarea" name="nickname" placeholder="请填写申请加班理由..." />
+					</view>
 				</view>
 				<view class="uni-btn-v uni-common-mt">
 					<button class="btn-submit" formType="submit" type="primary">提交请假申请</button>
@@ -79,31 +73,29 @@
 				
 				tabList:[
 				{
-					mode:"dateTime",
 					name:"请假起始日期时间选择",
-					value:[1,1,1,1,2,5]
+					date:"default date",
 				},{
-					mode:"dateTime",
 					name:"请假结束日期时间选择",
-					value:[1,1,1,1,2,5]
+					date:"default date",
 				}],
 				tabIndex:0,
-			}
-		},
-		computed:{
-			mode(){
-				return this.tabList[this.tabIndex].mode
-			},
-			defaultVal(){
-				return this.tabList[this.tabIndex].value
 			}
 		},
 		onLoad: function() {
 			this.token = uni.getStorageSync('token');
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
-			this.date = (new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
-			this.dateend = (new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
+			this.tabList[0].date = ((new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false})).replace("/","-").replace("/","-");
+			this.tabList[1].date = ((new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false})).replace("/","-").replace("/","-");
+		},
+		computed:{
+			mode(){
+				return "dateTime"
+			},
+			defaultVal(){
+				return [1,1,1,1,2,5]
+			}
 		},
 		methods: {
 			toggleTab(index){
@@ -111,14 +103,7 @@
 				this.$refs.picker.show();
 			},
 			onConfirm(val){
-				if(this.tabIndex == 0)
-				{
-					this.date=val.result;
-				}
-				else if(this.tabIndex == 1)
-				{
-					this.dateend = val.result;
-				}
+				this.tabList[this.tabIndex].date = val.result;
 			},
 			formSubmit: function (e) {
 				// var begin = this.date.toLocaleString();
@@ -208,6 +193,10 @@
 		margin-top: 20upx;
 	}
 	textarea {
+		line-height: 20upx;
+		padding-top: 15upx;
+		border-top: 0.5upx solid #B2B2B2;
 		margin-top: 20upx;
+		font-size: 30upx;
 	}
 </style>

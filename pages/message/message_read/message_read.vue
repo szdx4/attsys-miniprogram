@@ -1,18 +1,9 @@
 <template>
     <view class="_content">
-		<caption>
-			<label class="caption_label">
-				<view style="left: 17%;">来自</view>
-				<view style="left: 56%;">标题</view>
-				<view style="left: 86%;">操作</view>
-			</label>
-		</caption>
-		<scroll-view :scroll-y="true" class="uni-center center-box">
-			<view v-for="(item, index) in message_list" :key="index" class="uni-list-item message">
-				<view style="height: 55upx;left: 2%;text-align: left;width: 38%; border-right: 3upx solid #000000;">{{ item.from.name }}</view>
-				<view style="height: 55upx;left: 42%;text-align: left;width: 37%; border-right: 3upx solid #000000;">{{ item.title }}</view>
-				<view style="height: 55upx;left: 81%;text-align: center;width: 17%;" @tap="showMessage" :data-messageId='item.id' :data-id='index'>查看</view>
-			</view>
+		<scroll-view :scroll-y="true">
+			<uni-list v-for="(item, index) in message_list" :key="index">
+				<uni-list-item :title="item.title" :note="item.from.name" :id_1='item.id' @click="showMessage" ></uni-list-item>
+			</uni-list>
 		</scroll-view>
 		<view>
 			<uni-popup :show="isShowPopup" position="middle" mode="insert" buttonMode="right" @hidePopup="closeMessage">
@@ -29,6 +20,8 @@
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import webSiteUrl from '../../../common/webSiteUrl.js'
+	import uniList from '@/components/uni-list/uni-list.vue'
+	import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
 	
 	// 向服务器查询read消息。用total除以per_page，向下取整，得出需要查询的总页数
 	function queryReadMessage(that) {
@@ -68,7 +61,9 @@
 	
     export default {
 		components: {
-			uniPopup
+			uniPopup,
+			uniList,
+			uniListItem
 		},
 		data() {
 			return {
@@ -115,8 +110,7 @@
 		methods:{
 			showMessage(e) {
 				console.log(e)
-				var messageId = e.currentTarget.dataset.messageid;
-				var id = e.currentTarget.dataset.id;
+				var messageId = e.currentTarget.dataset.one;
 				this.message_title = 'test title';
 				this.message_from = 'tom';
 				this.message_content = messageId + 'test contenttest contenttest contenttest contenttest contenttest content';
@@ -152,13 +146,6 @@
     	flex-direction: column;
     	background-color: #CCCCCC;
     }
-	.message {
-		background-color: #EBEDF0;
-		height: 55upx;
-		border-bottom: 4upx solid #555555;
-		border-left: 4upx solid #555555;
-		border-right: 4upx solid #555555;
-	}
 	.specificMessage{
 		min-height: 300upx;
 		max-height: 700upx;
@@ -166,21 +153,11 @@
 		background-color: #F8F8F8;
 		border: 4upx solid #555555;
 	}
-	caption {
-		height: 70upx;
-		line-height: 70upx;
-		font-weight: bold;
-		border-bottom: 4upx solid #555555;
-	}
 	.sec_cap {
 		text-align: center;
 		font-weight: bold;
 		border-bottom: 3upx solid #000000;
 		font-size: 35upx;
-	}
-	.caption_label view{
-		line-height: 70upx;
-		position: absolute;
 	}
 	p {
 		padding-left: 8upx;
@@ -190,11 +167,10 @@
 		border-bottom: 1upx solid #000000;
 		font-size: 30upx;
 	}
-	.caption_label view{
-		line-height: 70upx;
-		position: absolute;
-	}
-	.message view {
-		position: absolute;
+	.bottom-btn {
+		height: 30upx;
+		padding-top: 20upx;
+		padding-bottom: 10upx;
+		border-bottom: 1upx solid #000000;
 	}
 </style>
