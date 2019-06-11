@@ -200,6 +200,9 @@
 											title:'上传失败'
 										})
 									}
+								},
+								fail: (errmsg) => {
+									console.log(errmsg);
 								}
 							})
 						},

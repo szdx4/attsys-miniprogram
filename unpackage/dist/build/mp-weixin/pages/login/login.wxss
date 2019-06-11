@@ -1,0 +1,29 @@
+
+.action-row {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+}
+.action-row navigator {
+        color: #007aff;
+        padding: 0 20rpx;
+}
+._content {
+		margin-top: 300rpx;
+}
+.title {
+	    color: #8f8f94;
+		text-align:center;
+}
+
+page::after{position: fixed;left: -1000px;top: -1000px;content: url(https://cdn.dcloud.net.cn/img/shadow-grey.png)}

@@ -1,0 +1,71 @@
+
+page {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	background-color: #fff
+}
+view {
+	font-size: 28rpx;
+	line-height: inherit
+}
+.example {
+	padding: 0 30rpx 30rpx
+}
+.example-title {
+	font-size: 32rpx;
+	line-height: 32rpx;
+	color: #777;
+	margin: 40rpx 25rpx;
+	position: relative
+}
+.example .example-title {
+	margin: 40rpx 0
+}
+.example-body {
+	padding: 0 40rpx
+}
+.no-content {
+	margin-bottom: 40rpx;
+	padding: 40rpx 0;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 300rpx;
+	background-color: #FFFFFF;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	text-align: center;
+	font-size: 50rpx;
+	color: #353535;
+	line-height: 1.8;
+}
+button {
+	margin: 30rpx;
+}
+.text-box {
+	width: 100%;
+}
+.remark {
+	color: #FF3333;
+}
+.current-picker {
+	line-height: 90rpx;
+	height: 130rpx;
+}
+

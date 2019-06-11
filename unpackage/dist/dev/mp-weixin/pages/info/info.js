@@ -210,6 +210,9 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
                     title: '上传失败' });
 
                 }
+              },
+              fail: function fail(errmsg) {
+                console.log(errmsg);
               } });
 
           } });
