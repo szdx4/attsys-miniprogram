@@ -93,11 +93,12 @@ var _webSiteUrl = _interopRequireDefault(__webpack_require__(/*! ../../common/we
 //
 //
 //
-// 设置计时器查询是否有unread的消息,第二个参数单位是ms
+var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\uni-popup\\uni-popup.vue"));}; // 设置计时器查询是否有unread的消息,第二个参数单位是ms
 function hasUnreadMessage(that) {// 向服务器查询unread消息
   uni.request({ url: _webSiteUrl.default + 'message?to_user_id=' + that.user_id + '&status=unread&page=' + 1, header: { 'Authorization': 'Bearer ' + that.token }, method: 'GET', success: function success(res) {console.log('计时器：', res);if (res.statusCode == 200) {// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
         uni.showModal({ title: '提示', content: '您有新消息了，请前往查看', showCancel: false, success: function success(res) {if (res.confirm) {console.log('用户点击确定');}} }); // 将localstorage中的start_query_unread_message设置未false，即停止查询
-        try {uni.setStorageSync('start_query_unread_message', false);} catch (e) {console.log("存储出现问题");}} else if (res.statusCode == 204) {console.log("无未读信息");} else {console.log("系统通知信息获取失败");}} });}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\uni-popup\\uni-popup.vue"));};var _default = { components: { uniPopup: uniPopup }, data: function data() {return { userName: '',
+        try {uni.setStorageSync('start_query_unread_message', false);} catch (e) {console.log("存储出现问题");}} else if (res.statusCode == 204) {console.log("无未读信息");} else {console.log("系统通知信息获取失败");}} });}var _default = { components: { uniPopup: uniPopup }, data: function data() {return {
+      userName: '',
       token: '',
       check_message: '未签到',
       start_at: '',
@@ -117,7 +118,7 @@ function hasUnreadMessage(that) {// 向服务器查询unread消息
     this.token = uni.getStorageSync('token');
     this.userName = uni.getStorageSync('userName');
     this.user_id = uni.getStorageSync('user_id');
-    this.messageSrc = '../../static/img/message.png';
+    this.messageSrc = '../../static/img/message_2.png';
     // 存储控制加班按键的变量
     try {
       uni.setStorageSync('canICU', false);

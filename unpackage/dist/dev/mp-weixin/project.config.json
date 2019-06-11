@@ -10,8 +10,6 @@
 	"libVersion": "2.6.4",
 	"appid": "wx0db6304e3250c717",
 	"projectname": "attsys_miniprogram",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -30,20 +28,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "登录",
 					"pathName": "pages/login/login",
 					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "1",
-					"pathName": "pages/leave/apply/apply",
-					"query": "",
-					"scene": null
 				},
 				{
 					"id": -1,

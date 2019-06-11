@@ -4,7 +4,7 @@
 			<view class="title">
 				{{userName}},&nbsp;您好
 			</view>
-			<view style="display: inline;">
+			<view class="message_img">
 				<image :src="messageSrc" :mode='scaleToFill'  @click="goMessage"></image>
 			</view>
 		</view>
@@ -41,7 +41,9 @@
 </template>
 
 <script>
-	import webSiteUrl from '../../common/webSiteUrl.js';
+	import webSiteUrl from '../../common/webSiteUrl.js'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	
 	// 设置计时器查询是否有unread的消息,第二个参数单位是ms
 	function hasUnreadMessage(that){
 		// 向服务器查询unread消息
@@ -79,7 +81,6 @@
 			}
 		});
 	}
-	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	
     export default {
 		components: {
@@ -107,7 +108,7 @@
 			this.token = uni.getStorageSync('token');
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
-			this.messageSrc = '../../static/img/message.png';
+			this.messageSrc = '../../static/img/message_2.png';
 			// 存储控制加班按键的变量
 			try{
 				uni.setStorageSync('canICU',false);
@@ -385,5 +386,12 @@
 	}
 	._caption {
 		border-bottom: 3.5upx solid #000000;
+	}
+	.message_img {
+		display: inline;
+		position: absolute;
+		right: 5%;
+		margin-top: 11upx;
+		height: 50upx;
 	}
 </style>
