@@ -106,6 +106,7 @@
 				method: 'GET',
 				success: (res) => {
 					if (res.statusCode==200) {
+						console.log(res);
 						console.log("获取用户图片成功");
 						if (res.data.data.status=="available") {
 							this.imgSrc = res.data.data.info;  // 服务器给的图片base64码，可以在image标签中直接解析

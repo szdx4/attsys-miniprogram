@@ -136,7 +136,7 @@ var _webSiteUrl = _interopRequireDefault(__webpack_require__(/*! ../../common/we
 //
 //
 var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\uni-popup\\uni-popup.vue"));};var mInput = function mInput() {return __webpack_require__.e(/*! import() | components/m-input */ "components/m-input").then(__webpack_require__.bind(null, /*! ../../components/m-input.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\m-input.vue"));};var _default = { components: { uniPopup: uniPopup, mInput: mInput }, data: function data() {return { userName: '', token: '', user_id: 0, name: 'Tony', department: 1, role: 'user', hours: 12, imgSrc: '', imgSrcOld: '', isChanged: false, isShowPopup: false, oldpwd: '', newpwd_1: '', newpwd_2: '' };}, onLoad: function onLoad() {var _this = this;this.token = uni.getStorageSync('token');this.user_id = uni.getStorageSync('user_id');this.userName = uni.getStorageSync('userName');this.name = uni.getStorageSync('name');this.department = uni.getStorageSync('department');this.role = uni.getStorageSync('role');this.hours = uni.getStorageSync('hours'); // 向服务器请求获取用户人脸信息
-    uni.request({ url: _webSiteUrl.default + '/face/user/' + this.user_id, header: { 'Authorization': 'Bearer ' + this.token }, method: 'GET', success: function success(res) {if (res.statusCode == 200) {console.log("获取用户图片成功");if (res.data.data.status == "available") {_this.imgSrc = res.data.data.info; // 服务器给的图片base64码，可以在image标签中直接解析
+    uni.request({ url: _webSiteUrl.default + '/face/user/' + this.user_id, header: { 'Authorization': 'Bearer ' + this.token }, method: 'GET', success: function success(res) {if (res.statusCode == 200) {console.log(res);console.log("获取用户图片成功");if (res.data.data.status == "available") {_this.imgSrc = res.data.data.info; // 服务器给的图片base64码，可以在image标签中直接解析
             _this.imgSrcOld = _this.imgSrc;} else {console.log("用户图片暂时不可用");}} else {console.log("获取用户图片失败");}} });}, methods: { // 选择照片，可从相册或相机，一次只允许选一张
     chooseImg: function chooseImg(e) {var _this2 = this;uni.chooseImage({ count: 1, sizeType: 'compressed', // 只能选择压缩图片，如果这个压缩还不够给力，则使用更麻烦的方法：http://www.heibaiketang.com/blog/show/97.html
         success: function success(chooseImageRes) {_this2.isChanged = true; // 通过画布得到等比例压缩后的图片的base64码
@@ -162,7 +162,8 @@ var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | 
           // 	}
           // })
           // 将图片存到本地
-          uni.saveFile({ tempFilePath: chooseImageRes.tempFilePaths[0],
+          uni.saveFile({
+            tempFilePath: chooseImageRes.tempFilePaths[0],
             success: function success(saveRes) {
               _this2.imgSrc = saveRes.savedFilePath;
               // console.log(this.imgSrc);
