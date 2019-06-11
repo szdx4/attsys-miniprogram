@@ -13,6 +13,10 @@
 	margin-top: 20rpx;
 }
 textarea {
+	line-height: 20rpx;
+	padding-top: 15rpx;
+	border-top: 0.5rpx solid #B2B2B2;
 	margin-top: 20rpx;
+	font-size: 30rpx;
 }
 
