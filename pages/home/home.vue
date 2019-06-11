@@ -108,6 +108,12 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			this.messageSrc = '../../static/img/message.png';
+			// 存储控制加班按键的变量
+			try{
+				uni.setStorageSync('canICU',false);
+			}catch(e){
+				console.log('存储出现问题');
+			}
 			// 检查用户签到状态
 			uni.request({
 				url: webSiteUrl + '/sign/user/' + this.user_id,
@@ -116,16 +122,24 @@
 				},
 				method: 'GET',
 				success:(res) => {
+					console.log(res);
 					if(res.statusCode==204){
 						this.check_message = "未签到";
 						this.IsNotcheck = true;
 					}
 					else if(res.statusCode==200){
+						uni.setStorageSync('sign_id', res.data.sign_id)
 						this.check_message = "已签到";
 						this.isNotCheck = false;
 						this.canCheckOff = true;
-						this.start_at = res.data.start_at;
-						this.end_at = res.data.end_at;
+						this.start_at = (new Date(res.data.shift.start_at)).toLocaleString('zh-CN', {
+							timeZone: 'Asia/Shanghai',
+							hour12: false
+						});
+						this.end_at = (new Date(res.data.shift.end_at)).toLocaleString('zh-CN', {
+							timeZone: 'Asia/Shanghai',
+							hour12: false
+						});
 					}
 					else{
 						this.check_message = "服务器异常";
@@ -191,6 +205,13 @@
 				console.log('关闭计时器');
 			}
 		},
+		onShow:function(){
+			try{
+				this.canICU = uni.getStorageSync('canICU');
+			}catch(e){
+				console.log('存储出现问题');
+			}
+		},
 		methods:{
 			goShiftArrangement(e) {
 				console.log(e)
@@ -222,7 +243,7 @@
 					onlyFromCamera: true,
 					success: (res) => {
 						console.log('条码内容：' + res.result);
-						this.check_token = res.result.token;
+						this.check_token = res.result;
 						// 通过二维码获得的token，向服务器签到
 						uni.request({
 							url: webSiteUrl + '/sign/qrcode/' + this.user_id,
@@ -248,6 +269,8 @@
 											duration:2000,
 											title:'签到成功'
 										})
+										this.start_at = res.data.shift.start_at;
+										this.end_at = res.data.shift.end_at;
 									} else{
 										console.log("签到失败");
 										uni.showToast({
@@ -291,9 +314,8 @@
 			},
 			// 签退
 			checkOff(e){
-				var sign_id = uni.getStorageSync('sign_id');
 				uni.request({
-					url: webSiteUrl + '/sign/off/' + sign_id,
+					url: webSiteUrl + '/sign/off/' + uni.getStorageSync('sign_id'),
 					method: 'POST',
 					header:{
 						'Authorization': 'Bearer ' + this.token
@@ -301,10 +323,18 @@
 					success: (res) => {
 						if(res.statusCode==200){
 							this.canICU = res.data.overtime;
+							this.isNotCheck = true;
+							this.canCheckOff = false;
+							this.check_message = "未签到";
 							uni.showToast({
 								duration:2000,
 								title:'签退成功'
 							})
+							try{
+								uni.setStorageSync('canICU',true);
+							}catch(e){
+								console.log('存储出现问题');
+							}
 						}
 						else{
 							console.log("签退失败");

@@ -6,8 +6,16 @@
 				 :start-date="startDate" :end-date="endDate" :date="date" @change="change" @to-click="toClick" />
 				<uni-popup :show="popUp === 'true'" position="middle" mode="fixed" @hidePopup="togglePopup('false')">
 					<scroll-view :scroll-y="true" class="uni-center center-box">
+						<view v-if="list.length == 0">
+							没有班次安排
+						</view>
 						<view v-for="(item, index) in list" :key="index" class="uni-list-item">
-							{{ item.type }} {{ item.text }}
+							<p style="margin-bottom: 20upx;">
+								排班类型：{{ item.type }}<br>
+								开始时间：{{ item.start_at }}<br>
+								结束时间：{{ item.end_at }}<br>
+								排班状态：{{ item.status }}<br>
+							</p>
 						</view>
 					</scroll-view>
 				</uni-popup>
@@ -98,15 +106,7 @@
 				userName: '',
 				token: '',
 				user_id: '',
-				list: [{
-						type: 'type：', // type/status
-						text: '1'
-					},
-					{
-						type: 'status：',
-						text: '2'
-					}
-				],
+				list: [],
 				data: [
 					{
 						"id": 1,
@@ -168,27 +168,40 @@
 				this.timeData = e
 			},
 			toClick(e) {
+				this.list = [];
 				console.log('点击事件', e.fulldate)
 				this.popUp = 'true'
 
 				for (var i in this.data) {
-					var d = this.data[i]
-					var start = d.start_at.toLocaleString().slice(0, 10).replace(/-/g, "\/")
-					var end = d.end_at.toLocaleString().slice(0, 10).replace(/-/g, "\/")
-
-					var month = (e.month >= 10) ? '' + e.month : '0' + e.month;
-					var day = (e.date >= 10) ? day = '' + e.date : day = '0' + e.date;
-					var selectedDate = '' + e.year + '/' + month + '/' + day;
+					var d = this.data[i];
+					var selected = new Date('' + e.year + '/' + e.month + '/' + e.date);
 					//debugger;
-					if (start <= selectedDate && selectedDate <= end) {
-						this.list[0].text = d.type;
-						this.list[1].text = d.status;
-						break;
-					}
-					else
-					{
-						this.list[0].text = 'error';
-						this.list[1].text = 'error';
+					if ((new Date(d.start_at)).toDateString() == selected.toDateString()) {
+						var data = {
+							type: d.type == 'normal' ? '正常排班' : '全体加班',
+							start_at: (new Date(d.start_at)).toLocaleString('zh-CN', {
+								timeZone: 'Asia/Shanghai',
+								hour12: false
+							}),
+							end_at: (new Date(d.end_at)).toLocaleString('zh-CN', {
+								timeZone: 'Asia/Shanghai',
+								hour12: false
+							}),
+							status: ''
+						}
+						if (d.status == 'no') {
+							data.status = '未签到';
+						} else if (d.status == 'on') {
+							data.status = '已签到';
+						} else if (d.status == 'off') {
+							data.status = '已签退';
+						} else if (d.status == 'leave') {
+							data.status = '请假';
+						} else {
+							data.status = d.status;
+						}
+						console.log(data);
+						this.list.push(data);
 					}
 				}
 

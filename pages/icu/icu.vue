@@ -53,22 +53,33 @@
 						url: webSiteUrl + '/overtime/user/' + this.user_id,
 						method: 'POST',
 						data: {
-							remark: formData
+							remark: formData.nickname
 						},
 						header: {
 							'Authorization': 'Bearer '+ this.token,
 							'content-type': 'application/json',// 也有可能是application/x-www-form-urlencoded
 						},
 						success: (res) => {
+							console.log(res);
 							if(res.statusCode == 201){
 								console.log('request success');
 								console.log(res);
-								uni.showToast({title:"提交成功!", icon:"none"});
+								uni.showToast({title:"提交成功!", duration:2500, icon:"none"});
+								uni.navigateBack({
+								});
+								try{
+									uni.setStorageSync('canICU',false);
+								}catch(e){
+									console.log('存储出现问题');
+								}
 							}
 							else{
 								var errCode = (res.statusCode == undefined)?'连接失败':res.statusCode;
 								uni.showToast({title:"提交失败! "+errCode, icon:"none"});
 							}
+						},
+						fail: (err) => {
+							console.log(err);
 						}
 					});
 					
