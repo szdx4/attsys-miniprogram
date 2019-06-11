@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/common/graceChecker.js":
-/*!********************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/common/graceChecker.js ***!
-  \********************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/common/graceChecker.js":
+/*!**********************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/common/graceChecker.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -107,10 +107,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/common/util.js":
-/*!************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/common/util.js ***!
-  \************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/common/util.js":
+/*!**************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/common/util.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -259,10 +259,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/common/webSiteUrl.js":
-/*!******************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/common/webSiteUrl.js ***!
-  \******************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/common/webSiteUrl.js":
+/*!********************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/common/webSiteUrl.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -271,10 +271,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/uni-calendar/calendar.js":
-/*!*********************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/uni-calendar/calendar.js ***!
-  \*********************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/components/uni-calendar/calendar.js":
+/*!***********************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/components/uni-calendar/calendar.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -828,10 +828,10 @@ calendar;exports.default = _default;
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/w-picker/city-data/area.js":
-/*!***********************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/w-picker/city-data/area.js ***!
-  \***********************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/components/w-picker/city-data/area.js":
+/*!*************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/components/w-picker/city-data/area.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13381,10 +13381,10 @@ areaData;exports.default = _default;
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/w-picker/city-data/city.js":
-/*!***********************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/w-picker/city-data/city.js ***!
-  \***********************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/components/w-picker/city-data/city.js":
+/*!*************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/components/w-picker/city-data/city.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14895,10 +14895,10 @@ cityData;exports.default = _default;
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/w-picker/city-data/province.js":
-/*!***************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/components/w-picker/city-data/province.js ***!
-  \***************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/components/w-picker/city-data/province.js":
+/*!*****************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/components/w-picker/city-data/province.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15045,19 +15045,19 @@ provinceData;exports.default = _default;
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js":
-/*!*****************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js ***!
-  \*****************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js":
+/*!*******************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/App.vue"));
+var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/App.vue"));
 
-var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/store/index.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/store/index.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 _vue.default.config.productionTip = false;
 
@@ -15074,163 +15074,163 @@ createApp(app).$mount();
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Fhome%2Fhome\"}":
-/*!************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Fhome%2Fhome"} ***!
-  \************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Fhome%2Fhome\"}":
+/*!**************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Fhome%2Fhome"} ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _home = _interopRequireDefault(__webpack_require__(/*! ./pages/home/home.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/home/home.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _home = _interopRequireDefault(__webpack_require__(/*! ./pages/home/home.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/home/home.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_home.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Ficu%2Ficu\"}":
-/*!**********************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Ficu%2Ficu"} ***!
-  \**********************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Ficu%2Ficu\"}":
+/*!************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Ficu%2Ficu"} ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _icu = _interopRequireDefault(__webpack_require__(/*! ./pages/icu/icu.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/icu/icu.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _icu = _interopRequireDefault(__webpack_require__(/*! ./pages/icu/icu.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/icu/icu.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_icu.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Finfo%2Finfo\"}":
-/*!************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Finfo%2Finfo"} ***!
-  \************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Finfo%2Finfo\"}":
+/*!**************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Finfo%2Finfo"} ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _info = _interopRequireDefault(__webpack_require__(/*! ./pages/info/info.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/info/info.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _info = _interopRequireDefault(__webpack_require__(/*! ./pages/info/info.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/info/info.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_info.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Fleave%2Fapply%2Fapply\"}":
-/*!**********************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Fleave%2Fapply%2Fapply"} ***!
-  \**********************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Fleave%2Fapply%2Fapply\"}":
+/*!************************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Fleave%2Fapply%2Fapply"} ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _apply = _interopRequireDefault(__webpack_require__(/*! ./pages/leave/apply/apply.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/leave/apply/apply.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _apply = _interopRequireDefault(__webpack_require__(/*! ./pages/leave/apply/apply.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/leave/apply/apply.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_apply.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Fleave%2Fleave\"}":
-/*!**************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Fleave%2Fleave"} ***!
-  \**************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Fleave%2Fleave\"}":
+/*!****************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Fleave%2Fleave"} ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _leave = _interopRequireDefault(__webpack_require__(/*! ./pages/leave/leave.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/leave/leave.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _leave = _interopRequireDefault(__webpack_require__(/*! ./pages/leave/leave.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/leave/leave.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_leave.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Flogin%2Flogin\"}":
-/*!**************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
-  \**************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Flogin%2Flogin\"}":
+/*!****************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _login = _interopRequireDefault(__webpack_require__(/*! ./pages/login/login.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/login/login.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _login = _interopRequireDefault(__webpack_require__(/*! ./pages/login/login.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/login/login.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_login.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Fmessage%2Fmessage\"}":
-/*!******************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Fmessage%2Fmessage"} ***!
-  \******************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Fmessage%2Fmessage\"}":
+/*!********************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Fmessage%2Fmessage"} ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _message = _interopRequireDefault(__webpack_require__(/*! ./pages/message/message.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/message/message.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _message = _interopRequireDefault(__webpack_require__(/*! ./pages/message/message.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/message/message.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_message.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Fmessage%2Fmessage_read%2Fmessage_read\"}":
-/*!**************************************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Fmessage%2Fmessage_read%2Fmessage_read"} ***!
-  \**************************************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Fmessage%2Fmessage_read%2Fmessage_read\"}":
+/*!****************************************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Fmessage%2Fmessage_read%2Fmessage_read"} ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _message_read = _interopRequireDefault(__webpack_require__(/*! ./pages/message/message_read/message_read.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/message/message_read/message_read.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _message_read = _interopRequireDefault(__webpack_require__(/*! ./pages/message/message_read/message_read.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/message/message_read/message_read.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_message_read.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{\"page\":\"pages%2Fshiftarrangement%2Fshiftarrangement\"}":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/main.js?{"page":"pages%2Fshiftarrangement%2Fshiftarrangement"} ***!
-  \************************************************************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/main.js?{\"page\":\"pages%2Fshiftarrangement%2Fshiftarrangement\"}":
+/*!**************************************************************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/main.js?{"page":"pages%2Fshiftarrangement%2Fshiftarrangement"} ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json");
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json");
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
-var _shiftarrangement = _interopRequireDefault(__webpack_require__(/*! ./pages/shiftarrangement/shiftarrangement.vue */ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages/shiftarrangement/shiftarrangement.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _shiftarrangement = _interopRequireDefault(__webpack_require__(/*! ./pages/shiftarrangement/shiftarrangement.vue */ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages/shiftarrangement/shiftarrangement.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_shiftarrangement.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-app-plus/dist/index.js */ "./node_modules/@dcloudio/uni-app-plus/dist/index.js")["createPage"]))
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json":
-/*!********************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/pages.json ***!
-  \********************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/pages.json":
+/*!**********************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/pages.json ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15239,10 +15239,10 @@ createPage(_shiftarrangement.default);
 
 /***/ }),
 
-/***/ "../../../../../../Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/store/index.js":
-/*!************************************************************************************!*\
-  !*** /Users/txfs1926/Documents/HBuilderProjects/attsys-miniprogram/store/index.js ***!
-  \************************************************************************************/
+/***/ "../../../../../../Volumes/Code/UniAPP/attsys-miniprogram/store/index.js":
+/*!**************************************************************!*\
+  !*** /Volumes/Code/UniAPP/attsys-miniprogram/store/index.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15285,7 +15285,7 @@ store;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createPage = createPage;exports.createComponent = createComponent;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+/* WEBPACK VAR INJECTION */(function(global) {Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createPage = createPage;exports.createComponent = createComponent;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -15327,7 +15327,7 @@ var camelize = cached(function (str) {
   return str.replace(camelizeRE, function (_, c) {return c ? c.toUpperCase() : '';});
 });
 
-var SYNC_API_RE = /subNVue|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$/;
+var SYNC_API_RE = /^\$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
 
@@ -15376,15 +15376,17 @@ function promisify(name, api) {
         fail: reject })].concat(
       params));
       /* eslint-disable no-extend-native */
-      Promise.prototype.finally = function (callback) {
-        var promise = this.constructor;
-        return this.then(
-        function (value) {return promise.resolve(callback()).then(function () {return value;});},
-        function (reason) {return promise.resolve(callback()).then(function () {
-            throw reason;
-          });});
+      if (!Promise.prototype.finally) {
+        Promise.prototype.finally = function (callback) {
+          var promise = this.constructor;
+          return this.then(
+          function (value) {return promise.resolve(callback()).then(function () {return value;});},
+          function (reason) {return promise.resolve(callback()).then(function () {
+              throw reason;
+            });});
 
-      };
+        };
+      }
     }));
   };
 }
@@ -15500,7 +15502,11 @@ function wrapper(methodName, method) {
 
       arg1 = processArgs(methodName, arg1, options.args, options.returnValue);
 
-      var returnValue = wx[options.name || methodName](arg1, arg2);
+      var args = [arg1];
+      if (typeof arg2 !== 'undefined') {
+        args.push(arg2);
+      }
+      var returnValue = wx[options.name || methodName].apply(wx, args);
       if (isSyncApi(methodName)) {// 同步 api
         return processReturnValue(methodName, returnValue, options.returnValue, isContextApi(methodName));
       }
@@ -15537,13 +15543,69 @@ TODOS.forEach(function (name) {
   todoApis[name] = createTodoApi(name);
 });
 
+var getEmitter = function () {
+  if (typeof getUniEmitter === 'function') {
+    /* eslint-disable no-undef */
+    return getUniEmitter;
+  }
+  var Emitter;
+  return function getUniEmitter() {
+    if (!Emitter) {
+      Emitter = new _vue.default();
+    }
+    return Emitter;
+  };
+}();
+
+function apply(ctx, method, args) {
+  return ctx[method].apply(ctx, args);
+}
+
+function $on() {
+  return apply(getEmitter(), '$on', Array.prototype.slice.call(arguments));
+}
+function $off() {
+  return apply(getEmitter(), '$off', Array.prototype.slice.call(arguments));
+}
+function $once() {
+  return apply(getEmitter(), '$once', Array.prototype.slice.call(arguments));
+}
+function $emit() {
+  return apply(getEmitter(), '$emit', Array.prototype.slice.call(arguments));
+}
+
+
+
+var eventApi = /*#__PURE__*/Object.freeze({
+  $on: $on,
+  $off: $off,
+  $once: $once,
+  $emit: $emit });
+
+
 function wrapper$1(webview) {
   webview.$processed = true;
+
+  webview.postMessage = function (data) {
+    plus.webview.postMessageToUniNView({
+      type: 'UniAppSubNVue',
+      data: data },
+    webview.id);
+  };
+  var callbacks = [];
+  webview.onMessage = function (callback) {
+    callbacks.push(callback);
+  };
+  webview.$consumeMessage = function (e) {
+    callbacks.forEach(function (callback) {return callback(e);});
+  };
+
   if (!webview.__uniapp_mask_id) {
     return;
   }
   var maskColor = webview.__uniapp_mask;
   var maskWebview = plus.webview.getWebviewById(webview.__uniapp_mask_id);
+  maskWebview = maskWebview.parent() || maskWebview; // 再次检测父
   var oldShow = webview.show;
   var oldHide = webview.hide;
   var oldClose = webview.close;
@@ -15571,33 +15633,15 @@ function wrapper$1(webview) {
     callbacks = [];for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {args[_key4] = arguments[_key4];}
     return oldClose.apply(webview, args);
   };
-  webview.postMessage = function (data) {
-    plus.webview.postMessageToUniNView({
-      type: 'UniAppSubNVue',
-      data: data,
-      options: {
-        id: webview.id } },
-
-    webview.id);
-  };
-  var callbacks = [];
-  webview.onMessage = function (callback) {
-    callbacks.push(callback);
-  };
-  webview.$consumeMessage = function (e) {
-    callbacks.forEach(function (callback) {return callback(e);});
-  };
 }
 
-var subNVue = {
-  getSubNVueById: function getSubNVueById(id) {
-    var webview = plus.webview.getWebviewById(id);
-    if (webview && !webview.$processed) {
-      wrapper$1(webview);
-    }
-    return webview;
-  } };
-
+function getSubNVueById(id) {
+  var webview = plus.webview.getWebviewById(id);
+  if (webview && !webview.$processed) {
+    wrapper$1(webview);
+  }
+  return webview;
+}
 
 function requireNativePlugin(pluginName) {
   /* eslint-disable no-undef */
@@ -15610,7 +15654,7 @@ function requireNativePlugin(pluginName) {
 
 var api = /*#__PURE__*/Object.freeze({
   requireNativePlugin: requireNativePlugin,
-  subNVue: subNVue });
+  getSubNVueById: getSubNVueById });
 
 
 var MPPage = Page;
@@ -15658,69 +15702,18 @@ Component = function Component() {var options = arguments.length > 0 && argument
   return MPComponent(options);
 };
 
-var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
+var PAGE_EVENT_HOOKS = [
+'onPullDownRefresh',
+'onReachBottom',
+'onShareAppMessage',
+'onPageScroll',
+'onResize',
+'onTabItemTap'];
 
-function initBehavior(options) {
-  return Behavior(options);
-}
-function initRefs(vm) {
-  var mpInstance = vm.$scope;
-  Object.defineProperty(vm, '$refs', {
-    get: function get() {
-      var $refs = {};
-      var components = mpInstance.selectAllComponents('.vue-ref');
-      components.forEach(function (component) {
-        var ref = component.dataset.ref;
-        $refs[ref] = component.$vm || component;
-      });
-      var forComponents = mpInstance.selectAllComponents('.vue-ref-in-for');
-      forComponents.forEach(function (component) {
-        var ref = component.dataset.ref;
-        if (!$refs[ref]) {
-          $refs[ref] = [];
-        }
-        $refs[ref].push(component.$vm || component);
-      });
-      return $refs;
-    } });
 
-}
-function triggerLink(mpInstance, vueOptions) {
-  mpInstance.triggerEvent('__l', mpInstance.$vm || vueOptions, {
-    bubbles: true,
-    composed: true });
-
-}
-
-function handleLink(event) {
-  if (event.detail.$mp) {// vm
-    if (!event.detail.$parent) {
-      event.detail.$parent = this.$vm;
-      event.detail.$parent.$children.push(event.detail);
-
-      event.detail.$root = this.$vm.$root;
-    }
-  } else {// vueOptions
-    if (!event.detail.parent) {
-      event.detail.parent = this.$vm;
-    }
-  }
-}
-
-function initPage$1(pageOptions) {
-  return initComponent$1(pageOptions);
-}
-
-function initComponent$1(componentOptions) {
-  componentOptions.methods.$getAppWebview = function () {
-    return plus.webview.getWebviewById("".concat(this.__wxWebviewId__));
-  };
-  return Component(componentOptions);
-}
-
-function initMocks(vm, mocks$$1) {
+function initMocks(vm, mocks) {
   var mpInstance = vm.$mp[vm.mpType];
-  mocks$$1.forEach(function (mock) {
+  mocks.forEach(function (mock) {
     if (hasOwn(mpInstance, mock)) {
       vm[mock] = mpInstance[mock];
     }
@@ -15730,12 +15723,46 @@ function initMocks(vm, mocks$$1) {
 function initHooks(mpOptions, hooks) {
   hooks.forEach(function (hook) {
     mpOptions[hook] = function (args) {
-      return this.$vm.__call_hook(hook, args);
+      return this.$vm && this.$vm.__call_hook(hook, args);
     };
   });
 }
 
-function getData(vueOptions, context) {
+function initVueComponent(Vue$$1, vueOptions) {
+  vueOptions = vueOptions.default || vueOptions;
+  var VueComponent;
+  if (isFn(vueOptions)) {
+    VueComponent = vueOptions;
+    vueOptions = VueComponent.extendOptions;
+  } else {
+    VueComponent = Vue$$1.extend(vueOptions);
+  }
+  return [VueComponent, vueOptions];
+}
+
+function initSlots(vm, vueSlots) {
+  if (Array.isArray(vueSlots) && vueSlots.length) {
+    var $slots = Object.create(null);
+    vueSlots.forEach(function (slotName) {
+      $slots[slotName] = true;
+    });
+    vm.$scopedSlots = vm.$slots = $slots;
+  }
+}
+
+function initVueIds(vueIds, mpInstance) {
+  vueIds = (vueIds || '').split(',');
+  var len = vueIds.length;
+
+  if (len === 1) {
+    mpInstance._$vueId = vueIds[0];
+  } else if (len === 2) {
+    mpInstance._$vueId = vueIds[0];
+    mpInstance._$vuePid = vueIds[1];
+  }
+}
+
+function initData(vueOptions, context) {
   var data = vueOptions.data || {};
   var methods = vueOptions.methods || {};
 
@@ -15777,7 +15804,7 @@ function createObserver(name) {
   };
 }
 
-function getBehaviors(vueOptions) {
+function initBehaviors(vueOptions, initBehavior) {
   var vueBehaviors = vueOptions['behaviors'];
   var vueExtends = vueOptions['extends'];
   var vueMixins = vueOptions['mixins'];
@@ -15806,7 +15833,7 @@ function getBehaviors(vueOptions) {
   if (isPlainObject(vueExtends) && vueExtends.props) {
     behaviors.push(
     initBehavior({
-      properties: getProperties(vueExtends.props, true) }));
+      properties: initProperties(vueExtends.props, true) }));
 
 
   }
@@ -15815,7 +15842,7 @@ function getBehaviors(vueOptions) {
       if (isPlainObject(vueMixin) && vueMixin.props) {
         behaviors.push(
         initBehavior({
-          properties: getProperties(vueMixin.props, true) }));
+          properties: initProperties(vueMixin.props, true) }));
 
 
       }
@@ -15832,9 +15859,13 @@ function parsePropType(key, type, defaultValue, file) {
   return type;
 }
 
-function getProperties(props) {var isBehavior = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;var file = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+function initProperties(props) {var isBehavior = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;var file = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var properties = {};
   if (!isBehavior) {
+    properties.vueId = {
+      type: String,
+      value: '' };
+
     properties.vueSlots = { // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
       type: null,
       value: [],
@@ -16034,6 +16065,17 @@ function processEventArgs(vm, event) {var args = arguments.length > 2 && argumen
 var ONCE = '~';
 var CUSTOM = '^';
 
+function isMatchEventType(eventType, optType) {
+  return eventType === optType ||
+
+  optType === 'regionchange' && (
+
+  eventType === 'begin' ||
+  eventType === 'end');
+
+
+}
+
 function handleEvent(event) {var _this = this;
   event = wrapper$2(event);
 
@@ -16054,11 +16096,19 @@ function handleEvent(event) {var _this = this;
     var isOnce = type.charAt(0) === ONCE;
     type = isOnce ? type.slice(1) : type;
 
-    if (eventsArray && eventType === type) {
+    if (eventsArray && isMatchEventType(eventType, type)) {
       eventsArray.forEach(function (eventArray) {
         var methodName = eventArray[0];
         if (methodName) {
-          var handler = _this.$vm[methodName];
+          var handlerCtx = _this.$vm;
+          if (
+          handlerCtx.$options.generic &&
+          handlerCtx.$parent &&
+          handlerCtx.$parent.$parent)
+          {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
+            handlerCtx = handlerCtx.$parent.$parent;
+          }
+          var handler = handlerCtx[methodName];
           if (!isFn(handler)) {
             throw new Error(" _vm.".concat(methodName, " is not a function"));
           }
@@ -16068,7 +16118,7 @@ function handleEvent(event) {var _this = this;
             }
             handler.once = true;
           }
-          handler.apply(_this.$vm, processEventArgs(
+          handler.apply(handlerCtx, processEventArgs(
           _this.$vm,
           event,
           eventArray[1],
@@ -16083,25 +16133,17 @@ function handleEvent(event) {var _this = this;
 }
 
 var hooks = [
+'onShow',
 'onHide',
 'onError',
-'onPageNotFound',
-'onUniNViewMessage'];
+'onPageNotFound'];
 
 
-function initVm(vm) {
-  if (this.$vm) {// 百度竟然 onShow 在 onLaunch 之前？
-    return;
-  }
+function parseBaseApp(vm, _ref2)
 
-  this.$vm = vm;
 
-  this.$vm.$mp = {
-    app: this };
-
-}
-
-function createApp(vm) {
+{var mocks = _ref2.mocks,initRefs = _ref2.initRefs;
+  _vue.default.prototype.mpHost = "app-plus";
 
   _vue.default.mixin({
     beforeCreate: function beforeCreate() {
@@ -16125,183 +16167,180 @@ function createApp(vm) {
         initRefs(this);
         initMocks(this, mocks);
       }
-    },
-    created: function created() {// 处理 injections
-      this.__init_injections(this);
-      this.__init_provide(this);
     } });
 
 
   var appOptions = {
     onLaunch: function onLaunch(args) {
-      initVm.call(this, vm);
+
+      this.$vm = vm;
+
+      this.$vm.$mp = {
+        app: this };
+
+
+      this.$vm.$scope = this;
 
       this.$vm._isMounted = true;
-      this.$vm.__call_hook('mounted');
+      this.$vm.__call_hook('mounted', args);
 
       this.$vm.__call_hook('onLaunch', args);
-    },
-    onShow: function onShow(args) {
-      initVm.call(this, vm);
-
-      this.$vm.__call_hook('onShow', args);
     } };
 
 
   // 兼容旧版本 globalData
   appOptions.globalData = vm.$options.globalData || {};
 
-  initHooks(appOptions, hooks); // 延迟执行，因为 App 的注册在 main.js 之前，可能导致生命周期内 Vue 原型上开发者注册的属性无法访问
+  initHooks(appOptions, hooks);
 
-  App(appOptions);
+  return appOptions;
+}
 
-  return vm;
+var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
+
+function findVmByVueId(vm, vuePid) {
+  var $children = vm.$children;
+  // 优先查找直属
+  var parentVm = $children.find(function (childVm) {return childVm.$scope._$vueId === vuePid;});
+  if (parentVm) {
+    return parentVm;
+  }
+  // 反向递归查找
+  for (var i = $children.length - 1; i >= 0; i--) {
+    parentVm = findVmByVueId($children[i], vuePid);
+    if (parentVm) {
+      return parentVm;
+    }
+  }
+}
+
+function initBehavior(options) {
+  return Behavior(options);
+}
+
+function isPage() {
+  return !!this.route;
+}
+
+function initRelation(detail) {
+  this.triggerEvent('__l', detail);
+}
+
+function initRefs(vm) {
+  var mpInstance = vm.$scope;
+  Object.defineProperty(vm, '$refs', {
+    get: function get() {
+      var $refs = {};
+      var components = mpInstance.selectAllComponents('.vue-ref');
+      components.forEach(function (component) {
+        var ref = component.dataset.ref;
+        $refs[ref] = component.$vm || component;
+      });
+      var forComponents = mpInstance.selectAllComponents('.vue-ref-in-for');
+      forComponents.forEach(function (component) {
+        var ref = component.dataset.ref;
+        if (!$refs[ref]) {
+          $refs[ref] = [];
+        }
+        $refs[ref].push(component.$vm || component);
+      });
+      return $refs;
+    } });
+
+}
+
+function handleLink(event) {var _ref3 =
+
+
+
+  event.detail || event.value,vuePid = _ref3.vuePid,vueOptions = _ref3.vueOptions; // detail 是微信,value 是百度(dipatch)
+
+  var parentVm;
+
+  if (vuePid) {
+    parentVm = findVmByVueId(this.$vm, vuePid);
+  }
+
+  if (!parentVm) {
+    parentVm = this.$vm;
+  }
+
+  vueOptions.parent = parentVm;
+}
+
+function parseApp(vm) {
+  return parseBaseApp(vm, {
+    mocks: mocks,
+    initRefs: initRefs });
+
 }
 
 var hooks$1 = [
-'onShow',
-'onHide',
-'onPullDownRefresh',
-'onReachBottom',
-'onShareAppMessage',
-'onPageScroll',
-'onResize',
-'onTabItemTap',
-'onBackPress',
-'onNavigationBarButtonTap',
-'onNavigationBarSearchInputChanged',
-'onNavigationBarSearchInputConfirmed',
-'onNavigationBarSearchInputClicked'];
+'onUniNViewMessage'];
 
 
-function initVm$1(VueComponent) {// 百度的 onLoad 触发在 attached 之前
-  if (this.$vm) {
-    return;
-  }
+function parseApp$1(vm) {
+  var appOptions = parseApp(vm);
 
-  this.$vm = new VueComponent({
-    mpType: 'page',
-    mpInstance: this });
+  initHooks(appOptions, hooks$1);
 
-
-  this.$vm.__call_hook('created');
-  this.$vm.$mount();
+  return appOptions;
 }
 
-function createPage(vueOptions) {
-  vueOptions = vueOptions.default || vueOptions;
-  var VueComponent;
-  if (isFn(vueOptions)) {
-    VueComponent = vueOptions;
-    vueOptions = VueComponent.extendOptions;
-  } else {
-    VueComponent = _vue.default.extend(vueOptions);
-  }
-  var pageOptions = {
-    options: {
-      multipleSlots: true,
-      addGlobalClass: true },
-
-    data: getData(vueOptions, _vue.default.prototype),
-    lifetimes: { // 当页面作为组件时
-      attached: function attached() {
-        initVm$1.call(this, VueComponent);
-      },
-      ready: function ready() {
-        this.$vm.__call_hook('beforeMount');
-        this.$vm._isMounted = true;
-        this.$vm.__call_hook('mounted');
-        this.$vm.__call_hook('onReady');
-      },
-      detached: function detached() {
-        this.$vm.$destroy();
-      } },
-
-    methods: { // 作为页面时
-      onLoad: function onLoad(args) {
-        initVm$1.call(this, VueComponent);
-        this.$vm.$mp.query = args; // 又要兼容 mpvue
-        this.$vm.__call_hook('onLoad', args); // 开发者可能会在 onLoad 时赋值，提前到 mount 之前
-      },
-      onUnload: function onUnload() {
-        this.$vm.__call_hook('onUnload');
-      },
-      __e: handleEvent,
-      __l: handleLink } };
-
-
-
-  initHooks(pageOptions.methods, hooks$1);
-
-  return initPage$1(pageOptions, vueOptions);
+function createApp(vm) {
+  App(parseApp$1(vm));
+  return vm;
 }
 
-function initVm$2(VueComponent) {
-  if (this.$vm) {
-    return;
-  }
+function parseBaseComponent(vueComponentOptions)
 
-  var properties = this.properties;
 
-  var options = {
-    mpType: 'component',
-    mpInstance: this,
-    propsData: properties };
-
-  // 初始化 vue 实例
-  this.$vm = new VueComponent(options);
-
-  // 处理$slots,$scopedSlots（暂不支持动态变化$slots）
-  var vueSlots = properties.vueSlots;
-  if (Array.isArray(vueSlots) && vueSlots.length) {
-    var $slots = Object.create(null);
-    vueSlots.forEach(function (slotName) {
-      $slots[slotName] = true;
-    });
-    this.$vm.$scopedSlots = this.$vm.$slots = $slots;
-  }
-  // 性能优先，mount 提前到 attached 中，保证组件首次渲染数据被合并
-  // 导致与标准 Vue 的差异，data 和 computed 中不能使用$parent，provide等组件属性
-  this.$vm.$mount();
-}
-
-function createComponent(vueOptions) {
-  vueOptions = vueOptions.default || vueOptions;
-
-  var VueComponent;
-  if (isFn(vueOptions)) {
-    VueComponent = vueOptions; // TODO form-field props.name,props.value
-    vueOptions = VueComponent.extendOptions;
-  } else {
-    VueComponent = _vue.default.extend(vueOptions);
-  }
-
-  var behaviors = getBehaviors(vueOptions);
-
-  var properties = getProperties(vueOptions.props, false, vueOptions.__file);
+{var _ref4 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},isPage$$1 = _ref4.isPage,initRelation$$1 = _ref4.initRelation;var _initVueComponent =
+  initVueComponent(_vue.default, vueComponentOptions),_initVueComponent2 = _slicedToArray(_initVueComponent, 2),VueComponent = _initVueComponent2[0],vueOptions = _initVueComponent2[1];
 
   var componentOptions = {
     options: {
       multipleSlots: true,
       addGlobalClass: true },
 
-    data: getData(vueOptions, _vue.default.prototype),
-    behaviors: behaviors,
-    properties: properties,
+    data: initData(vueOptions, _vue.default.prototype),
+    behaviors: initBehaviors(vueOptions, initBehavior),
+    properties: initProperties(vueOptions.props, false, vueOptions.__file),
     lifetimes: {
       attached: function attached() {
-        initVm$2.call(this, VueComponent);
+        var properties = this.properties;
+
+        var options = {
+          mpType: isPage$$1.call(this) ? 'page' : 'component',
+          mpInstance: this,
+          propsData: properties };
+
+
+        initVueIds(properties.vueId, this);
+
+        // 处理父子关系
+        initRelation$$1.call(this, {
+          vuePid: this._$vuePid,
+          vueOptions: options });
+
+
+        // 初始化 vue 实例
+        this.$vm = new VueComponent(options);
+
+        // 处理$slots,$scopedSlots（暂不支持动态变化$slots）
+        initSlots(this.$vm, properties.vueSlots);
+
+        // 触发首次 setData
+        this.$vm.$mount();
       },
       ready: function ready() {
-        initVm$2.call(this, VueComponent); // 目前发现部分情况小程序 attached 不触发
-        triggerLink(this); // 处理 parent,children
-
-        // 补充生命周期
-        this.$vm.__call_hook('created');
-        this.$vm.__call_hook('beforeMount');
-        this.$vm._isMounted = true;
-        this.$vm.__call_hook('mounted');
-        this.$vm.__call_hook('onReady');
+        // 当组件 props 默认值为 true，初始化时传入 false 会导致 created,ready 触发, 但 attached 不触发
+        // https://developers.weixin.qq.com/community/develop/doc/00066ae2844cc0f8eb883e2a557800
+        if (this.$vm) {
+          this.$vm._isMounted = true;
+          this.$vm.__call_hook('mounted');
+          this.$vm.__call_hook('onReady');
+        }
       },
       detached: function detached() {
         this.$vm.$destroy();
@@ -16309,7 +16348,7 @@ function createComponent(vueOptions) {
 
     pageLifetimes: {
       show: function show(args) {
-        this.$vm.__call_hook('onPageShow', args);
+        this.$vm && this.$vm.__call_hook('onPageShow', args);
       },
       hide: function hide() {
         this.$vm && this.$vm.__call_hook('onPageHide');
@@ -16319,12 +16358,93 @@ function createComponent(vueOptions) {
       } },
 
     methods: {
-      __e: handleEvent,
-      __l: handleLink } };
+      __l: handleLink,
+      __e: handleEvent } };
 
 
 
-  return initComponent$1(componentOptions, vueOptions);
+  if (isPage$$1) {
+    return componentOptions;
+  }
+  return [componentOptions, VueComponent];
+}
+
+function parseComponent(vueComponentOptions) {
+  return parseBaseComponent(vueComponentOptions, {
+    isPage: isPage,
+    initRelation: initRelation });
+
+}
+
+function parseComponent$1(vueComponentOptions) {
+  var componentOptions = parseComponent(vueComponentOptions);
+
+  componentOptions.methods.$getAppWebview = function () {
+    return plus.webview.getWebviewById("".concat(this.__wxWebviewId__));
+  };
+  return componentOptions;
+}
+
+var hooks$2 = [
+'onShow',
+'onHide',
+'onUnload'];
+
+
+hooks$2.push.apply(hooks$2, PAGE_EVENT_HOOKS);
+
+function parseBasePage(vuePageOptions, _ref5)
+
+
+{var isPage = _ref5.isPage,initRelation = _ref5.initRelation;
+  var pageOptions = parseComponent$1(vuePageOptions, {
+    isPage: isPage,
+    initRelation: initRelation });
+
+
+  initHooks(pageOptions.methods, hooks$2);
+
+  pageOptions.methods.onLoad = function (args) {
+    this.$vm.$mp.query = args; // 兼容 mpvue
+    this.$vm.__call_hook('onLoad', args);
+  };
+
+  return pageOptions;
+}
+
+function parsePage(vuePageOptions) {
+  return parseBasePage(vuePageOptions, {
+    isPage: isPage,
+    initRelation: initRelation });
+
+}
+
+var hooks$3 = [
+'onBackPress',
+'onNavigationBarButtonTap',
+'onNavigationBarSearchInputChanged',
+'onNavigationBarSearchInputConfirmed',
+'onNavigationBarSearchInputClicked'];
+
+
+function parsePage$1(vuePageOptions) {
+  var pageOptions = parsePage(vuePageOptions);
+
+  initHooks(pageOptions.methods, hooks$3);
+
+  return pageOptions;
+}
+
+function createPage(vuePageOptions) {
+  {
+    return Component(parsePage$1(vuePageOptions));
+  }
+}
+
+function createComponent(vueOptions) {
+  {
+    return Component(parseComponent$1(vueOptions));
+  }
 }
 
 todos.forEach(function (todoApi) {
@@ -16332,7 +16452,8 @@ todos.forEach(function (todoApi) {
 });
 
 canIUses.forEach(function (canIUseApi) {
-  var apiName = protocols[canIUseApi] && protocols[canIUseApi].name ? protocols[canIUseApi].name : canIUseApi;
+  var apiName = protocols[canIUseApi] && protocols[canIUseApi].name ? protocols[canIUseApi].name :
+  canIUseApi;
   if (!wx.canIUse(apiName)) {
     protocols[canIUseApi] = false;
   }
@@ -16349,6 +16470,9 @@ if (typeof Proxy !== 'undefined') {
       if (api[name]) {
         return promisify(name, api[name]);
       }
+      if (eventApi[name]) {
+        return eventApi[name];
+      }
       if (!hasOwn(wx, name) && !hasOwn(protocols, name)) {
         return;
       }
@@ -16357,6 +16481,10 @@ if (typeof Proxy !== 'undefined') {
 
 } else {
   uni.upx2px = upx2px;
+
+  Object.keys(eventApi).forEach(function (name) {
+    uni[name] = eventApi[name];
+  });
 
   Object.keys(api).forEach(function (name) {
     uni[name] = promisify(name, api[name]);
@@ -16369,9 +16497,20 @@ if (typeof Proxy !== 'undefined') {
   });
 }
 
+{
+  if (typeof global !== 'undefined') {
+    global.UniEmitter = eventApi;
+  }
+}
+
+wx.createApp = createApp;
+wx.createPage = createPage;
+wx.createComponent = createComponent;
+
 var uni$1 = uni;var _default =
 
 uni$1;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -20936,7 +21075,16 @@ function initProps (vm, propsOptions) {
       }
       defineReactive$$1(props, key, value, function () {
         if (!isRoot && !isUpdatingChildComponent) {
-          !vm._getFormData && warn(//fixed by xxxxxx uni://form-field 时不告警
+          {
+            if(vm.mpHost === 'mp-baidu'){//百度 observer 在 setData callback 之后触发，直接忽略该 warn
+                return
+            }
+            //fixed by xxxxxx __next_tick_pending,uni://form-field 时不告警
+            if(vm._getFormData || (vm.$parent && vm.$parent.__next_tick_pending)){
+              return
+            }
+          }
+          warn(
             "Avoid mutating a prop directly since the value will be " +
             "overwritten whenever the parent component re-renders. " +
             "Instead, use a data or computed property based on the prop's " +
@@ -21259,7 +21407,10 @@ function initMixin (Vue) {
     initEvents(vm);
     initRender(vm);
     callHook(vm, 'beforeCreate');
+    vm.mpHost !== 'mp-toutiao' && initInjections(vm); // resolve injections before data/props  
     initState(vm);
+    vm.mpHost !== 'mp-toutiao' && initProvide(vm); // resolve provide after data/props
+    vm.mpHost !== 'mp-toutiao' && callHook(vm, 'created');      
 
     /* istanbul ignore if */
     if ( true && config.performance && mark) {
@@ -21967,6 +22118,8 @@ function mountComponent$1(
       }
     }
   }
+  
+  vm.mpHost !== 'mp-toutiao' && callHook(vm, 'beforeMount');
 
   var updateComponent = function () {
     vm._update(vm._render(), hydrating);
@@ -22139,10 +22292,16 @@ function internalMixin(Vue) {
                 value = this._n(value);
             }
         }
+        if(!target){
+            target = this;
+        }
         target[key] = value;
     };
 
     Vue.prototype.__set_sync = function(target, key, value) {
+        if(!target){
+            target = this;
+        }
         target[key] = value;
     };
 

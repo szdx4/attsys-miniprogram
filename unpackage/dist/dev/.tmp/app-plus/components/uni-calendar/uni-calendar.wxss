@@ -120,8 +120,10 @@
 	border: 1px rgba(253, 46, 50, .5) solid;
 	border-right: none;
 	font-size: 24rpx;
-	border-top-left-radius: 50rpx;
-	border-bottom-left-radius: 50rpx;
+	-webkit-border-top-left-radius: 50rpx;
+	        border-top-left-radius: 50rpx;
+	-webkit-border-bottom-left-radius: 50rpx;
+	        border-bottom-left-radius: 50rpx;
 	color: rgba(253, 46, 50, .7);
 	background: rgba(241, 233, 233, .4)
 }

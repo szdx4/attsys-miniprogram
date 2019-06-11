@@ -84,8 +84,9 @@
     "arguments": "{\"name\":\"登录\",\"query\":\"\",\"id\":0,\"pathName\":\"pages/login/login\"}",
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "1.9.9",
-      "control": "v8"
+      "compilerVersion": "2.0.0",
+      "control": "v8",
+      "nvueCompiler": "weex"
     }
   }
 }

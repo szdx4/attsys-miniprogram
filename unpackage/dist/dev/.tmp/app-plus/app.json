@@ -16,11 +16,12 @@
     "navigationBarBackgroundColor": "#0faeff",
     "backgroundColor": "#fbf9fe"
   },
+  "nvueCompiler": "weex",
   "splashscreen": {
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
   "appname": "attsys_miniprogram",
-  "compilerVersion": "1.9.9",
+  "compilerVersion": "2.0.0",
   "usingComponents": {}
 }

@@ -159,7 +159,8 @@
 	width: 5px;
 	height: 5px;
 	background-color: #999;
-	border-radius: 50%
+	-webkit-border-radius: 50%;
+	        border-radius: 50%
 }
 .uni-steps-item-line {
 	background-color: #ebedf0;

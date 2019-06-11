@@ -22,12 +22,6 @@
 						<canvas canvas-id="myCanvas"></canvas>
 					</view>
 				</view>
-				<view class="flex-row flex-cell">
-					<text class="flex-cell flex-row"></text>
-					<view class="flex-cell flex-row img_button">
-						<button size="mini" @tap="chooseImg">选择图片</button>
-					</view>
-				</view>
 			</view>
 		</view>
 		<view class="upload_button">
@@ -121,98 +115,49 @@
 			});
 		},
 		methods: {
-			// 选择照片，可从相册或相机，一次只允许选一张
-			chooseImg(e) {
-				uni.chooseImage({
-					count: 1,
-					sizeType: 'compressed',  // 只能选择压缩图片，如果这个压缩还不够给力，则使用更麻烦的方法：http://www.heibaiketang.com/blog/show/97.html
-					success: (chooseImageRes) => {
-						this.isChanged = true;
-						// 通过画布得到等比例压缩后的图片的base64码
-						// 先获得图像长宽
-						// uni.getImageInfo({
-						// 	src:chooseImageRes.tempFilePaths[0],
-						// 	success: (image) => {
-						// 		var max_height = 600;
-						// 		var max_width = 800;
-						// 		var image_width_ori = image.width;
-						// 		var image_height_ori = image.height;
-						// 		console.log(image_width_ori);
-						// 		console.log(image_height_ori);
-						// 		w_h_rate = image_width_ori/image_height_ori;
-						// 		// 等比压缩，判断宽度或高度优先
-						// 		const ctx = uni.createCanvasContext('myCanvas');
-						// 		if (w_h_rate>(max_height/max_width)) {
-						// 			ctx.drawImage(chooseImageRes.tempFilePaths[0], 0, 0, max_width, max_width/w_h_rate);
-						// 		} else{
-						// 			ctx.drawImage(chooseImageRes.tempFilePaths[0], 0, 0, max_height*w_h_rate, max_height);
-						// 		}
-						// 		ctx.draw();
-						// 	}
-						// })
-						// 将图片存到本地
-						uni.saveFile({
-							tempFilePath: chooseImageRes.tempFilePaths[0],
-							success: (saveRes) => {
-								this.imgSrc = saveRes.savedFilePath;
-								// console.log(this.imgSrc);
-							}
-						});
-					}
-				});
-				
-			},
 			// 提交用户的图片修改
 			submit(e) {
-				var img_base64 = '';
-				if (this.isChanged){
-					// 先将图片base64编码
-					uni.getFileSystemManager().readFile({
-						filePath: this.imgSrc,
-						encoding: 'base64',
-						success: (encodeRes) => {
-							this.imgSrc = 'data:image/png;base64,' + encodeRes.data;
-							// console.log(this.imgSrc);
-							// 再将图片的base64上传到服务器
-							uni.request({
-								url: webSiteUrl + '/face/user/' + this.user_id,
-								header: {
-									'Authorization': 'Bearer '+ this.token,
-								},
-								data: {
-									info: this.imgSrc
-								},
-								method: 'POST',
-								success: (uploadRes) => {
-									console.log(uploadRes);
-									if (uploadRes.statusCode==201) {
-										console.log("上传成功");
-										this.imgSrcOld = this.imgSrc;
-										uni.showToast({
-											duration:2000,
-											title:'上传成功'
-										})
-									} else{
-										console.log("上传失败");
-										this.imgSrc = this.imgSrcOld;
-										uni.showToast({
-											duration:2000,
-											title:'上传失败'
-										})
-									}
-								}
-							})
-						},
-					})
-					
-				}
-				else {
-					console.log("还未上传图片")
-					uni.showToast({
-						duration:2000,
-						title:'您还未选择照片'
-					})
-				}
+				uni.chooseImage({
+					count: 1,
+					sizeType: ['compressed'],
+					sourceType: ['album', 'camera'],
+					success: (res) => {
+						plus.io.resolveLocalFileSystemURL(res.tempFilePaths[0], (entry) => {
+							entry.file((file) => {
+								var reader = new plus.io.FileReader();
+								reader.onloadend = ({ target: { result } }) => {
+									uni.request({
+										url: webSiteUrl + '/face/user/' + this.user_id,
+										header: {
+											'Authorization': 'Bearer '+ this.token,
+										},
+										data: {
+											info: result
+										},
+										method: 'POST',
+										success: (res) => {
+											console.log(res);
+											if (res.statusCode == 201) {
+												console.log("上传成功");
+												uni.showToast({
+													duration:2000,
+													title:'上传成功'
+												})
+											} else {
+												console.log("上传失败");
+												uni.showToast({
+													duration:2000,
+													title:'上传失败'
+												})
+											}
+										}
+									});
+								};
+								reader.readAsDataURL(file);
+							});
+						});
+					}
+				})
 			},
 			showPanel(e) {
 				console.log(e);
