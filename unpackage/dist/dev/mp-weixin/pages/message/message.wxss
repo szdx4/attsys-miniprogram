@@ -15,16 +15,6 @@
     	        flex-direction: column;
     	background-color: #CCCCCC;
 }
-.message {
-		background-color: #EBEDF0;
-		height: 55rpx;
-		border-bottom: 4rpx solid #555555;
-		border-left: 4rpx solid #555555;
-		border-right: 4rpx solid #555555;
-}
-.message view {
-		position: absolute;
-}
 .specificMessage{
 		min-height: 300rpx;
 		max-height: 700rpx;
@@ -32,21 +22,11 @@
 		background-color: #F8F8F8;
 		border: 4rpx solid #555555;
 }
-._caption {
-		height: 70rpx;
-		line-height: 70rpx;
-		font-weight: bold;
-		border-bottom: 4rpx solid #555555;
-}
 .sec_cap {
 		text-align: center;
 		font-weight: bold;
 		border-bottom: 3rpx solid #000000;
 		font-size: 35rpx;
-}
-.caption_label view{
-		line-height: 70rpx;
-		position: absolute;
 }
 ._p {
 		padding-left: 8rpx;
@@ -57,13 +37,14 @@
 		font-size: 30rpx;
 }
 .bottom-btn {
-		position: absolute;
-		bottom: 1%;
+		padding-top: 20rpx;
+		padding-bottom: 10rpx;
+		border-bottom: 1rpx solid #000000;
 }
 .btn_left {
-		left: 20%;
+		left: 10%;
 }
 .btn_right {
-		left: 40%;
+		left: 25.2%;
 }
 

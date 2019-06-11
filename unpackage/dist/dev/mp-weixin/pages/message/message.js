@@ -33,16 +33,9 @@
 
 
 
+var _webSiteUrl = _interopRequireDefault(__webpack_require__(/*! ../../common/webSiteUrl.js */ "D:\\HBuilderX\\attsys-miniprogram\\common\\webSiteUrl.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\uni-popup\\uni-popup.vue"));};var uniList = function uniList() {return __webpack_require__.e(/*! import() | components/uni-list/uni-list */ "components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/components/uni-list/uni-list.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\uni-list\\uni-list.vue"));};var uniListItem = function uniListItem() {return __webpack_require__.e(/*! import() | components/uni-list-item/uni-list-item */ "components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/components/uni-list-item/uni-list-item.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\uni-list-item\\uni-list-item.vue"));};
 
 
-
-
-
-
-
-
-
-var _webSiteUrl = _interopRequireDefault(__webpack_require__(/*! ../../common/webSiteUrl.js */ "D:\\HBuilderX\\attsys-miniprogram\\common\\webSiteUrl.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ "D:\\HBuilderX\\attsys-miniprogram\\components\\uni-popup\\uni-popup.vue"));};
 
 // 向服务器查询unread消息。用total除以per_page，向下取整，得出需要查询的总页数
 function queryUnreadMessage(that) {
@@ -82,7 +75,9 @@ function queryUnreadMessage(that) {
 
 {
   components: {
-    uniPopup: uniPopup },
+    uniPopup: uniPopup,
+    uniList: uniList,
+    uniListItem: uniListItem },
 
   data: function data() {
     return {
@@ -94,20 +89,137 @@ function queryUnreadMessage(that) {
       message_title: '',
       message_from: '',
       message_list: [
-        // {
-        // 	"id": 1,
-        // 	"from": {
-        // 		"id": 1,
-        // 		"name": "test",
-        // 	},
-        // 	"to": {
-        // 		"id": 2,
-        // 		"name": "test2",
-        // 	},
-        // 	"title": "test title",
-        // 	"status": "unread"
-        // }
-      ] };
+      {
+        "id": 1,
+        "from": {
+          "id": 1,
+          "name": "test" },
+
+        "to": {
+          "id": 2,
+          "name": "test2" },
+
+        "title": "test title",
+        "status": "unread" },
+
+      {
+        "id": 1,
+        "from": {
+          "id": 1,
+          "name": "test3" },
+
+        "to": {
+          "id": 2,
+          "name": "test4" },
+
+        "title": "test title2",
+        "status": "unread" },
+
+      {
+        "id": 1,
+        "from": {
+          "id": 1,
+          "name": "test" },
+
+        "to": {
+          "id": 2,
+          "name": "test2" },
+
+        "title": "test title",
+        "status": "unread" }] };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   },
   onLoad: function onLoad() {
@@ -129,8 +241,8 @@ function queryUnreadMessage(that) {
   methods: {
     showMessage: function showMessage(e) {var _this = this;
       console.log(e);
-      var messageId = e.currentTarget.dataset.messageid;
-      var id = e.currentTarget.dataset.id;
+      var messageId = e.currentTarget.dataset.one;
+      var id = e.currentTarget.dataset.two;
       uni.request({
         url: _webSiteUrl.default + '/message/' + messageId,
         method: 'GET',
@@ -138,18 +250,26 @@ function queryUnreadMessage(that) {
           'Authorization': 'Bearer ' + this.token },
 
         success: function success(res) {
-          _this.message_title = res.data.data.title;
-          _this.message_from = res.data.data.from.name;
-          _this.message_content = res.data.data.content;
-          // 将该消息从消息列表中删除
-          _this.message_list.splice(id, 1);
-          // 当消息列表为空时，将定时器的控制变量设置为true
-          if (_this.message_list.length == 0) {
-            try {
-              uni.setStorageSync('start_query_unread_message', true);
-            } catch (e) {
-              console.log("存储出现问题");
+          if (res.statusCode == 200) {
+            _this.message_title = res.data.data.title;
+            _this.message_from = res.data.data.from.name;
+            _this.message_content = res.data.data.content;
+            // 将该消息从消息列表中删除
+            _this.message_list.splice(id, 1);
+            // 当消息列表为空时，将定时器的控制变量设置为true
+            if (_this.message_list.length == 0) {
+              try {
+                uni.setStorageSync('start_query_unread_message', true);
+              } catch (e) {
+                console.log("存储出现问题");
+              }
             }
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: "获取消息失败",
+              duration: 2000 });
+
           }
         },
         fail: function fail() {

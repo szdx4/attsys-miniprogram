@@ -108,22 +108,22 @@
 				user_id: '',
 				list: [],
 				data: [
-					{
-						"id": 1,
-						"user_id": 1,
-						"start_at": "2019-06-02 11:11:11",
-						"end_at": "2019-06-03 11:11:11",
-						"type": "normal",
-						"status": "no"
-					},
-					{
-						"id": 1,
-						"user_id": 1,
-						"start_at": "2019-06-19 11:11:11",
-						"end_at": "2019-06-20 11:11:11",
-						"type": "allovertime",
-						"status": "leave"
-					},
+					// {
+					// 	"id": 1,
+					// 	"user_id": 1,
+					// 	"start_at": "2019-06-02 11:11:11",
+					// 	"end_at": "2019-06-03 11:11:11",
+					// 	"type": "normal",
+					// 	"status": "no"
+					// },
+					// {
+					// 	"id": 1,
+					// 	"user_id": 1,
+					// 	"start_at": "2019-06-19 11:11:11",
+					// 	"end_at": "2019-06-20 11:11:11",
+					// 	"type": "allovertime",
+					// 	"status": "leave"
+					// },
 				], //just for test, from backend
 
 				popUp: 'false',
@@ -140,24 +140,39 @@
 			this.token = uni.getStorageSync('token');
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
-			uni.request({
-				url: webSiteUrl + '/shift?user_id=' + this.user_id + '&page=' + 0,
-				// data: {
-				// 	text: 'uni.request'
-				// },
-				header: {
-					'Authorization': 'Bearer ' + this.token //'Authorization'加引号？
-				},
-				method: 'GET',
-				success: (res) => {
-					console.log(res);
-					if (res.statusCode == 200) {
-						console.log('request success');
-						console.log(res.data);
-						this.data = res.data.data;
+			var pages = 1;
+			this.data = [];
+			for (var i = 1; i <= pages; i++) {
+				uni.request({
+					url: webSiteUrl + '/shift?user_id=' + this.user_id + '&page=' + i,
+					header: {
+						'Authorization': 'Bearer ' + this.token //'Authorization'加引号？
+					},
+					method: 'GET',
+					success: (res) => {
+						console.log(res);
+						if (res.statusCode==200) {
+							if (res.data.total != 0) {
+								pages = Math.ceil(res.data.total / res.data.per_page);
+								// 将得到的数组加入data中
+								this.data.push.apply(this.data,res.data.data);
+								console.log('request success');
+							} else{
+								uni.showToast({
+									title:'无排班信息',
+									icon:'none',
+									duration:2000
+								})
+								console.log("无排班信息")
+							}
+						} else if (res.statusCode==204) {
+							console.log("无排班信息")
+						} else {
+							console.log("排班信息获取失败")
+						}
 					}
-				}
-			});
+				});
+			}
 		},
 		methods: {
 			closeMask() {
@@ -204,7 +219,6 @@
 						this.list.push(data);
 					}
 				}
-
 				this.timeData = e
 			},
 			confirm() {
@@ -213,7 +227,6 @@
 			togglePopup(type) {
 				this.popUp = type
 			}
-
 		}
 	}
 </script>
