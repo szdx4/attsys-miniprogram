@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-list-cell" :class="[disabled === true || disabled === 'true' ? 'uni-list-cell--disabled' : '']"
-	 :hover-class="disabled === true || disabled === 'true' || showSwitch === true || showSwitch === 'true' ? '' : 'uni-list-cell--hover'" @click="onClick">
-		<view class="uni-list-cell__container">
+	 :hover-class="disabled === true || disabled === 'true' || showSwitch === true || showSwitch === 'true' ? '' : 'uni-list-cell--hover'" >
+		<view class="uni-list-cell__container" @click="onClick" :data-one="id_1" :data-two=id_2>
 			<view class="uni-list-cell__icon" v-if="thumb">
 				<image class="uni-list-cell__icon-img" :src="thumb"></image>
 			</view>
@@ -38,6 +38,8 @@
 		props: {
 			title: String, //列表标题
 			note: String, //列表描述
+			id_1: String,
+			id_2: String,
 			disabled: { //是否禁用
 				type: [Boolean, String],
 				default: false
@@ -80,8 +82,8 @@
 			}
 		},
 		methods: {
-			onClick() {
-				this.$emit('click')
+			onClick(e) {
+				this.$emit('click', e)
 			},
 			onSwitchChange(e) {
 				this.$emit('switchChange', e.detail)

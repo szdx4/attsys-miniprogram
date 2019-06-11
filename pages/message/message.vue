@@ -1,18 +1,13 @@
 <template>
     <view class="_content">
-		<caption>
-			<label class="caption_label">
-				<view style="left: 17%;">来自</view>
-				<view style="left: 56%;">标题</view>
-				<view style="left: 86%;">操作</view>
-			</label>
-		</caption>
-		<scroll-view :scroll-y="true" class="uni-center center-box">
-			<view v-for="(item, index) in message_list" :key="index" class="uni-list-item message">
-				<view style="height: 55upx;left: 2%;text-align: left;width: 38%; border-right: 3upx solid #000000;">{{ item.from.name }}</view>
-				<view style="height: 55upx;left: 42%;text-align: left;width: 37%; border-right: 3upx solid #000000;">{{ item.title }}</view>
-				<view style="height: 55upx;left: 81%;text-align: center;width: 17%;" @tap="showMessage" :data-messageId='item.id' :data-id='index'>查看</view>
+		<scroll-view :scroll-y="true">
+			<view class="bottom-btn">
+				<button class="btn_left" size="mini" @tap="clearAll">清除所有消息</button>
+				<button class="btn_right" size="mini" @click="goMessageRead">查看已读消息</button>
 			</view>
+			<uni-list v-for="(item, index) in message_list" :key="index">
+				<uni-list-item :title="item.title" :note="item.from.name" :id_1='item.id' :id_2 ='index' @click="showMessage" ></uni-list-item>
+			</uni-list>
 		</scroll-view>
 		<view>
 			<uni-popup :show="isShowPopup" position="middle" mode="insert" buttonMode="right" @hidePopup="closeMessage">
@@ -23,16 +18,14 @@
 				</scroll-view>
 			</uni-popup>
 		</view>
-		<view class="bottom-btn">
-			<button class="btn_left" size="mini" @tap="clearAll">清除所有消息</button>
-			<button class="btn_right" size="mini" @click="goMessageRead">查看已读消息</button>
-		</view>
     </view>
 </template>
 
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import webSiteUrl from '../../common/webSiteUrl.js'
+	import uniList from '@/components/uni-list/uni-list.vue'
+	import uniListItem from '@/components/uni-list-item/uni-list-item.vue'
 	
 	// 向服务器查询unread消息。用total除以per_page，向下取整，得出需要查询的总页数
 	function queryUnreadMessage(that) {
@@ -72,7 +65,9 @@
 	
     export default {
 		components: {
-			uniPopup
+			uniPopup,
+			uniList,
+			uniListItem
 		},
 		data() {
 			return {
@@ -84,6 +79,58 @@
 				message_title:'',
 				message_from:'',
 				message_list: [
+					{
+						"id": 1,
+						"from": {
+							"id": 1,
+							"name": "test",
+						},
+						"to": {
+							"id": 2,
+							"name": "test2",
+						},
+						"title": "test title",
+						"status": "unread"
+					},
+					{
+						"id": 1,
+						"from": {
+							"id": 1,
+							"name": "test3",
+						},
+						"to": {
+							"id": 2,
+							"name": "test4",
+						},
+						"title": "test title2",
+						"status": "unread"
+					},
+					{
+						"id": 1,
+						"from": {
+							"id": 1,
+							"name": "test",
+						},
+						"to": {
+							"id": 2,
+							"name": "test2",
+						},
+						"title": "test title",
+						"status": "unread"
+					},
+					// {
+					// 	"id": 1,
+					// 	"from": {
+					// 		"id": 1,
+					// 		"name": "test3",
+					// 	},
+					// 	"to": {
+					// 		"id": 2,
+					// 		"name": "test4",
+					// 	},
+					// 	"title": "test title2",
+					// 	"status": "unread"
+					// },
 					// {
 					// 	"id": 1,
 					// 	"from": {
@@ -95,6 +142,71 @@
 					// 		"name": "test2",
 					// 	},
 					// 	"title": "test title",
+					// 	"status": "unread"
+					// },
+					// {
+					// 	"id": 1,
+					// 	"from": {
+					// 		"id": 1,
+					// 		"name": "test3",
+					// 	},
+					// 	"to": {
+					// 		"id": 2,
+					// 		"name": "test4",
+					// 	},
+					// 	"title": "test title2",
+					// 	"status": "unread"
+					// },
+					// {
+					// 	"id": 1,
+					// 	"from": {
+					// 		"id": 1,
+					// 		"name": "test",
+					// 	},
+					// 	"to": {
+					// 		"id": 2,
+					// 		"name": "test2",
+					// 	},
+					// 	"title": "test title",
+					// 	"status": "unread"
+					// },
+					// {
+					// 	"id": 1,
+					// 	"from": {
+					// 		"id": 1,
+					// 		"name": "test3",
+					// 	},
+					// 	"to": {
+					// 		"id": 2,
+					// 		"name": "test4",
+					// 	},
+					// 	"title": "test title2",
+					// 	"status": "unread"
+					// },
+					// {
+					// 	"id": 1,
+					// 	"from": {
+					// 		"id": 1,
+					// 		"name": "test",
+					// 	},
+					// 	"to": {
+					// 		"id": 2,
+					// 		"name": "test2",
+					// 	},
+					// 	"title": "test title",
+					// 	"status": "unread"
+					// },
+					// {
+					// 	"id": 1,
+					// 	"from": {
+					// 		"id": 1,
+					// 		"name": "test3",
+					// 	},
+					// 	"to": {
+					// 		"id": 2,
+					// 		"name": "test4",
+					// 	},
+					// 	"title": "test title2",
 					// 	"status": "unread"
 					// }
 				],
@@ -119,8 +231,8 @@
 		methods:{
 			showMessage(e) {
 				console.log(e)
-				var messageId = e.currentTarget.dataset.messageid;
-				var id = e.currentTarget.dataset.id;
+				var messageId = e.currentTarget.dataset.one;
+				var id = e.currentTarget.dataset.two;
 				uni.request({
 					url: webSiteUrl + '/message/' + messageId,
 					method: 'GET',
@@ -128,18 +240,26 @@
 						'Authorization': 'Bearer '+ this.token,
 					},
 					success: (res) => {
-						this.message_title = res.data.data.title;
-						this.message_from = res.data.data.from.name;
-						this.message_content = res.data.data.content;
-						// 将该消息从消息列表中删除
-						this.message_list.splice(id,1);
-						// 当消息列表为空时，将定时器的控制变量设置为true
-						if (this.message_list.length==0) {
-							try{
-								uni.setStorageSync('start_query_unread_message',true);
-							}catch(e){
-								console.log("存储出现问题");
+						if (res.statusCode == 200) {
+							this.message_title = res.data.data.title;
+							this.message_from = res.data.data.from.name;
+							this.message_content = res.data.data.content;
+							// 将该消息从消息列表中删除
+							this.message_list.splice(id,1);
+							// 当消息列表为空时，将定时器的控制变量设置为true
+							if (this.message_list.length==0) {
+								try{
+									uni.setStorageSync('start_query_unread_message',true);
+								}catch(e){
+									console.log("存储出现问题");
+								}
 							}
+						} else{
+							uni.showToast({
+								icon:'none',
+								title:"获取消息失败",
+								duration:2000
+							})
 						}
 					},
 					fail() {
@@ -209,16 +329,6 @@
     	flex-direction: column;
     	background-color: #CCCCCC;
     }
-	.message {
-		background-color: #EBEDF0;
-		height: 55upx;
-		border-bottom: 4upx solid #555555;
-		border-left: 4upx solid #555555;
-		border-right: 4upx solid #555555;
-	}
-	.message view {
-		position: absolute;
-	}
 	.specificMessage{
 		min-height: 300upx;
 		max-height: 700upx;
@@ -226,21 +336,11 @@
 		background-color: #F8F8F8;
 		border: 4upx solid #555555;
 	}
-	caption {
-		height: 70upx;
-		line-height: 70upx;
-		font-weight: bold;
-		border-bottom: 4upx solid #555555;
-	}
 	.sec_cap {
 		text-align: center;
 		font-weight: bold;
 		border-bottom: 3upx solid #000000;
 		font-size: 35upx;
-	}
-	.caption_label view{
-		line-height: 70upx;
-		position: absolute;
 	}
 	p {
 		padding-left: 8upx;
@@ -251,13 +351,14 @@
 		font-size: 30upx;
 	}
 	.bottom-btn {
-		position: absolute;
-		bottom: 1%;
+		padding-top: 20upx;
+		padding-bottom: 10upx;
+		border-bottom: 1upx solid #000000;
 	}
 	.btn_left {
-		left: 20%;
+		left: 10%;
 	}
 	.btn_right {
-		left: 40%;
+		left: 25.2%;
 	}
 </style>

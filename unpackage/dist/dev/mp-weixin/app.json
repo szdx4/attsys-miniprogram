@@ -16,5 +16,6 @@
     "navigationBarBackgroundColor": "#0faeff",
     "backgroundColor": "#fbf9fe"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }
