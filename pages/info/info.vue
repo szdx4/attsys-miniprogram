@@ -75,7 +75,6 @@
 				role:'user',
 				hours:12,
 				imgSrc:'',
-				imgSrcOld:'',
 				isChanged: false,
 				isShowPopup:false,
 				oldpwd:'',
@@ -92,28 +91,27 @@
 			this.role = uni.getStorageSync('role');
 			this.hours = uni.getStorageSync('hours');
 			// 向服务器请求获取用户人脸信息
-			uni.request({
-				url: webSiteUrl + '/face/user/' + this.user_id,
-				header: {
-					'Authorization': 'Bearer '+ this.token,
-				},
-				method: 'GET',
-				success: (res) => {
-					if (res.statusCode==200) {
-						console.log(res);
-						console.log("获取用户图片成功");
-						if (res.data.data.status=="available") {
-							this.imgSrc = res.data.data.info;  // 服务器给的图片base64码，可以在image标签中直接解析
-							this.imgSrcOld = this.imgSrc;
-						}
-						else {
-							console.log("用户图片暂时不可用")
-						}
-					} else{
-						console.log("获取用户图片失败");
-					}
-				},
-			});
+			// uni.request({
+			// 	url: webSiteUrl + '/face/user/' + this.user_id,
+			// 	header: {
+			// 		'Authorization': 'Bearer '+ this.token,
+			// 	},
+			// 	method: 'GET',
+			// 	success: (res) => {
+			// 		if (res.statusCode==200) {
+			// 			console.log(res);
+			// 			console.log("获取用户图片成功");
+			// 			if (res.data.data.status=="available") {
+			// 				this.imgSrc = res.data.data.info;  // 服务器给的图片base64码，可以在image标签中直接解析
+			// 			}
+			// 			else {
+			// 				console.log("用户图片暂时不可用")
+			// 			}
+			// 		} else{
+			// 			console.log("获取用户图片失败");
+			// 		}
+			// 	},
+			// });
 		},
 		methods: {
 			// 提交用户的图片修改

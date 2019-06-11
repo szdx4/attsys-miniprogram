@@ -9,7 +9,7 @@
 				</view>
 				<view class="uni-list-cell-db current-picker">
 					<picker @change="bindPickerChange" :value="index" :range="data" range-key="start_at">
-						<view class="uni-input">{{index}}.{{data[index].start_at}} 至 {{data[index].end_at}}</view>
+						<view class="uni-input">开始：{{data[index].start_at}}<br>结束：{{data[index].end_at}}</view>
 					</picker>
 				</view>
 			</view>
