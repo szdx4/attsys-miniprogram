@@ -50,7 +50,8 @@
 	        box-shadow: none;
 }
 .uni-popup-middle.uni-popup-fixed {
-	border-radius: 10rpx;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 	padding: 30rpx;
 }
 .uni-close-bottom,
@@ -58,7 +59,8 @@
 	position: absolute;
 	bottom: -180rpx;
 	text-align: center;
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
 	color: #f5f5f5;
 	font-size: 60rpx;
 	font-weight: bold;

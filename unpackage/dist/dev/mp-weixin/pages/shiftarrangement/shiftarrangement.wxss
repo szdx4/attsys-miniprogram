@@ -73,7 +73,8 @@ page {
 	padding: 10rpx 20rpx;
 	border: 1px rgba(0, 0, 0, 0.2) solid;
 	color: #333;
-	border-radius: 10rpx;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 	text-align: center;
 	margin: 10rpx;
 	background: #f8f8f8;

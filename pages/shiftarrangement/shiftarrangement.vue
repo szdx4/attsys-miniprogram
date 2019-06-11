@@ -10,11 +10,11 @@
 							没有班次安排
 						</view>
 						<view v-for="(item, index) in list" :key="index" class="uni-list-item">
-							<p style="margin-bottom: 20upx;">
+							<p style="margin-bottom: 7upx;height: 160upx;width: 380upx;text-align: left;">
 								排班类型：{{ item.type }}<br>
 								开始时间：{{ item.start_at }}<br>
 								结束时间：{{ item.end_at }}<br>
-								排班状态：{{ item.status }}<br>
+								签到状态：{{ item.status }}<br>
 							</p>
 						</view>
 					</scroll-view>

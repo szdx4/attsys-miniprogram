@@ -1,8 +1,6 @@
 <template>
     <view class="_content">
 		<scroll-view :scroll-y="true">
-			<view class="bottom-btn">
-			</view>
 			<uni-list v-for="(item, index) in message_list" :key="index">
 				<uni-list-item :title="item.title" :note="item.from.name" :id_1='item.id' @click="showMessage" ></uni-list-item>
 			</uni-list>
