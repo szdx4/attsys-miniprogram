@@ -117,7 +117,6 @@
 		},
 		methods: {
 			// 提交用户的图片修改
-<<<<<<< HEAD
 			submit(e) {
 				uni.chooseImage({
 					count: 1,
@@ -160,61 +159,6 @@
 						});
 					}
 				})
-=======
-			submit(e) {
-				var img_base64 = '';
-				if (this.isChanged){
-					// 先将图片base64编码
-					uni.getFileSystemManager().readFile({
-						filePath: this.imgSrc,
-						encoding: 'base64',
-						success: (encodeRes) => {
-							this.imgSrc = 'data:image/png;base64,' + encodeRes.data;
-							// console.log(this.imgSrc);
-							// 再将图片的base64上传到服务器
-							uni.request({
-								url: webSiteUrl + '/face/user/' + this.user_id,
-								header: {
-									'Authorization': 'Bearer '+ this.token,
-								},
-								data: {
-									info: this.imgSrc
-								},
-								method: 'POST',
-								success: (uploadRes) => {
-									console.log(uploadRes);
-									if (uploadRes.statusCode==201) {
-										console.log("上传成功");
-										this.imgSrcOld = this.imgSrc;
-										uni.showToast({
-											duration:2000,
-											title:'上传成功'
-										})
-									} else{
-										console.log("上传失败");
-										this.imgSrc = this.imgSrcOld;
-										uni.showToast({
-											duration:2000,
-											title:'上传失败'
-										})
-									}
-								},
-								fail: (errmsg) => {
-									console.log(errmsg);
-								}
-							})
-						},
-					})
-					
-				}
-				else {
-					console.log("还未上传图片")
-					uni.showToast({
-						duration:2000,
-						title:'您还未选择照片'
-					})
-				}
->>>>>>> 4112ca1894d06c19b5eac4c1d026e6ef81056726
 			},
 			showPanel(e) {
 				console.log(e);
