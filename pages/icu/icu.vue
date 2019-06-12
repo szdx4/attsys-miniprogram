@@ -65,20 +65,20 @@
 								console.log('request success');
 								console.log(res);
 								uni.showToast({title:"提交成功!", duration:2500, icon:"none"});
-								uni.navigateBack({
-								});
 								try{
-									uni.setStorageSync('canICU',false);
+									uni.setStorageSync('canICU', false);
 								}catch(e){
 									console.log('存储出现问题');
 								}
-							}
-							else{
+								uni.navigateBack({});
+							} else {
 								var errCode = (res.statusCode == undefined)?'连接失败':res.statusCode;
 								uni.showToast({title:"提交失败! "+errCode, icon:"none"});
+								uni.setStorageSync('canICU', true);
 							}
 						},
 						fail: (err) => {
+							uni.setStorageSync('canICU', true);
 							console.log(err);
 						}
 					});

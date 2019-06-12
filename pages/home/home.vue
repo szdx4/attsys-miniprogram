@@ -32,7 +32,7 @@
 			<button type="primary" class="primary" @tap="goLeave">申请/查看请假</button>
 		</view>
 		<view class="btn-row" v-if="canICU">
-			<button type="primary" class="primary" @tap="goICU">申请加班</button>
+			<button type="warn" @tap="goICU">申请加班</button>
 		</view>
 		<view class="btn-row">
 			<button type="primary" class="primary" @tap="goInfo">查看个人信息</button>
@@ -110,10 +110,15 @@
 			this.user_id = uni.getStorageSync('user_id');
 			this.messageSrc = '../../static/img/message_2.png';
 			// 存储控制加班按键的变量
-			try{
-				uni.setStorageSync('canICU',false);
-			}catch(e){
-				console.log('存储出现问题');
+			try {
+				const value = uni.getStorageSync('canICU');
+				if (value) {
+					this.canICU = true;
+				} else {
+					this.canICU = false;
+				}
+			} catch (e) {
+				this.canICU = false;
 			}
 			// 检查用户签到状态
 			uni.request({
@@ -127,12 +132,13 @@
 					if(res.statusCode==204){
 						this.check_message = "未签到";
 						this.IsNotcheck = true;
-					}
-					else if(res.statusCode==200){
+					} else if (res.statusCode == 200) {
 						uni.setStorageSync('sign_id', res.data.sign_id)
 						this.check_message = "已签到";
 						this.isNotCheck = false;
 						this.canCheckOff = true;
+						this.canICU = false;
+						uni.setStorageSync('canICU', false);
 						this.start_at = (new Date(res.data.shift.start_at)).toLocaleString('zh-CN', {
 							timeZone: 'Asia/Shanghai',
 							hour12: false
@@ -207,10 +213,15 @@
 			}
 		},
 		onShow:function(){
-			try{
-				this.canICU = uni.getStorageSync('canICU');
-			}catch(e){
-				console.log('存储出现问题');
+			try {
+				const value = uni.getStorageSync('canICU');
+				if (value) {
+					this.canICU = true;
+				} else {
+					this.canICU = false;
+				}
+			} catch (e) {
+				this.canICU = false;
 			}
 		},
 		methods:{
@@ -228,6 +239,7 @@
 			},
 			goICU(e){
 				console.log(e)
+				this.canICU = false
 				uni.navigateTo({
 					url: '../icu/icu'
 				});

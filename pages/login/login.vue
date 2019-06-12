@@ -16,7 +16,7 @@
 			</view>
 		</view>
         <view class="btn-row">
-            <button type="primary" class="primary" @tap="bindLogin">登录</button>
+            <button type="primary" @tap="bindLogin">登录</button>
         </view>
     </view>
 </template>
