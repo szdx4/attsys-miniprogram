@@ -50,6 +50,10 @@
 			var pages = 1;
 			var showInit = true;
 			this.data = [];
+			uni.showLoading({title: '加载中'});
+			setTimeout(function () {
+				uni.hideLoading();
+			}, 1500);
 			for (var i = 1; i <= pages; i++) {
 				uni.request({
 					url: webSiteUrl + '/leave/user/' + this.user_id + '?page=' + i,

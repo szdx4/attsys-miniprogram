@@ -142,6 +142,10 @@
 			this.user_id = uni.getStorageSync('user_id');
 			var pages = 1;
 			this.data = [];
+			uni.showLoading({title: '加载中'});
+			setTimeout(function () {
+				uni.hideLoading();
+			}, 1000);
 			for (var i = 1; i <= pages; i++) {
 				uni.request({
 					url: webSiteUrl + '/shift?user_id=' + this.user_id + '&page=' + i,

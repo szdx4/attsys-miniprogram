@@ -38,7 +38,7 @@
         },
 		onLoad:function(){
 			try{
-				// 检查是否储存过用户登陆信息
+				// 检查是否储存过用户登录信息
 				const res = uni.getStorageInfoSync();
 				if(res.keys[0] == 'userName'){
 					console.log("存储过该用户的信息");
@@ -60,24 +60,18 @@
 					}
 				}
 				else{
-					console.log("初次登陆！");
+					console.log("初次登录！");
 				}
 			}catch(e){
 				console.log(e);
 			}
 		},
         methods: {
-            initPosition() {
-                /**
-                 * 使用 absolute 定位，并且设置 bottom 值进行定位。软键盘弹出时，底部会因为窗口变化而被顶上来。
-                 * 反向使用 top 进行定位，可以避免此问题。
-                 */
-                this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
-            },
             bindLogin(e) {
                 if (this.account.length < 3) {
                     uni.showToast({
                         duration:2000,
+						icon:'none',
                         title: '账号最短为 3 个字符'
                     });
                     return;
@@ -85,12 +79,14 @@
                 if (this.password.length < 4) {
                     uni.showToast({
                         duration:2000,
+						icon:'none',
                         title: '密码最短为 4 个字符'
                     });
                     return;
                 }
                 // 检测用户账号密码是否在已注册的用户列表中
 				var token;
+				uni.showLoading({title: '登录中'});
 				uni.request({
 					url: webSiteUrl+'user/auth',
 					method: 'POST',
@@ -135,7 +131,7 @@
 							// 将expired_at格式化
 							// expired_at_init=new Date(expired_at_init)
 							// let expired_at = Date.UTC(expired_at_init.getYear(),expired_at_init.getMonth(),expired_at_init.getDay(),expired_at_init.getHours(),expired_at_init.getMinutes(),expired_at_init.getSeconds());
-							// 存储用户登陆信息到本地
+							// 存储用户登录信息到本地
 							try{
 								uni.setStorageSync('userName',userName);
 								uni.setStorageSync('token',token);
@@ -144,10 +140,12 @@
 							}catch(e){
 								console.log("存储出现问题");
 							}
+							uni.hideLoading();
 						    uni.redirectTo({
 						    	url: '../home/home'
 						    });
 						} else {
+							uni.hideLoading();
 						    uni.showToast({
 						        icon: 'none',
 						        title: '用户账号或密码不正确',
@@ -155,7 +153,11 @@
 						}
 					},
 					fail: () => {
-						console.log("登陆认证失败");
+						uni.hideLoading();
+						uni.showToast({
+						    icon: 'none',
+						    title: '登录认证失败',
+						});
 					}
 				});
             },

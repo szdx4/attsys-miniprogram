@@ -91,27 +91,49 @@
 			this.role = uni.getStorageSync('role');
 			this.hours = uni.getStorageSync('hours');
 			// 向服务器请求获取用户人脸信息
-			// uni.request({
-			// 	url: webSiteUrl + '/face/user/' + this.user_id,
-			// 	header: {
-			// 		'Authorization': 'Bearer '+ this.token,
-			// 	},
-			// 	method: 'GET',
-			// 	success: (res) => {
-			// 		if (res.statusCode==200) {
-			// 			console.log(res);
-			// 			console.log("获取用户图片成功");
-			// 			if (res.data.data.status=="available") {
-			// 				this.imgSrc = res.data.data.info;  // 服务器给的图片base64码，可以在image标签中直接解析
-			// 			}
-			// 			else {
-			// 				console.log("用户图片暂时不可用")
-			// 			}
-			// 		} else{
-			// 			console.log("获取用户图片失败");
-			// 		}
-			// 	},
-			// });
+			uni.showLoading({title: '图片加载中'});
+			uni.request({
+				url: webSiteUrl + '/face/user/' + this.user_id,
+				header: {
+					'Authorization': 'Bearer '+ this.token,
+				},
+				method: 'GET',
+				success: (res) => {
+					if (res.statusCode==200) {
+						console.log(res);
+						console.log("获取用户图片成功");
+						if (res.data.data.status=="available") {
+							this.imgSrc = res.data.data.info;  // 服务器给的图片base64码，可以在image标签中直接解析
+							uni.hideLoading();
+						}
+						else {
+							uni.hideLoading();
+							uni.showToast({
+								duration:2000,
+								icon:'none',
+								title:'暂时没有可用人脸图片'
+							})
+						}
+					} else{
+						uni.hideLoading();
+						console.log("获取用户图片失败");
+						uni.showToast({
+							duration:2000,
+							icon:'none',
+							title:'人脸图片获取失败'
+						})
+					}
+					
+				},
+				fail() {
+					uni.hideLoading();
+					uni.showToast({
+						duration:2000,
+						icon:'none',
+						title:'图片加载失败'
+					})
+				}
+			});
 		},
 		methods: {
 			// 提交用户的图片修改
@@ -125,6 +147,7 @@
 							entry.file((file) => {
 								var reader = new plus.io.FileReader();
 								reader.onloadend = ({ target: { result } }) => {
+									uni.showLoading({title: '图片上传中'});
 									uni.request({
 										url: webSiteUrl + '/face/user/' + this.user_id,
 										header: {
@@ -137,18 +160,29 @@
 										success: (res) => {
 											console.log(res);
 											if (res.statusCode == 201) {
+												uni.hideLoading();
 												console.log("上传成功");
 												uni.showToast({
 													duration:2000,
 													title:'上传成功'
 												})
 											} else {
+												uni.hideLoading();
 												console.log("上传失败");
 												uni.showToast({
 													duration:2000,
+													icon:'none',
 													title:'上传失败'
 												})
 											}
+										},
+										fail() {
+											uni.hideLoading();
+											uni.showToast({
+												duration:2000,
+												icon:'none',
+												title:'上传失败'
+											})
 										}
 									});
 								};
@@ -184,6 +218,7 @@
 				} else {
 					// 判断两次新密码是否相同
 					if (this.newpwd_1 == this.newpwd_2) {
+						uni.showLoading({title: '修改请求中'});
 						uni.request({
 							url: webSiteUrl + '/user/' + this.user_id + '/password',
 							header: {
@@ -196,6 +231,7 @@
 							method: 'PUT',
 							success: (res) => {
 								if (res.statusCode == 200) {
+									uni.hideLoading();
 									uni.showToast({
 										duration:2000,
 										title:'修改密码成功'
@@ -211,16 +247,20 @@
 										url: '../login/login'
 									});
 								} else{
+									uni.hideLoading();
 									uni.showToast({
 										duration:2000,
+										icon:'none',
 										title:'修改密码失败'
 									})
 									console.log('修改密码请求提交失败');
 								}
 							},
 							fail() {
+								uni.hideLoading();
 								uni.showToast({
 									duration:2000,
+									icon:'none',
 									title:'修改密码失败'
 								})
 								console.log('修改密码请求提交失败');
@@ -229,6 +269,7 @@
 					} else{
 						uni.showToast({
 							duration:2000,
+							icon:'none',
 							title:'两次输入的新密码不一致'
 						})
 					}

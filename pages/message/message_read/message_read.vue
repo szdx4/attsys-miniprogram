@@ -97,6 +97,10 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			var that = this;
+			uni.showLoading({title: '加载中'});
+			setTimeout(function () {
+				uni.hideLoading();
+			}, 1500);
 			queryReadMessage(that);
 		},
 		onPullDownRefresh() {
@@ -111,9 +115,7 @@
 			showMessage(e) {
 				console.log(e)
 				var messageId = e.currentTarget.dataset.one;
-				this.message_title = 'test title';
-				this.message_from = 'tom';
-				this.message_content = messageId + 'test contenttest contenttest contenttest contenttest contenttest content';
+				uni.showLoading({title: '加载中'});
 				uni.request({
 					url: webSiteUrl + '/message/' + messageId,
 					method: 'GET',
@@ -121,12 +123,14 @@
 						'Authorization': 'Bearer '+ this.token,
 					},
 					success: (res) => {
+						uni.hideLoading();
 						console.log(res);
 						this.message_title = res.data.data.title;
 						this.message_from = res.data.data.from.name;
 						this.message_content = res.data.data.content;
 					},
 					fail() {
+						uni.hideLoading();
 						console.log(查询失败);
 					}
 				})

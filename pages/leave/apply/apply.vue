@@ -141,6 +141,7 @@
 				//输入通过
 				else
 				{
+					uni.showLoading({title: '申请提交中'});
 					uni.request({
 						url: webSiteUrl + '/leave/user/' + this.user_id,
 						data: {
@@ -157,14 +158,20 @@
 						success: (res) => {
 							console.log(res);
 							if(res.statusCode == 201){
+								uni.hideLoading();
 								console.log('request success');
 								console.log(res.data);
-								uni.showToast({title:"验证通过!", icon:"none"});
+								uni.showToast({title:"提交成功", duration:2000});
 							}
 							else{
+								uni.hideLoading();
 								var errCode = (res.statusCode == undefined)?'连接失败':res.statusCode;
-								uni.showToast({title:"提交失败! "+errCode, icon:"none"});
+								uni.showToast({title:"提交失败! "+errCode, icon:"none",duration:2000});
 							}
+						},
+						fail() {
+							uni.hideLoading();
+							uni.showToast({title:"提交失败! "+errCode, icon:"none",duration:2000});
 						}
 					});
 				}

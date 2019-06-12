@@ -79,58 +79,6 @@
 				message_title:'',
 				message_from:'',
 				message_list: [
-					{
-						"id": 1,
-						"from": {
-							"id": 1,
-							"name": "test",
-						},
-						"to": {
-							"id": 2,
-							"name": "test2",
-						},
-						"title": "test title",
-						"status": "unread"
-					},
-					{
-						"id": 1,
-						"from": {
-							"id": 1,
-							"name": "test3",
-						},
-						"to": {
-							"id": 2,
-							"name": "test4",
-						},
-						"title": "test title2",
-						"status": "unread"
-					},
-					{
-						"id": 1,
-						"from": {
-							"id": 1,
-							"name": "test",
-						},
-						"to": {
-							"id": 2,
-							"name": "test2",
-						},
-						"title": "test title",
-						"status": "unread"
-					},
-					// {
-					// 	"id": 1,
-					// 	"from": {
-					// 		"id": 1,
-					// 		"name": "test3",
-					// 	},
-					// 	"to": {
-					// 		"id": 2,
-					// 		"name": "test4",
-					// 	},
-					// 	"title": "test title2",
-					// 	"status": "unread"
-					// },
 					// {
 					// 	"id": 1,
 					// 	"from": {
@@ -168,45 +116,6 @@
 					// 		"name": "test2",
 					// 	},
 					// 	"title": "test title",
-					// 	"status": "unread"
-					// },
-					// {
-					// 	"id": 1,
-					// 	"from": {
-					// 		"id": 1,
-					// 		"name": "test3",
-					// 	},
-					// 	"to": {
-					// 		"id": 2,
-					// 		"name": "test4",
-					// 	},
-					// 	"title": "test title2",
-					// 	"status": "unread"
-					// },
-					// {
-					// 	"id": 1,
-					// 	"from": {
-					// 		"id": 1,
-					// 		"name": "test",
-					// 	},
-					// 	"to": {
-					// 		"id": 2,
-					// 		"name": "test2",
-					// 	},
-					// 	"title": "test title",
-					// 	"status": "unread"
-					// },
-					// {
-					// 	"id": 1,
-					// 	"from": {
-					// 		"id": 1,
-					// 		"name": "test3",
-					// 	},
-					// 	"to": {
-					// 		"id": 2,
-					// 		"name": "test4",
-					// 	},
-					// 	"title": "test title2",
 					// 	"status": "unread"
 					// }
 				],
@@ -218,6 +127,10 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			var that = this;
+			uni.showLoading({title: '加载中'});
+			setTimeout(function () {
+				uni.hideLoading();
+			}, 1500);
 			queryUnreadMessage(that);
 		},
 		onPullDownRefresh() {
@@ -233,6 +146,7 @@
 				console.log(e)
 				var messageId = e.currentTarget.dataset.one;
 				var id = e.currentTarget.dataset.two;
+				uni.showLoading({title: '加载中'});
 				uni.request({
 					url: webSiteUrl + '/message/' + messageId,
 					method: 'GET',
@@ -241,6 +155,7 @@
 					},
 					success: (res) => {
 						if (res.statusCode == 200) {
+							uni.hideLoading();
 							this.message_title = res.data.data.title;
 							this.message_from = res.data.data.from.name;
 							this.message_content = res.data.data.content;
@@ -255,6 +170,7 @@
 								}
 							}
 						} else{
+							uni.hideLoading();
 							uni.showToast({
 								icon:'none',
 								title:"获取消息失败",
@@ -263,7 +179,13 @@
 						}
 					},
 					fail() {
+						uni.hideLoading();
 						console.log(查询失败);
+						uni.showToast({
+							icon:'none',
+							title:"获取消息失败",
+							duration:2000
+						})
 					}
 				})
 				this.isShowPopup = true;
@@ -280,6 +202,10 @@
 							if (choose_res.confirm) {
 								console.log('用户点击确定');
 								// 将所有消息通过api接口标记为read
+								uni.showLoading({title: '清除中'});
+								setTimeout(function () {
+									uni.hideLoading();
+								}, 1500);
 								for (var i = 0; i < this.message_list.length; i++) {
 									uni.request({
 										url: webSiteUrl + '/message/' + this.message_list[i].id,
