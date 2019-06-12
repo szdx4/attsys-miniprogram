@@ -56,6 +56,7 @@
 				// console.log('计时器：',res);
 				if (res.statusCode==200) {
 					// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
+					uni.vibrateLong();
 					uni.showModal({
 						title: '提示',
 						content: '您有新消息了，请前往查看',
@@ -194,6 +195,7 @@
 					// 如果当前时间距离上班时间半个小时，则提醒用户
 					var time_interval = ( ( (new Date(that.start_shift)) - (new Date()) ) / 1000 / 60 );
 					if (time_interval < 30) {
+						uni.vibrateLong();
 						uni.showModal({
 							title: '提示',
 							content: '距离上班时间还有：' + Math.floor(time_interval) + "分钟",
@@ -203,7 +205,7 @@
 					}
 				}
 				// 设置计时器的间隔，为了方便调试设为30s，单位为ms
-			},30000,that);
+			},10000,that);
         },
 		// 当退出小程序的时候，关闭计时器
 		onUnload:function(){
