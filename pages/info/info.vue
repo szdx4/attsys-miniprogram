@@ -100,8 +100,8 @@
 				method: 'GET',
 				success: (res) => {
 					if (res.statusCode==200) {
-						console.log(res);
-						console.log("获取用户图片成功");
+						// console.log(res);
+						// console.log("获取用户图片成功");
 						if (res.data.data.status=="available") {
 							this.imgSrc = res.data.data.info;  // 服务器给的图片base64码，可以在image标签中直接解析
 							uni.hideLoading();
@@ -116,7 +116,7 @@
 						}
 					} else{
 						uni.hideLoading();
-						console.log("获取用户图片失败");
+						// console.log("获取用户图片失败");
 						uni.showToast({
 							duration:2000,
 							icon:'none',
@@ -158,17 +158,17 @@
 										},
 										method: 'POST',
 										success: (res) => {
-											console.log(res);
+											// console.log(res);
 											if (res.statusCode == 201) {
 												uni.hideLoading();
-												console.log("上传成功");
+												// console.log("上传成功");
 												uni.showToast({
 													duration:2000,
 													title:'上传成功'
 												})
 											} else {
 												uni.hideLoading();
-												console.log("上传失败");
+												// console.log("上传失败");
 												uni.showToast({
 													duration:2000,
 													icon:'none',
@@ -193,7 +193,7 @@
 				})
 			},
 			showPanel(e) {
-				console.log(e);
+				// console.log(e);
 				this.oldpwd = '';
 				this.newpwd_1 = '';
 				this.newpwd_2 = '';
@@ -236,12 +236,12 @@
 										duration:2000,
 										title:'修改密码成功'
 									})
-									console.log('修改密码请求提交成功');
+									// console.log('修改密码请求提交成功');
 									// 修改密码成功，则清除缓存，重新登陆
 									try {
 										uni.clearStorageSync();
 									} catch (e) {
-										console.log(e);
+										// console.log(e);
 									}
 									uni.redirectTo({
 										url: '../login/login'
@@ -253,7 +253,7 @@
 										icon:'none',
 										title:'修改密码失败'
 									})
-									console.log('修改密码请求提交失败');
+									// console.log('修改密码请求提交失败');
 								}
 							},
 							fail() {
@@ -263,7 +263,7 @@
 									icon:'none',
 									title:'修改密码失败'
 								})
-								console.log('修改密码请求提交失败');
+								// console.log('修改密码请求提交失败');
 							}
 						})
 					} else{

@@ -112,8 +112,8 @@
 				// end = end.replace(/-/g,"\/");
 				var begin = new Date(this.date);
 				var end = new Date(this.dateend);
-				console.log(begin);
-				console.log(end);
+				// console.log(begin);
+				// console.log(end);
 				var today = new Date()
 				//将下列代码加入到对应的检查位置
 				//定义表单规则
@@ -156,11 +156,11 @@
 							'Authorization': 'Bearer '+ this.token
 						},
 						success: (res) => {
-							console.log(res);
+							// console.log(res);
 							if(res.statusCode == 201){
 								uni.hideLoading();
-								console.log('request success');
-								console.log(res.data);
+								// console.log('request success');
+								// console.log(res.data);
 								uni.showToast({title:"提交成功", duration:2000});
 							}
 							else{

@@ -41,7 +41,7 @@
 				// 检查是否储存过用户登录信息
 				const res = uni.getStorageInfoSync();
 				if(res.keys[0] == 'userName'){
-					console.log("存储过该用户的信息");
+					// console.log("存储过该用户的信息");
 					// 检查token是否到期
 					let expired_at = new Date(uni.getStorageSync('expired_at'));
 					let current_time = new Date();
@@ -51,19 +51,19 @@
 						});
 					}
 					else{
-						console.log("token过期，清除缓存");
+						// console.log("token过期，清除缓存");
 						try {
 							uni.clearStorageSync();
 						} catch (e) {
-							console.log(e);
+							// console.log(e);
 						}
 					}
 				}
 				else{
-					console.log("初次登录！");
+					// console.log("初次登录！");
 				}
 			}catch(e){
-				console.log(e);
+				// console.log(e);
 			}
 		},
         methods: {
@@ -125,7 +125,7 @@
 							}
 							// 上面的方法转自https://blog.csdn.net/u012369749/article/details/73784897
 							let key_info_obj = JSON.parse(key_info_str);
-							console.log(key_info_obj);
+							// console.log(key_info_obj);
 							let user_id = key_info_obj.id;
 							let expired_at = key_info_obj.expired_at;
 							// 将expired_at格式化
@@ -138,7 +138,7 @@
 								uni.setStorageSync('expired_at',expired_at);
 								uni.setStorageSync('user_id',user_id);
 							}catch(e){
-								console.log("存储出现问题");
+								// console.log("存储出现问题");
 							}
 							uni.hideLoading();
 						    uni.redirectTo({

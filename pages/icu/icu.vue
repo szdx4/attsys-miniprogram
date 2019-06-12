@@ -60,15 +60,15 @@
 							'content-type': 'application/json',// 也有可能是application/x-www-form-urlencoded
 						},
 						success: (res) => {
-							console.log(res);
+							// console.log(res);
 							if(res.statusCode == 201){
-								console.log('request success');
-								console.log(res);
+								// console.log('request success');
+								// console.log(res);
 								uni.showToast({title:"提交成功!", duration:2500, icon:"none"});
 								try{
 									uni.setStorageSync('canICU', false);
 								}catch(e){
-									console.log('存储出现问题');
+									// console.log('存储出现问题');
 								}
 								uni.navigateBack({});
 							} else {
@@ -79,7 +79,7 @@
 						},
 						fail: (err) => {
 							uni.setStorageSync('canICU', true);
-							console.log(err);
+							// console.log(err);
 						}
 					});
 					
@@ -88,7 +88,7 @@
 				}
 			},
 			formReset: function (e) {
-				console.log("清空数据")
+				// console.log("清空数据")
 				this.chosen = ''
 			}
 		}

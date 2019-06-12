@@ -54,7 +54,7 @@
 			},
 			method: 'GET',
 			success: (res) => {
-				console.log('计时器：',res);
+				// console.log('计时器：',res);
 				if (res.statusCode==200) {
 					// unread消息不为空，则提醒用户有新消息，用户点击确认后，关闭计时器
 					uni.showModal({
@@ -63,20 +63,20 @@
 						showCancel:false,
 						success: function (res) {
 							if (res.confirm) {
-								console.log('用户点击确定');
+								// console.log('用户点击确定');
 							}
 						}
 					});
-					// 将localstorage中的start_query_unread_message设置未false，即停止查询
+					// 将localstorage中的start_query_unread_message设置为false，即停止查询
 					try{
 						uni.setStorageSync('start_query_unread_message',false);
 					}catch(e){
-						console.log("存储出现问题");
+						// console.log("存储出现问题");
 					}
 				} else if (res.statusCode==204) {
-					console.log("无未读信息");
+					// console.log("无未读信息");
 				} else {
-					console.log("系统通知信息获取失败");
+					// console.log("系统通知信息获取失败");
 				}
 			}
 		});
@@ -128,7 +128,7 @@
 				},
 				method: 'GET',
 				success:(res) => {
-					console.log(res);
+					// console.log(res);
 					if(res.statusCode==204){
 						this.check_message = "未签到";
 						this.IsNotcheck = true;
@@ -162,7 +162,7 @@
 				method:'GET',
 				success: res=> {
 					if (res.statusCode==200) {
-						console.log("获取用户信息成功");
+						// console.log("获取用户信息成功");
 						// 存储用户信息到本地
 						try{
 							uni.setStorageSync('name',res.data.data.name);
@@ -170,10 +170,10 @@
 							uni.setStorageSync('role',res.data.data.role);
 							uni.setStorageSync('hours',res.data.data.hours);
 						}catch(e){
-							console.log("存储出现问题");
+							// console.log("存储出现问题");
 						}
 					} else{
-						console.log("获取用户信息失败");
+						// console.log("获取用户信息失败");
 					}
 				}
 			});
@@ -181,7 +181,7 @@
 			try{
 				uni.setStorageSync('start_query_unread_message',true);
 			}catch(e){
-				console.log("存储出现问题");
+				// console.log("存储出现问题");
 			}
 			// （页面加载时）查询一次用户是否有unread消息
 			var that = this;
@@ -195,12 +195,12 @@
 			* 停止计时器：页面unload时
 			* 
 			*/
-			console.log('开启计时器');
+			// console.log('开启计时器');
 			this.messageIntervalID = setInterval(function(that){
 				if (uni.getStorageSync('start_query_unread_message')) {
 					hasUnreadMessage(that);
 				} else {
-					console.log("上次的新信息还没处理完");
+					// console.log("上次的新信息还没处理完");
 				}
 			},60000,that);
         },
@@ -209,7 +209,7 @@
 			if(this.messageIntervalID != -1) {
 				clearInterval(this.messageIntervalID);
 				this.messageIntervalID = -1;
-				console.log('关闭计时器');
+				// console.log('关闭计时器');
 			}
 		},
 		onShow:function(){
@@ -226,26 +226,22 @@
 		},
 		methods:{
 			goShiftArrangement(e) {
-				console.log(e)
 				uni.navigateTo({
 					url: '../shiftarrangement/shiftarrangement'
 				});
 			},
 			goLeave(e){
-				console.log(e)
 				uni.navigateTo({
 					url: '../leave/apply/apply'
 				});
 			},
 			goICU(e){
-				console.log(e)
 				this.canICU = false
 				uni.navigateTo({
 					url: '../icu/icu'
 				});
 			},
 			goInfo(e){
-				console.log(e)
 				uni.navigateTo({
 					url: '../info/info'
 				});
@@ -255,7 +251,7 @@
 				uni.scanCode({
 					onlyFromCamera: true,
 					success: (res) => {
-						console.log('条码内容：' + res.result);
+						// console.log('条码内容：' + res.result);
 						this.check_token = res.result;
 						// 通过二维码获得的token，向服务器签到
 						uni.request({
@@ -268,15 +264,15 @@
 								token: this.check_token
 							},
 							success: res => {
-								console.log(res);
+								// console.log(res);
 								try{
 									if (res.statusCode==200) {
-										console.log("签到成功");
+										// console.log("签到成功");
 										// 存储sign_id到本地
 										try{
 											uni.setStorageSync('sign_id',res.data.sign_id);
 										}catch(e){
-											console.log("sign_id存储出现问题");
+											// console.log("sign_id存储出现问题");
 										}
 										uni.showToast({
 											duration:2000,
@@ -285,31 +281,39 @@
 										this.start_at = res.data.shift.start_at;
 										this.end_at = res.data.shift.end_at;
 									} else{
-										console.log("签到失败");
+										// console.log("签到失败");
 										uni.showToast({
 											duration:2000,
+											icon:'none',
 											title:'签到失败'
 										})
 									}
 								}catch(e){
-									console.log("签到失败:",e);
+									// console.log("签到失败:",e);
 									uni.showToast({
 										duration:2000,
+										icon:'none',
 										title:'签到失败'
 									})
 								}
 							},
 							fail() {
-								console.log("接口调用失败");
+								// console.log("接口调用失败");
 								uni.showToast({
 									duration:2000,
+									icon:'none',
 									title:'签到失败'
 								})
 							}
 						})
 					},
 					fail() {
-						console.log("扫码失败");
+						// console.log("扫码失败");
+						uni.showToast({
+							duration:2000,
+							icon:'none',
+							title:'签到失败'
+						})
 					},
 					complete() {
 						// 刷新home页面
@@ -320,7 +324,6 @@
 				});
 			},
 			goMessage(e){
-				console.log(e)
 				uni.navigateTo({
 					url: '../message/message'
 				});
@@ -346,21 +349,23 @@
 							try{
 								uni.setStorageSync('canICU',true);
 							}catch(e){
-								console.log('存储出现问题');
+								// console.log('存储出现问题');
 							}
 						}
 						else{
-							console.log("签退失败");
+							// console.log("签退失败");
 							uni.showToast({
 								duration:2000,
+								icon:'none',
 								title:'签退失败'
 							})
 						}
 					},
 					fail() {
-						console.log("签退失败");
+						// console.log("签退失败");
 						uni.showToast({
 							duration:2000,
+							icon:'none',
 							title:'签退失败'
 						})
 					}

@@ -154,25 +154,25 @@
 					},
 					method: 'GET',
 					success: (res) => {
-						console.log(res);
+						// console.log(res);
 						if (res.statusCode==200) {
 							if (res.data.total != 0) {
 								pages = Math.ceil(res.data.total / res.data.per_page);
 								// 将得到的数组加入data中
 								this.data.push.apply(this.data,res.data.data);
-								console.log('request success');
+								// console.log('request success');
 							} else{
 								uni.showToast({
 									title:'无排班信息',
 									icon:'none',
 									duration:2000
 								})
-								console.log("无排班信息")
+								// console.log("无排班信息")
 							}
 						} else if (res.statusCode==204) {
-							console.log("无排班信息")
+							// console.log("无排班信息")
 						} else {
-							console.log("排班信息获取失败")
+							// console.log("排班信息获取失败")
 						}
 					}
 				});
@@ -183,12 +183,12 @@
 				this.show = false
 			},
 			change(e) {
-				console.log('change 返回:', e.fulldate)
+				// console.log('change 返回:', e.fulldate)
 				this.timeData = e
 			},
 			toClick(e) {
 				this.list = [];
-				console.log('点击事件', e.fulldate)
+				// console.log('点击事件', e.fulldate)
 				this.popUp = 'true'
 
 				for (var i in this.data) {
@@ -219,7 +219,7 @@
 						} else {
 							data.status = d.status;
 						}
-						console.log(data);
+						// console.log(data);
 						this.list.push(data);
 					}
 				}

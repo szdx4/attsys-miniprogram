@@ -62,9 +62,9 @@
 					},
 					method: 'GET',
 					success: (res) => {
-						console.log(res);
+						// console.log(res);
 						if (res.statusCode == 200) {
-							console.log('request success');
+							// console.log('request success');
 							if (res.data.total != 0) {
 								this.haveWorkOff = true;
 								pages = Math.ceil(res.data.total / res.data.per_page);
@@ -80,11 +80,11 @@
 									title:'无请假信息',
 									duration:2000
 								})
-								console.log("无请假信息")
+								// console.log("无请假信息")
 							}
 							// 显示第一个请假项目的信息
 							if (showInit) {
-								console.log(this.data.length);
+								// console.log(this.data.length);
 								if (this.data.length > 0) {
 									this.datebegin = this.data[this.index].start_at;
 									this.dateend = this.data[this.index].end_at
@@ -109,7 +109,7 @@
 						}
 					},
 					fail() {
-						console.log('请假信息获取失败')
+						// console.log('请假信息获取失败')
 					}
 				});
 			}
@@ -172,7 +172,7 @@
 				});
 			},
 			bindPickerChange: function(e) {
-				console.log('picker发送选择改变，携带值为（同样为index值）：' + e.target.value);
+				// console.log('picker发送选择改变，携带值为（同样为index值）：' + e.target.value);
 				this.index = e.target.value;
 				this.datebegin = this.data[this.index].start_at;
 				this.dateend = this.data[this.index].end_at;

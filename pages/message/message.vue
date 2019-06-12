@@ -39,7 +39,7 @@
 				},
 				method: 'GET',
 				success: (res) => {
-					console.log(res);
+					// console.log(res);
 					if (res.statusCode==200) {
 						if (res.data.total != 0) {
 							pages = Math.ceil(res.data.total / res.data.per_page);
@@ -51,13 +51,30 @@
 								icon:'none',
 								duration:2000
 							})
-							console.log("无未读信息")
+							// console.log("无未读信息")
 						}
 					} else if (res.statusCode==204) {
-						console.log("无系统通知信息")
+						uni.showToast({
+							title:'无未读信息',
+							icon:'none',
+							duration:2000
+						})
+						// console.log("无系统通知信息")
 					} else {
-						console.log("系统通知信息获取失败")
+						// console.log("系统通知信息获取失败")
+						uni.showToast({
+							title:'未读信息获取失败',
+							icon:'none',
+							duration:2000
+						})
 					}
+				},
+				fail() {
+					uni.showToast({
+						title:'未读信息获取失败',
+						icon:'none',
+						duration:2000
+					})
 				}
 			});
 		}
@@ -134,7 +151,7 @@
 			queryUnreadMessage(that);
 		},
 		onPullDownRefresh() {
-			console.log('refresh');
+			// console.log('refresh');
 			var that = this;
 			queryUnreadMessage(that);
 			setTimeout(function () {
@@ -143,7 +160,7 @@
 		},
 		methods:{
 			showMessage(e) {
-				console.log(e)
+				// console.log(e)
 				var messageId = e.currentTarget.dataset.one;
 				var id = e.currentTarget.dataset.two;
 				uni.showLoading({title: '加载中'});
@@ -166,7 +183,7 @@
 								try{
 									uni.setStorageSync('start_query_unread_message',true);
 								}catch(e){
-									console.log("存储出现问题");
+									// console.log("存储出现问题");
 								}
 							}
 						} else{
@@ -180,7 +197,7 @@
 					},
 					fail() {
 						uni.hideLoading();
-						console.log(查询失败);
+						// console.log(查询失败);
 						uni.showToast({
 							icon:'none',
 							title:"获取消息失败",
@@ -200,7 +217,7 @@
 						content: '是否确定清除',
 						success: (choose_res) => {
 							if (choose_res.confirm) {
-								console.log('用户点击确定');
+								// console.log('用户点击确定');
 								// 将所有消息通过api接口标记为read
 								uni.showLoading({title: '清除中'});
 								setTimeout(function () {
@@ -221,14 +238,14 @@
 								try{
 									uni.setStorageSync('start_query_unread_message',true);
 								}catch(e){
-									console.log("存储出现问题");
+									// console.log("存储出现问题");
 								}
 								uni.showToast({
 									title: '清除成功',
 									duration:2000
 								})
 							} else {
-								console.log('用户点击取消');
+								// console.log('用户点击取消');
 							}
 						}
 					});

@@ -35,7 +35,7 @@
 				},
 				method: 'GET',
 				success: (res) => {
-					console.log(res);
+					// console.log(res);
 					if (res.statusCode==200) {
 						if (res.data.total != 0) {
 							pages = Math.ceil(res.data.total / res.data.per_page);
@@ -47,13 +47,30 @@
 								icon:'none',
 								duration:2000
 							})
-							console.log("无未读信息")
+							// console.log("无未读信息")
 						}
 					} else if (res.statusCode==204) {
-						console.log("无系统通知信息")
+						uni.showToast({
+							title:'无已读信息',
+							icon:'none',
+							duration:2000
+						})
+						// console.log("无系统通知信息")
 					} else {
-						console.log("系统通知信息获取失败")
+						// console.log("系统通知信息获取失败")
+						uni.showToast({
+							title:'已读信息获取失败',
+							icon:'none',
+							duration:2000
+						})
 					}
+				},
+				fail() {
+					uni.showToast({
+						title:'已读信息获取失败',
+						icon:'none',
+						duration:2000
+					})
 				}
 			});
 		}
@@ -104,7 +121,7 @@
 			queryReadMessage(that);
 		},
 		onPullDownRefresh() {
-			console.log('refresh');
+			// console.log('refresh');
 			var that = this;
 			queryReadMessage(that);
 			setTimeout(function () {
@@ -113,7 +130,7 @@
 		},
 		methods:{
 			showMessage(e) {
-				console.log(e)
+				// console.log(e)
 				var messageId = e.currentTarget.dataset.one;
 				uni.showLoading({title: '加载中'});
 				uni.request({
@@ -124,14 +141,19 @@
 					},
 					success: (res) => {
 						uni.hideLoading();
-						console.log(res);
+						// console.log(res);
 						this.message_title = res.data.data.title;
 						this.message_from = res.data.data.from.name;
 						this.message_content = res.data.data.content;
 					},
 					fail() {
 						uni.hideLoading();
-						console.log(查询失败);
+						uni.showToast({
+							icon:'none',
+							duration:2000,
+							title:"查看失败"
+						})
+						// console.log(查询失败);
 					}
 				})
 				this.isShowPopup = true;
