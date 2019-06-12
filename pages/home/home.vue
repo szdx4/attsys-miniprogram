@@ -44,9 +44,8 @@
 	import webSiteUrl from '../../common/webSiteUrl.js'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	
-	// 设置计时器查询是否有unread的消息,第二个参数单位是ms
+	// 向服务器查询是否有unread消息
 	function hasUnreadMessage(that){
-		// 向服务器查询unread消息
 		uni.request({
 			url: webSiteUrl + 'message?to_user_id=' + that.user_id + '&status=unread&page=' + 1,
 			header:{
@@ -61,11 +60,6 @@
 						title: '提示',
 						content: '您有新消息了，请前往查看',
 						showCancel:false,
-						success: function (res) {
-							if (res.confirm) {
-								// console.log('用户点击确定');
-							}
-						}
 					});
 					// 将localstorage中的start_query_unread_message设置为false，即停止查询
 					try{
@@ -101,6 +95,8 @@
 				canCheckOff:false,
 				messageSrc:'../../static/img/message.png',
 				messageIntervalID:-1,
+				canWarn:false,
+				start_shift:new Date()
 			}
 		},
         onLoad: function(){
@@ -129,10 +125,43 @@
 							// console.log("存储出现问题");
 						}
 					} else{
-						// console.log("获取用户信息失败");
+						uni.showToast({
+							icon:'none',
+							duration: 2000,
+							title: '用户信息获取失败'
+						});
 					}
 				}
 			});
+			// 获取用户今日排班，若有status为no的排班则将控制是否 判断提醒用户的变量设置为 true
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = today.getMonth();
+			var day = today.getDate();
+			var today_start_at = (new Date(year,month,day,0,0,0)).toJSON();
+			var today_end_at = (new Date(year,month,day,23,59,59)).toJSON();
+			// console.log(today_start_at);
+			// console.log(today_end_at);
+			uni.request({
+				url: webSiteUrl + '/shift?user_id=' + this.user_id + '&start_at=' + today_start_at + '&end_at=' + today_end_at + '&page=' + 1,
+				header: {
+					'Authorization': 'Bearer '+ this.token,
+				},
+				method:'GET',
+				success: (res) => {
+					if (res.statusCode == 200){
+						if (res.data.total != 0){
+							for (var i = 0; i < res.data.data.length; i++) {
+								if (res.data.data[i].status == 'no') {
+									this.canWarn = true;
+									this.start_shift = (new Date(res.data.data[i].start_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
+									break;
+								}
+							}
+						}
+					}
+				}
+			})
 			// 存储是否控制是否查询的变量
 			try{
 				uni.setStorageSync('start_query_unread_message',true);
@@ -143,22 +172,38 @@
 			var that = this;
 			hasUnreadMessage(that);
 			/** 
-			* 开启计时器，每隔 60s，利用localstorage中的变量start_query_unread_message判断是否进行查询。
-			*	停止查询的条件:
+			* ·开启计时器，每隔 60s，利用localstorage中的变量start_query_unread_message判断是否进行查询。
+			*	·停止查询的条件:
 			*		上一次查询查到有unread信息
-			*	重新开始查询的条件：
+			*	·重新开始查询的条件：
 			* 		在message页面将unread全部“查看”
-			* 停止计时器：页面unload时
+			* ·停止计时器：页面unload时
+			* ·计时器的功能：
+			* 	·是否有未读消息
+			* 	·是否即将到上班时间
 			* 
 			*/
-			// console.log('开启计时器');
 			this.messageIntervalID = setInterval(function(that){
 				if (uni.getStorageSync('start_query_unread_message')) {
-					hasUnreadMessage(that);
+					// hasUnreadMessage(that);
 				} else {
 					// console.log("上次的新信息还没处理完");
 				}
-			},60000,that);
+				// 有未签到班次的时候判断是否需要提醒用户上班时间
+				if (that.canWarn) {
+					// 如果当前时间距离上班时间半个小时，则提醒用户
+					var time_interval = ( ( (new Date(that.start_shift)) - (new Date()) ) / 1000 / 60 );
+					if (time_interval < 30) {
+						uni.showModal({
+							title: '提示',
+							content: '距离上班时间还有：' + Math.floor(time_interval) + "分钟",
+							showCancel:false,
+						});
+						that.canWarn = false;
+					}
+				}
+				// 设置计时器的间隔，为了方便调试设为30s，单位为ms
+			},30000,that);
         },
 		// 当退出小程序的时候，关闭计时器
 		onUnload:function(){

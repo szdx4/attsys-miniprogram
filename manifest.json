@@ -81,6 +81,10 @@
                     "xxhdpi" : "unpackage/res/launchimg/3.png"
                 }
             }
+        },
+        "splashscreen" : {
+            "waiting" : false,
+            "alwaysShowBeforeRender" : false
         }
     },
     /* SDK配置 */
