@@ -109,50 +109,6 @@
 			this.userName = uni.getStorageSync('userName');
 			this.user_id = uni.getStorageSync('user_id');
 			this.messageSrc = '../../static/img/message_2.png';
-			// 存储控制加班按键的变量
-			try {
-				const value = uni.getStorageSync('canICU');
-				if (value) {
-					this.canICU = true;
-				} else {
-					this.canICU = false;
-				}
-			} catch (e) {
-				this.canICU = false;
-			}
-			// 检查用户签到状态
-			uni.request({
-				url: webSiteUrl + '/sign/user/' + this.user_id,
-				header:{
-					'Authorization': 'Bearer '+ this.token,
-				},
-				method: 'GET',
-				success:(res) => {
-					// console.log(res);
-					if(res.statusCode==204){
-						this.check_message = "未签到";
-						this.IsNotcheck = true;
-					} else if (res.statusCode == 200) {
-						uni.setStorageSync('sign_id', res.data.sign_id)
-						this.check_message = "已签到";
-						this.isNotCheck = false;
-						this.canCheckOff = true;
-						this.canICU = false;
-						uni.setStorageSync('canICU', false);
-						this.start_at = (new Date(res.data.shift.start_at)).toLocaleString('zh-CN', {
-							timeZone: 'Asia/Shanghai',
-							hour12: false
-						});
-						this.end_at = (new Date(res.data.shift.end_at)).toLocaleString('zh-CN', {
-							timeZone: 'Asia/Shanghai',
-							hour12: false
-						});
-					}
-					else{
-						this.check_message = "服务器异常";
-					}
-				}
-			});
 			// 获取用户基本信息，并存入缓存
 			uni.request({
 				url: webSiteUrl + '/user/' + this.user_id,
@@ -213,9 +169,40 @@
 			}
 		},
 		onShow:function(){
+			// 检查用户签到状态
+			uni.request({
+				url: webSiteUrl + '/sign/user/' + this.user_id,
+				header:{
+					'Authorization': 'Bearer '+ this.token,
+				},
+				method: 'GET',
+				success:(res) => {
+					// console.log(res);
+					if(res.statusCode==204){
+						this.check_message = "未签到";
+						this.IsNotcheck = true;
+					} else if (res.statusCode == 200) {
+						uni.setStorageSync('sign_id', res.data.sign_id)
+						this.check_message = "已签到";
+						this.isNotCheck = false;
+						this.canCheckOff = true;
+						uni.setStorageSync('canICU', false);
+						this.start_at = (new Date(res.data.shift.start_at)).toLocaleString('zh-CN', {
+							timeZone: 'Asia/Shanghai',
+							hour12: false
+						});
+						this.end_at = (new Date(res.data.shift.end_at)).toLocaleString('zh-CN', {
+							timeZone: 'Asia/Shanghai',
+							hour12: false
+						});
+					} else {
+						this.check_message = "服务器异常";
+					}
+				}
+			});
 			try {
 				const value = uni.getStorageSync('canICU');
-				if (value) {
+				if (value === true) {
 					this.canICU = true;
 				} else {
 					this.canICU = false;
@@ -264,45 +251,34 @@
 								token: this.check_token
 							},
 							success: res => {
-								// console.log(res);
-								try{
-									if (res.statusCode==200) {
-										// console.log("签到成功");
-										// 存储sign_id到本地
-										try{
-											uni.setStorageSync('sign_id',res.data.sign_id);
-										}catch(e){
-											// console.log("sign_id存储出现问题");
-										}
-										uni.showToast({
-											duration:2000,
-											title:'签到成功'
-										})
-										this.start_at = res.data.shift.start_at;
-										this.end_at = res.data.shift.end_at;
-									} else{
-										// console.log("签到失败");
-										uni.showToast({
-											duration:2000,
-											icon:'none',
-											title:'签到失败'
-										})
+								console.log(res);
+								if (res.statusCode == 200) {
+									// console.log("签到成功");
+									// 存储sign_id到本地
+									try{
+										uni.setStorageSync('sign_id',res.data.sign_id);
+									}catch(e){
+										// console.log("sign_id存储出现问题");
 									}
-								}catch(e){
-									// console.log("签到失败:",e);
 									uni.showToast({
 										duration:2000,
-										icon:'none',
-										title:'签到失败'
+										title:'签到成功'
+									})
+								} else {
+									// console.log("签到失败");
+									uni.showToast({
+										duration: 2000,
+										icon: 'none',
+										title: '签到失败'
 									})
 								}
 							},
 							fail() {
 								// console.log("接口调用失败");
 								uni.showToast({
-									duration:2000,
-									icon:'none',
-									title:'签到失败'
+									duration: 2000,
+									icon: 'none',
+									title: '网络错误'
 								})
 							}
 						})

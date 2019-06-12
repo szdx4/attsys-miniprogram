@@ -137,6 +137,7 @@
 								uni.setStorageSync('token',token);
 								uni.setStorageSync('expired_at',expired_at);
 								uni.setStorageSync('user_id',user_id);
+								uni.setStorageSync('canICU', false);
 							}catch(e){
 								// console.log("存储出现问题");
 							}
