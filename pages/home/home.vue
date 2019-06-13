@@ -22,7 +22,7 @@
 		<view class="btn-row" v-if="isNotCheck">
 			<button type="primary" class="primary" @tap="checkIn">扫码</button>
 		</view>
-		<view class="btn-row" v-if="canCheckOff">
+		<view class="btn-row" v-if="canCheckOff"> 
 			<button type="primary" class="primary" @tap="checkOff">签退</button>
 		</view>
 		<view class="btn-row">
@@ -196,11 +196,19 @@
 					var time_interval = ( ( (new Date(that.start_shift)) - (new Date()) ) / 1000 / 60 );
 					if (time_interval < 30) {
 						uni.vibrateLong();
-						uni.showModal({
-							title: '提示',
-							content: '距离上班时间还有：' + Math.floor(time_interval) + "分钟",
-							showCancel:false,
-						});
+						if (time_interval > 0) {
+							uni.showModal({
+								title: '提示',
+								content: '距离上班时间还有：' + Math.floor(time_interval) + "分钟",
+								showCancel:false,
+							});
+						} else{
+							uni.showModal({
+								title: '提示',
+								content: '您已经迟到了',
+								showCancel:false,
+							});
+						}
 						that.canWarn = false;
 					}
 				}

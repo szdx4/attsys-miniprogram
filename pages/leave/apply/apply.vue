@@ -104,16 +104,15 @@
 			},
 			onConfirm(val){
 				this.tabList[this.tabIndex].date = val.result;
+	
 			},
 			formSubmit: function (e) {
 				// var begin = this.date.toLocaleString();
 				// var end = this.dateend.toLocaleString();
 				// begin = begin.replace(/-/g,"\/");
 				// end = end.replace(/-/g,"\/");
-				var begin = new Date(this.date);
-				var end = new Date(this.dateend);
-				// console.log(begin);
-				// console.log(end);
+				var begin = new Date(this.tabList[0].date);
+				var end = new Date(this.tabList[1].date);
 				var today = new Date()
 				//将下列代码加入到对应的检查位置
 				//定义表单规则
@@ -156,7 +155,7 @@
 							'Authorization': 'Bearer '+ this.token
 						},
 						success: (res) => {
-							// console.log(res);
+							console.log(res);
 							if(res.statusCode == 201){
 								uni.hideLoading();
 								// console.log('request success');
