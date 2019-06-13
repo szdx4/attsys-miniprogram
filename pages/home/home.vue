@@ -158,7 +158,7 @@
 									this.canWarn = true;
 									this.start_shift = (new Date(res.data.data[i].start_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
 								} else if (res.data.data[i].status == 'on') {  //获取最晚的已签到未签退的班次结束时间
-									temp_date_string = (new Date(res.data.data[i].end_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
+									var temp_date_string = (new Date(res.data.data[i].end_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
 									if (this.end_shift < (new Date(temp_date_string))) {
 										this.end_shift = (new Date(temp_date_string));
 									}
