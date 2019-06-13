@@ -298,6 +298,7 @@
 				uni.scanCode({
 					onlyFromCamera: true,
 					success: (res) => {
+						this.canWarn = false;
 						// console.log('条码内容：' + res.result);
 						this.check_token = res.result;
 						// 通过二维码获得的token，向服务器签到
@@ -374,6 +375,7 @@
 					},
 					success: (res) => {
 						if(res.statusCode==200){
+							this.canWarn = true;
 							this.canICU = res.data.overtime;
 							this.isNotCheck = true;
 							this.canCheckOff = false;
