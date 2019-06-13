@@ -191,7 +191,7 @@
 			*/
 			this.messageIntervalID = setInterval(function(that){
 				if (uni.getStorageSync('start_query_unread_message')) {
-					// hasUnreadMessage(that);
+					hasUnreadMessage(that);
 				} else {
 					// console.log("上次的新信息还没处理完");
 				}
