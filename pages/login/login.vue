@@ -76,11 +76,11 @@
                     });
                     return;
                 }
-                if (this.password.length < 4) {
+                if (this.password.length < 5) {
                     uni.showToast({
                         duration:2000,
 						icon:'none',
-                        title: '密码最短为 4 个字符'
+                        title: '密码最短为 5 个字符'
                     });
                     return;
                 }
