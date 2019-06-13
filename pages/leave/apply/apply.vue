@@ -6,11 +6,11 @@
 					<button class="tab uni-common-mt uni-comment-replay-btn" :class="[{'active':index==tabIndex}]" @tap="toggleTab(index)" v-for="(item,index) in tabList" :key="index">{{item.name}}: {{item.date}}</button>
 					<w-picker 
 						:mode="mode" 
-						startYear="1926" 
-						endYear="2112" 
+						startYear="2018" 
+						endYear="2050" 
 						step="1" 
 						:defaultVal="defaultVal"
-						:current="true" 
+						:current="false" 
 						@confirm="onConfirm" 
 						ref="picker" 
 						themeColor="#439057"
@@ -64,8 +64,6 @@
 				//结束
 				dateend: '',
 				//控制选择日期
-				defaultVal1: [1,1,1,1,2,5],
-				defaultVal2: [1,1,1,1,2,5],
 				startDate:getDate('start'),
 				endDate:getDate('end'),
 				startDate2:getDate('start'),
@@ -89,12 +87,16 @@
 			this.tabList[0].date = ((new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false})).replace("/","-").replace("/","-");
 			this.tabList[1].date = ((new Date()).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false})).replace("/","-").replace("/","-");
 		},
+		onShow: function () {
+			this.tabList[0].date = this.tabList[0].date.split(' ')[0]
+			this.tabList[1].date = this.tabList[1].date.split(' ')[0]
+		},
 		computed:{
 			mode(){
-				return "dateTime"
+				return "date"
 			},
-			defaultVal(){
-				return [1,1,1,1,2,5]
+			defaultVal() {
+				return [1, 0, 0, 0, 0, 0]
 			}
 		},
 		methods: {
@@ -104,15 +106,14 @@
 			},
 			onConfirm(val){
 				this.tabList[this.tabIndex].date = val.result;
-	
 			},
 			formSubmit: function (e) {
 				// var begin = this.date.toLocaleString();
 				// var end = this.dateend.toLocaleString();
 				// begin = begin.replace(/-/g,"\/");
 				// end = end.replace(/-/g,"\/");
-				var begin = new Date(this.tabList[0].date);
-				var end = new Date(this.tabList[1].date);
+				var begin = new Date(this.tabList[0].date + ' 00:00:00');
+				var end = new Date(this.tabList[1].date + ' 23:59:59');
 				var today = new Date()
 				//将下列代码加入到对应的检查位置
 				//定义表单规则
@@ -155,7 +156,7 @@
 							'Authorization': 'Bearer '+ this.token
 						},
 						success: (res) => {
-							console.log(res);
+							// console.log(res);
 							if(res.statusCode == 201){
 								uni.hideLoading();
 								// console.log('request success');

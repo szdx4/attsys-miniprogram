@@ -97,7 +97,8 @@
 				messageSrc:'../../static/img/message.png',
 				messageIntervalID:-1,
 				canWarn:false,
-				start_shift:new Date()
+				start_shift:new Date(),
+				end_shift:new Date()
 			}
 		},
         onLoad: function(){
@@ -153,10 +154,14 @@
 					if (res.statusCode == 200){
 						if (res.data.total != 0){
 							for (var i = 0; i < res.data.data.length; i++) {
-								if (res.data.data[i].status == 'no') {
+								if (res.data.data[i].status == 'no') {  // 获取最早的未签到的班次开始时间
 									this.canWarn = true;
 									this.start_shift = (new Date(res.data.data[i].start_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
-									break;
+								} else if (res.data.data[i].status == 'on') {  //获取最晚的已签到未签退的班次结束时间
+									temp_date_string = (new Date(res.data.data[i].end_at)).toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai', hour12: false});
+									if (this.end_shift < (new Date(temp_date_string))) {
+										this.end_shift = (new Date(temp_date_string));
+									}
 								}
 							}
 						}
@@ -377,10 +382,12 @@
 								duration:2000,
 								title:'签退成功'
 							})
-							try{
-								uni.setStorageSync('canICU',true);
-							}catch(e){
-								// console.log('存储出现问题');
+							if ((new Date()) > this.end_shift) {
+								try{
+									uni.setStorageSync('canICU',true);
+								}catch(e){
+									// console.log('存储出现问题');
+								}
 							}
 						}
 						else{
