@@ -252,6 +252,7 @@
 				} else {
 					uni.showToast({
 						duration:2000,
+						icon:'none',
 						title:'消息已为空'
 					})
 				}
