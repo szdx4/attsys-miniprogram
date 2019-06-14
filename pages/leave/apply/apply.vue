@@ -6,7 +6,7 @@
 					<button class="tab uni-common-mt uni-comment-replay-btn" :class="[{'active':index==tabIndex}]" @tap="toggleTab(index)" v-for="(item,index) in tabList" :key="index">{{item.name}}: {{item.date}}</button>
 					<w-picker 
 						:mode="mode" 
-						startYear="2018" 
+						startYear="2019" 
 						endYear="2050" 
 						step="1" 
 						:defaultVal="defaultVal"
@@ -96,7 +96,7 @@
 				return "date"
 			},
 			defaultVal() {
-				return [1, 0, 0, 0, 0, 0]
+				return [0, 0, 0, 0, 0, 0]
 			}
 		},
 		methods: {
@@ -156,7 +156,7 @@
 							'Authorization': 'Bearer '+ this.token
 						},
 						success: (res) => {
-							// console.log(res);
+							console.log(res);
 							if(res.statusCode == 201){
 								uni.hideLoading();
 								// console.log('request success');

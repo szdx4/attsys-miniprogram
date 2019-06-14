@@ -144,10 +144,10 @@
 		methods: {
 			resume() {//销假按钮
 				uni.request({
-					url: webSiteUrl + '/leave/user/leave/'+this.data[this.index].id,
+					url: webSiteUrl + '/leave/'+this.data[this.index].id,
 					method: 'DELETE',
 					header:{
-						'Authorization': 'Bearer' + this.token //'Authorization'加引号？
+						'Authorization': 'Bearer ' + this.token
 					},
 					data: {},
 					success: res => {

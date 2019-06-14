@@ -64,7 +64,7 @@
 							if(res.statusCode == 201){
 								// console.log('request success');
 								// console.log(res);
-								uni.showToast({title:"提交成功!", duration:2500, icon:"none"});
+								uni.showToast({title:"提交成功!", duration:2000});
 								try{
 									uni.setStorageSync('canICU', false);
 								}catch(e){

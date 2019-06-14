@@ -97,7 +97,7 @@
 				messageSrc:'../../static/img/message.png',
 				messageIntervalID:-1,
 				canWarn:false,
-				start_shift:new Date(),
+				start_shift:new Date().toString(),
 				end_shift:new Date()
 			}
 		},
@@ -312,7 +312,7 @@
 								token: this.check_token
 							},
 							success: res => {
-								console.log(res);
+								// console.log(res);
 								if (res.statusCode == 200) {
 									// console.log("签到成功");
 									// 存储sign_id到本地
@@ -325,6 +325,10 @@
 										duration:2000,
 										title:'签到成功'
 									})
+									// 刷新home页面
+									uni.redirectTo({
+										url: '../home/home'
+									});
 								} else {
 									// console.log("签到失败");
 									uni.showToast({
@@ -351,12 +355,6 @@
 							icon:'none',
 							title:'签到失败'
 						})
-					},
-					complete() {
-						// 刷新home页面
-						uni.redirectTo({
-							url: '../home/home'
-						});
 					}
 				});
 			},
@@ -375,7 +373,6 @@
 					},
 					success: (res) => {
 						if(res.statusCode==200){
-							this.canWarn = true;
 							this.canICU = res.data.overtime;
 							this.isNotCheck = true;
 							this.canCheckOff = false;
@@ -391,6 +388,10 @@
 									// console.log('存储出现问题');
 								}
 							}
+							// 刷新home页面
+							uni.redirectTo({
+								url: '../home/home'
+							});
 						}
 						else{
 							// console.log("签退失败");
